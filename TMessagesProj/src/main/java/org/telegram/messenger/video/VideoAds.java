@@ -176,6 +176,7 @@ public class VideoAds {
     private boolean loading, loaded;
     private void load() {
         if (loading || loaded) return;
+        if (true) return; // FORK MOD: never load video ads
 
         if (UserConfig.getInstance(currentAccount).isPremium() && MessagesController.getInstance(currentAccount).isSponsoredDisabled()) {
             return;

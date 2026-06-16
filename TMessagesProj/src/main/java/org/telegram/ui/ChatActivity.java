@@ -2835,6 +2835,7 @@ public class ChatActivity extends BaseFragment implements
             .add(NotificationCenter.didLoadSendAsPeers)
             .add(NotificationCenter.closeChatActivity)
             .add(NotificationCenter.messagesDeleted)
+            .add(NotificationCenter.messagesForkKept)
             .add(NotificationCenter.historyCleared)
             .add(NotificationCenter.messageReceivedByServer)
             .add(NotificationCenter.messageReceivedByAck)
@@ -21750,6 +21751,21 @@ public class ChatActivity extends BaseFragment implements
             if (updated && chatAdapter != null) {
                 chatAdapter.notifyDataSetChanged(false);
             }
+        } else if (id == NotificationCenter.messagesForkKept) {
+            // FORK MOD (anti-delete): the server asked to delete these messages, but we keep them
+            // locally. Just mark them as deleted and redraw, do NOT remove them from the chat.
+            ArrayList<Integer> keptIds = (ArrayList<Integer>) args[0];
+            boolean changed = false;
+            for (int i = 0; i < keptIds.size(); i++) {
+                MessageObject msg = messagesDict[0].get(keptIds.get(i));
+                if (msg != null && msg.messageOwner != null && !msg.messageOwner.forkDeleted) {
+                    msg.messageOwner.forkDeleted = true;
+                    changed = true;
+                }
+            }
+            if (changed && chatAdapter != null) {
+                chatAdapter.notifyDataSetChanged();
+            }
         } else if (id == NotificationCenter.messagesDeleted) {
             boolean scheduled = (Boolean) args[2];
             if (scheduled != (chatMode == MODE_SCHEDULED)) {
@@ -38517,6 +38533,16 @@ public class ChatActivity extends BaseFragment implements
 
         @Override
         public void didPressTime(ChatMessageCell cell) {
+            MessageObject msg = cell.getMessageObject();
+            if (msg != null && msg.hasForkEditHistory()) {
+                // FORK MOD (edit history): tap the time/"edited" label to expand or collapse previous versions
+                msg.forkHistoryExpanded = !msg.forkHistoryExpanded;
+                msg.generateLayout(null);
+                if (chatAdapter != null) {
+                    chatAdapter.updateRowWithMessageObject(msg, false, false);
+                }
+                return;
+            }
             createUndoView();
             if (undoView == null) {
                 return;

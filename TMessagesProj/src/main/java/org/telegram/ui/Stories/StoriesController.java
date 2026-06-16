@@ -249,6 +249,7 @@ public class StoriesController {
     }
 
     public boolean hasStories(long dialogId) {
+        if (true) return false; // FORK MOD: stories hidden everywhere
         if (dialogId == 0) {
             return false;
         }
@@ -282,10 +283,11 @@ public class StoriesController {
     }
 
     public boolean hasStories() {
-        return (dialogListStories != null && dialogListStories.size() > 0) || hasSelfStories();
+        return false; // FORK MOD: stories hidden everywhere
     }
 
     public void loadStories() {
+        if (true) return; // FORK MOD: never load stories
         if (firstLoad) {
             loadingFromDatabase = true;
             storiesStorage.getAllStories(allStories -> {
@@ -676,7 +678,7 @@ public class StoriesController {
     }
 
     public ArrayList<TL_stories.PeerStories> getDialogListStories() {
-        return dialogListStories;
+        return new ArrayList<>(); // FORK MOD: stories hidden everywhere
     }
 
     public TL_stories.PeerStories getStories(long peerId) {
@@ -1071,6 +1073,7 @@ public class StoriesController {
     }
 
     public boolean hasSelfStories() {
+        if (true) return false; // FORK MOD: stories hidden everywhere
         long clientUserId = UserConfig.getInstance(currentAccount).clientUserId;
         TL_stories.PeerStories storyItem = allStoriesMap.get(clientUserId);
         if (storyItem != null && !storyItem.stories.isEmpty()) {
@@ -1337,6 +1340,7 @@ public class StoriesController {
     }
 
     public boolean hasUnreadStories(long dialogId) {
+        if (true) return false; // FORK MOD: stories hidden everywhere
         TL_stories.PeerStories userStories = allStoriesMap.get(dialogId);
         if (userStories == null) {
             userStories = getStoriesFromFullPeer(dialogId);
@@ -1678,7 +1682,7 @@ public class StoriesController {
     }
 
     public ArrayList<TL_stories.PeerStories> getHiddenList() {
-        return hiddenListStories;
+        return new ArrayList<>(); // FORK MOD: stories hidden everywhere
     }
 
     public int getUnreadStoriesCount(long dialogId) {

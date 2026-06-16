@@ -62704,6 +62704,9 @@ public class TLRPC {
         public TL_textWithEntities summaryText; //custom
         public String translatedSummaryLanguage; //custom
         public TL_textWithEntities translatedSummaryText; //custom
+        public boolean forkDeleted; //custom (FORK MOD: server asked to delete, kept locally)
+        public ArrayList<String> forkEditHistory; //custom (FORK MOD: previous message texts, oldest first)
+        public ArrayList<Integer> forkEditHistoryDates; //custom (FORK MOD: dates parallel to forkEditHistory)
 
         public static Message TLdeserialize(InputSerializedData stream, int constructor, boolean exception) {
             Message result = null;

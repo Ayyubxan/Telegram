@@ -4101,7 +4101,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
     }
 
     private boolean checkDateMotionEvent(MotionEvent event) {
-        if (!currentMessageObject.isImportedForward()) {
+        if (!currentMessageObject.isImportedForward() && !currentMessageObject.hasForkEditHistory()) { // FORK MOD (edit history): allow tapping time to expand history
             return false;
         }
         int x = (int) getEventX(event);
@@ -18363,6 +18363,9 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             }
         } else {
             currentTimeString = timeString;
+        }
+        if (currentMessageObject.messageOwner != null && currentMessageObject.messageOwner.forkDeleted) {
+            currentTimeString = TextUtils.concat("🗑 ", currentTimeString); // FORK MOD (anti-delete): mark kept-after-delete
         }
         if (currentMessageObject.isStakedDice()) {
             currentTimeString = TextUtils.concat("💎", StarsIntroActivity.formatTON(currentMessageObject.getStakedDiceAmount()), "  ", currentTimeString);

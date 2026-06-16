@@ -5639,6 +5639,77 @@ public class MessagesStorage extends BaseController {
         return message;
     }
 
+    // FORK MOD: anti-delete / edit-history scope — private chats, basic groups and supergroups;
+    // excludes broadcast channels and secret chats.
+    private boolean isForkInScopeDialog(long did) {
+        if (DialogObject.isEncryptedDialog(did)) {
+            return false;
+        }
+        if (did > 0) {
+            return true;
+        }
+        TLRPC.Chat chat = getMessagesController().getChat(-did);
+        return chat == null || !ChatObject.isChannel(chat) || chat.megagroup;
+    }
+
+    // FORK MOD (anti-delete): instead of deleting messages the server asked to delete,
+    // mark them locally as forkDeleted (kept). Runs on the storage queue.
+    // key == 0  -> global ids (private chats + basic groups): resolve (mid, uid) from db
+    // key != 0  -> channel id: uid is the channel dialog id itself
+    public void markServerDeletedMessagesKept(long key, ArrayList<Integer> mids) {
+        if (mids == null || mids.isEmpty()) {
+            return;
+        }
+        SQLiteCursor cursor = null;
+        SQLitePreparedStatement state = null;
+        try {
+            ArrayList<long[]> pairs = new ArrayList<>(); // {mid, uid}
+            if (key == 0) {
+                cursor = database.queryFinalized(String.format(Locale.US, "SELECT mid, uid FROM messages_v2 WHERE mid IN(%s)", TextUtils.join(",", mids)));
+                while (cursor.next()) {
+                    pairs.add(new long[]{cursor.intValue(0), cursor.longValue(1)});
+                }
+                cursor.dispose();
+                cursor = null;
+            } else {
+                for (int i = 0; i < mids.size(); i++) {
+                    pairs.add(new long[]{mids.get(i), key});
+                }
+            }
+            for (int i = 0; i < pairs.size(); i++) {
+                int mid = (int) pairs.get(i)[0];
+                long uid = pairs.get(i)[1];
+                TLRPC.Message message = getMessageWithCustomParamsOnlyInternal(mid, uid);
+                message.forkDeleted = true;
+                state = database.executeFast("UPDATE messages_v2 SET custom_params = ? WHERE mid = ? AND uid = ?");
+                state.requery();
+                NativeByteBuffer nativeByteBuffer = MessageCustomParamsHelper.writeLocalParams(message);
+                if (nativeByteBuffer != null) {
+                    state.bindByteBuffer(1, nativeByteBuffer);
+                } else {
+                    state.bindNull(1);
+                }
+                state.bindInteger(2, mid);
+                state.bindLong(3, uid);
+                state.step();
+                state.dispose();
+                state = null;
+                if (nativeByteBuffer != null) {
+                    nativeByteBuffer.reuse();
+                }
+            }
+        } catch (Exception e) {
+            checkSQLException(e);
+        } finally {
+            if (cursor != null) {
+                cursor.dispose();
+            }
+            if (state != null) {
+                state.dispose();
+            }
+        }
+    }
+
     public void getNewTask(LongSparseArray<ArrayList<Integer>> oldTask, LongSparseArray<ArrayList<Integer>> oldTaskMedia) {
         storageQueue.postRunnable(() -> {
             SQLiteCursor cursor = null;
@@ -15445,6 +15516,22 @@ public class MessagesStorage extends BaseController {
                                     MessageCustomParamsHelper.readLocalParams(message, customParams);
                                     if (customParams != null) {
                                         customParams.reuse();
+                                    }
+                                    // FORK MOD (edit history): when an edit changes the text, keep the previous text
+                                    if (oldMessage.message != null && !TextUtils.equals(oldMessage.message, message.message)
+                                            && isForkInScopeDialog(MessageObject.getDialogId(message))) {
+                                        if (message.forkEditHistory == null) {
+                                            message.forkEditHistory = new ArrayList<>();
+                                            message.forkEditHistoryDates = new ArrayList<>();
+                                        }
+                                        message.forkEditHistory.add(oldMessage.message);
+                                        message.forkEditHistoryDates.add(oldMessage.edit_date != 0 ? oldMessage.edit_date : oldMessage.date);
+                                        while (message.forkEditHistory.size() > 20) {
+                                            message.forkEditHistory.remove(0);
+                                            if (!message.forkEditHistoryDates.isEmpty()) {
+                                                message.forkEditHistoryDates.remove(0);
+                                            }
+                                        }
                                     }
                                 }
                                 boolean oldMention = cursor.intValue(3) != 0;

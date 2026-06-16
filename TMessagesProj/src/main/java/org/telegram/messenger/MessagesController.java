@@ -10226,6 +10226,16 @@ public class MessagesController extends BaseController implements NotificationCe
         });
     }
 
+    // FORK MOD (anti-delete): keep server-deleted messages for private chats, basic groups and
+    // supergroups (megagroups); only broadcast channels are deleted normally.
+    private boolean forkKeepDeletedForKey(long key) {
+        if (key == 0) {
+            return true; // private chats + basic groups (global message ids)
+        }
+        TLRPC.Chat chat = getChat(-key);
+        return chat != null && chat.megagroup;
+    }
+
     public void updateTimerProc() {
         long currentTime = System.currentTimeMillis();
 
@@ -20300,6 +20310,10 @@ public class MessagesController extends BaseController implements NotificationCe
                     if (arrayList == null) {
                         continue;
                     }
+                    if (forkKeepDeletedForKey(dialogId)) { // FORK MOD (anti-delete): notify UI to keep+mark instead of removing
+                        getNotificationCenter().postNotificationName(NotificationCenter.messagesForkKept, arrayList, -dialogId);
+                        continue;
+                    }
                     getNotificationCenter().postNotificationName(NotificationCenter.messagesDeleted, arrayList, -dialogId, false);
                     if (dialogId == 0) {
                         for (int b = 0, size2 = arrayList.size(); b < size2; b++) {
@@ -20417,10 +20431,16 @@ public class MessagesController extends BaseController implements NotificationCe
             for (int a = 0, size = deletedMessages.size(); a < size; a++) {
                 long key = deletedMessages.keyAt(a);
                 ArrayList<Integer> arrayList = deletedMessages.valueAt(a);
-                getMessagesStorage().getStorageQueue().postRunnable(() -> {
-                    ArrayList<Long> dialogIds = getMessagesStorage().markMessagesAsDeleted(key, arrayList, false, true, 0, 0);
-                    getMessagesStorage().updateDialogsWithDeletedMessages(key, -key, arrayList, dialogIds);
-                });
+                if (forkKeepDeletedForKey(key)) { // FORK MOD (anti-delete): keep locally instead of deleting
+                    getMessagesStorage().getStorageQueue().postRunnable(() -> {
+                        getMessagesStorage().markServerDeletedMessagesKept(key, arrayList);
+                    });
+                } else {
+                    getMessagesStorage().getStorageQueue().postRunnable(() -> {
+                        ArrayList<Long> dialogIds = getMessagesStorage().markMessagesAsDeleted(key, arrayList, false, true, 0, 0);
+                        getMessagesStorage().updateDialogsWithDeletedMessages(key, -key, arrayList, dialogIds);
+                    });
+                }
             }
         }
         if (deletedQuickReplyMessages != null) {
@@ -20816,6 +20836,7 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public SponsoredMessagesInfo getSponsoredMessages(long dialogId) {
+        if (true) return null; // FORK MOD: never load sponsored messages (ads)
         SponsoredMessagesInfo info = sponsoredMessages.get(dialogId);
         if (info != null && (info.loading || Math.abs(SystemClock.elapsedRealtime() - info.loadTime) <= 5 * 60 * 1000)) {
             return info;

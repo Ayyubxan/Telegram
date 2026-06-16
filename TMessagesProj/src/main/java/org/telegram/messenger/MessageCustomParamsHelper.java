@@ -6,6 +6,8 @@ import org.telegram.tgnet.OutputSerializedData;
 import org.telegram.tgnet.TLObject;
 import org.telegram.tgnet.TLRPC;
 
+import java.util.ArrayList;
+
 public class MessageCustomParamsHelper {
 
     public static boolean isEmpty(TLRPC.Message message) {
@@ -27,7 +29,9 @@ public class MessageCustomParamsHelper {
             message.translatedPoll == null &&
             message.translatedText == null &&
             message.errorAllowedPriceStars == 0 &&
-            message.errorNewPriceStars == 0
+            message.errorNewPriceStars == 0 &&
+            !message.forkDeleted &&
+            (message.forkEditHistory == null || message.forkEditHistory.isEmpty())
         );
     }
 
@@ -50,6 +54,9 @@ public class MessageCustomParamsHelper {
         toMessage.summaryText = fromMessage.summaryText;
         toMessage.translatedSummaryText = fromMessage.translatedSummaryText;
         toMessage.translatedSummaryLanguage = fromMessage.translatedSummaryLanguage;
+        toMessage.forkDeleted = fromMessage.forkDeleted;
+        toMessage.forkEditHistory = fromMessage.forkEditHistory;
+        toMessage.forkEditHistoryDates = fromMessage.forkEditHistoryDates;
     }
 
 
@@ -109,6 +116,8 @@ public class MessageCustomParamsHelper {
             flags = setFlag(flags, FLAG_10, message.summaryText != null);
             flags = setFlag(flags, FLAG_11, message.translatedSummaryText != null);
             flags = setFlag(flags, FLAG_12, message.translatedSummaryLanguage != null);
+            flags = setFlag(flags, FLAG_13, message.forkDeleted);
+            flags = setFlag(flags, FLAG_14, message.forkEditHistory != null && !message.forkEditHistory.isEmpty());
         }
 
         @Override
@@ -116,6 +125,8 @@ public class MessageCustomParamsHelper {
             stream.writeInt32(VERSION);
             flags = message.voiceTranscriptionForce ? (flags | 2) : (flags &~ 2);
             flags = message.summarizedOpen ? (flags | 512) : (flags &~ 512);
+            flags = setFlag(flags, FLAG_13, message.forkDeleted);
+            flags = setFlag(flags, FLAG_14, message.forkEditHistory != null && !message.forkEditHistory.isEmpty());
             stream.writeInt32(flags);
             if ((flags & 1) != 0) {
                 stream.writeString(message.voiceTranscription);
@@ -157,6 +168,15 @@ public class MessageCustomParamsHelper {
             }
             if (hasFlag(flags, FLAG_12)) {
                 stream.writeString(message.translatedSummaryLanguage);
+            }
+            if (hasFlag(flags, FLAG_14)) {
+                int count = message.forkEditHistory.size();
+                stream.writeInt32(count);
+                for (int i = 0; i < count; i++) {
+                    stream.writeString(message.forkEditHistory.get(i));
+                    int date = (message.forkEditHistoryDates != null && i < message.forkEditHistoryDates.size()) ? message.forkEditHistoryDates.get(i) : 0;
+                    stream.writeInt32(date);
+                }
             }
         }
 
@@ -204,6 +224,16 @@ public class MessageCustomParamsHelper {
             }
             if (hasFlag(flags, FLAG_12)) {
                 message.translatedSummaryLanguage = stream.readString(exception);
+            }
+            message.forkDeleted = hasFlag(flags, FLAG_13);
+            if (hasFlag(flags, FLAG_14)) {
+                int count = stream.readInt32(exception);
+                message.forkEditHistory = new ArrayList<>();
+                message.forkEditHistoryDates = new ArrayList<>();
+                for (int i = 0; i < count; i++) {
+                    message.forkEditHistory.add(stream.readString(exception));
+                    message.forkEditHistoryDates.add(stream.readInt32(exception));
+                }
             }
         }
 

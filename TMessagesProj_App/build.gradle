@@ -83,6 +83,7 @@ android {
         }
 
         release {
+            applicationIdSuffix ".web" // FORK MOD: coexist with official Telegram (org.telegram.messenger.web, already in google-services.json)
             debuggable false
             jniDebuggable false
             signingConfig signingConfigs.release

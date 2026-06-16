@@ -390,6 +390,11 @@ public class VoIPPreNotificationService { // } extends Service implements AudioM
             return;
         }
 
+        if (org.telegram.messenger.LockedChats.isSuppressed(intent.getLongExtra("user_id", 0))) { // FORK MOD (locked chats): don't ring/show calls from locked+hidden chats
+            FileLog.d("VoIPPreNotification.show(): suppressed (locked chat)");
+            return;
+        }
+
         if (pendingCall != null && pendingCall.id == call.id) {
             return;
         }

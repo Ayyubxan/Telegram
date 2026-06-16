@@ -8212,6 +8212,33 @@ public class MessageObject {
         }
     }
 
+    // FORK MOD (edit history): transient UI state + helpers for the tap-to-expand history
+    public boolean forkHistoryExpanded;
+
+    public boolean hasForkEditHistory() {
+        return messageOwner != null && messageOwner.forkEditHistory != null && !messageOwner.forkEditHistory.isEmpty();
+    }
+
+    public CharSequence buildForkEditHistoryText() {
+        if (!hasForkEditHistory()) {
+            return "";
+        }
+        SpannableStringBuilder sb = new SpannableStringBuilder();
+        for (int i = 0; i < messageOwner.forkEditHistory.size(); i++) {
+            String old = messageOwner.forkEditHistory.get(i);
+            if (old == null) {
+                old = "";
+            }
+            int date = (messageOwner.forkEditHistoryDates != null && i < messageOwner.forkEditHistoryDates.size()) ? messageOwner.forkEditHistoryDates.get(i) : 0;
+            sb.append("\n✎ ");
+            if (date != 0) {
+                sb.append(LocaleController.getInstance().getFormatterDay().format((long) date * 1000)).append(": ");
+            }
+            sb.append(old);
+        }
+        return sb;
+    }
+
     public void generateLayout(TLRPC.User fromUser) {
         if (type != TYPE_TEXT && type != TYPE_EMOJIS && type != TYPE_STORY_MENTION || messageOwner.peer_id == null || TextUtils.isEmpty(messageText) && !isBotPendingDraft) {
             return;
@@ -8267,6 +8294,9 @@ public class MessageObject {
         }
 
         CharSequence text = messageText;
+        if (forkHistoryExpanded && hasForkEditHistory()) {
+            text = new SpannableStringBuilder(text).append(buildForkEditHistoryText()); // FORK MOD (edit history)
+        }
         try {
             textLayoutOriginalWidth = maxWidth;
             textLayout = makeStaticLayout(text, paint, maxWidth, 1f, totalAnimatedEmojiCount >= 4 ? -1 : 0, emojiOnlyCount > 0);

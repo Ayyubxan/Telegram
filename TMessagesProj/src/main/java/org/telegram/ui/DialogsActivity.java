@@ -119,6 +119,7 @@ import org.telegram.messenger.MediaController;
 import org.telegram.messenger.MediaDataController;
 import org.telegram.messenger.MessageObject;
 import org.telegram.messenger.VideoEditedInfo;
+import org.telegram.messenger.LockedChats;
 import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.MessagesStorage;
 import org.telegram.messenger.NotificationCenter;
@@ -3207,6 +3208,24 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
 
             passcodeItem = menu.addItem(1, R.drawable.outline_header_lock_24);
             passcodeItem.setContentDescription(getString(R.string.AccDescrPasscodeLock));
+            passcodeItem.setOnLongClickListener(v -> { // FORK MOD (locked chats): long-press toggles hide/reveal of locked chats
+                if (LockedChats.isEmpty()) {
+                    return false;
+                }
+                LockedChats.toggleHidden();
+                if (viewPages != null) {
+                    for (ViewPage viewPage : viewPages) {
+                        if (viewPage != null) {
+                            viewPage.updateList(true);
+                        }
+                    }
+                }
+                BulletinFactory.of(this).createSimpleBulletin(
+                        LockedChats.isHidden() ? R.raw.passcode_lock_close : R.raw.chats_infotip,
+                        LockedChats.isHidden() ? "Locked chats hidden" : "Locked chats shown"
+                ).show();
+                return true;
+            });
 
             downloadsItem = menu.addItem(3, new ColorDrawable(Color.TRANSPARENT));
             downloadsItem.addView(downloadProgressIcon = new DownloadProgressIcon(currentAccount, context));
@@ -8604,6 +8623,29 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             previewMenu[0].addView(muteItem);
         }
 
+        // FORK MOD (locked chats): lock/unlock this chat from the long-press menu
+        ActionBarMenuSubItem lockItem = new ActionBarMenuSubItem(getParentActivity(), false, false);
+        lockItem.setTextAndIcon(LockedChats.isLocked(dialogId) ? "Unlock chat" : "Lock chat", R.drawable.outline_header_lock_24);
+        lockItem.setMinimumWidth(160);
+        lockItem.setOnClickListener(e -> {
+            boolean nowLocked = !LockedChats.isLocked(dialogId);
+            LockedChats.setLocked(dialogId, nowLocked);
+            if (viewPages != null) {
+                for (ViewPage viewPage : viewPages) {
+                    if (viewPage != null) {
+                        viewPage.updateList(true);
+                    }
+                }
+            }
+            checkUi_menuItems();
+            BulletinFactory.of(this).createSimpleBulletin(
+                    nowLocked ? R.raw.passcode_lock_close : R.raw.chats_infotip,
+                    nowLocked ? "Chat locked" : "Chat unlocked"
+            ).show();
+            finishPreviewFragment();
+        });
+        previewMenu[0].addView(lockItem);
+
         ActionBarMenuSubItem deleteItem = new ActionBarMenuSubItem(getParentActivity(), false, true);
         deleteItem.setIconColor(getThemedColor(Theme.key_text_RedRegular));
         deleteItem.setTextColor(getThemedColor(Theme.key_text_RedBold));
@@ -10716,13 +10758,40 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
     private ArrayList<TLRPC.Dialog> botShareDialogs;
 
     @NonNull
+    // FORK MOD (locked chats): drop suppressed (locked + hidden) dialogs from the main chats list
+    private ArrayList<TLRPC.Dialog> filterLockedDialogs(ArrayList<TLRPC.Dialog> list) {
+        if (list == null || onlySelect || initialDialogsType != DIALOGS_TYPE_DEFAULT || !LockedChats.isHidden() || LockedChats.isEmpty()) {
+            return list;
+        }
+        boolean any = false;
+        for (int i = 0; i < list.size(); i++) {
+            TLRPC.Dialog d = list.get(i);
+            if (d != null && LockedChats.isSuppressed(d.id)) {
+                any = true;
+                break;
+            }
+        }
+        if (!any) {
+            return list;
+        }
+        ArrayList<TLRPC.Dialog> copy = new ArrayList<>(list.size());
+        for (int i = 0; i < list.size(); i++) {
+            TLRPC.Dialog d = list.get(i);
+            if (d != null && LockedChats.isSuppressed(d.id)) {
+                continue;
+            }
+            copy.add(d);
+        }
+        return copy;
+    }
+
     public ArrayList<TLRPC.Dialog> getDialogsArray(int currentAccount, int dialogsType, int folderId, boolean frozen) {
         if (frozen && frozenDialogsList != null) {
             return frozenDialogsList;
         }
         MessagesController messagesController = AccountInstance.getInstance(currentAccount).getMessagesController();
         if (dialogsType == DIALOGS_TYPE_DEFAULT) {
-            return messagesController.getDialogs(folderId);
+            return filterLockedDialogs(messagesController.getDialogs(folderId));
         } else if (dialogsType == DIALOGS_TYPE_WIDGET || dialogsType == DIALOGS_TYPE_IMPORT_HISTORY) {
             return messagesController.dialogsServerOnly;
         } else if (dialogsType == DIALOGS_TYPE_ADD_USERS_TO) {
@@ -10762,12 +10831,12 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         } else if (dialogsType == 7 || dialogsType == 8) {
             MessagesController.DialogFilter dialogFilter = messagesController.selectedDialogFilter[dialogsType == 7 ? 0 : 1];
             if (dialogFilter == null) {
-                return messagesController.getDialogs(folderId);
+                return filterLockedDialogs(messagesController.getDialogs(folderId));
             } else {
                 if (initialDialogsType == DIALOGS_TYPE_FORWARD) {
                     return dialogFilter.dialogsForward;
                 }
-                return dialogFilter.dialogs;
+                return filterLockedDialogs(dialogFilter.dialogs);
             }
         } else if (dialogsType == DIALOGS_TYPE_BLOCK) {
             return messagesController.dialogsForBlock;
@@ -13743,7 +13812,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
     }
 
     private void checkUi_itemPasscodeVisibility() {
-        final float factor0 = SharedConfig.passcodeHash.isEmpty() ? 0 : 1;
+        final float factor0 = (SharedConfig.passcodeHash.isEmpty() && LockedChats.isEmpty()) ? 0 : 1; // FORK MOD (locked chats): also show the lock icon when chats are locked
         final float factor1 = 1f - animatorSearchVisible.getFloatValue();
         final float factor2 = 1f - getRightSlidingProgress();
         final float factor3 = 1f - animatorDoneButtonVisible.getFloatValue();

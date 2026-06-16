@@ -4498,6 +4498,10 @@ public class VoIPService extends Service implements SensorEventListener, AudioMa
 	}
 
 	private void startRinging() {
+		if (org.telegram.messenger.LockedChats.isSuppressed(getCallerId())) { // FORK MOD (locked chats): reject calls from locked+hidden chats
+			declineIncomingCall();
+			return;
+		}
 		if (currentState == STATE_WAITING_INCOMING) {
 			return;
 		}
