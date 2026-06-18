@@ -8646,6 +8646,23 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         });
         previewMenu[0].addView(lockItem);
 
+        // FORK MOD (radio mode): toggle (persisted) — under the Lock/Unlock button
+        ActionBarMenuSubItem radioItem = new ActionBarMenuSubItem(getParentActivity(), false, false);
+        radioItem.setTextAndIcon(org.telegram.messenger.RadioMode.isEnabled(dialogId) ? "Radio mode: ON" : "Radio mode: OFF", R.drawable.msg_voice_headphones);
+        radioItem.setMinimumWidth(160);
+        radioItem.setOnClickListener(e -> {
+            org.telegram.messenger.RadioMode.toggle(dialogId);
+            boolean radioOn = org.telegram.messenger.RadioMode.isEnabled(dialogId);
+            // FORK MOD (radio mode): mute the chat while radio mode is on, unmute when off
+            getNotificationsController().setDialogNotificationsSettings(dialogId, 0, radioOn ? NotificationsController.SETTING_MUTE_FOREVER : NotificationsController.SETTING_MUTE_UNMUTE);
+            BulletinFactory.of(this).createSimpleBulletin(
+                    R.raw.chats_infotip,
+                    radioOn ? "Radio mode ON — chat muted, voice auto-plays" : "Radio mode OFF — chat unmuted"
+            ).show();
+            finishPreviewFragment();
+        });
+        previewMenu[0].addView(radioItem);
+
         ActionBarMenuSubItem deleteItem = new ActionBarMenuSubItem(getParentActivity(), false, true);
         deleteItem.setIconColor(getThemedColor(Theme.key_text_RedRegular));
         deleteItem.setTextColor(getThemedColor(Theme.key_text_RedBold));

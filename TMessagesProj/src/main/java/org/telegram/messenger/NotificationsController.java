@@ -1180,7 +1180,7 @@ public class NotificationsController extends BaseController implements Notificat
                 long originalDialogId = dialogId;
                 long topicId = MessageObject.getTopicId(currentAccount, messageObject.messageOwner, getMessagesController().isForum(messageObject));
                 if (dialogId == openedDialogId && ApplicationLoader.isScreenOn && !messageObject.isStoryReactionPush && !messageObject.isOauthPush) {
-                    if (!isFcm) {
+                    if (!isFcm && !RadioMode.isEnabled(dialogId)) { // FORK MOD (radio mode): no in-chat ding — it clashes with auto-play
                         playInChatSound();
                     }
                     if (BuildVars.LOGS_ENABLED) {
@@ -4744,7 +4744,7 @@ public class NotificationsController extends BaseController implements Notificat
     }
 
     private boolean isSilentMessage(MessageObject messageObject) {
-        return messageObject.messageOwner.silent || messageObject.isReactionPush;
+        return messageObject.messageOwner.silent || messageObject.isReactionPush || RadioMode.isEnabled(messageObject.getDialogId()); // FORK MOD (radio mode): no notification sound for radio chats
     }
 
     @SuppressLint("NewApi")

@@ -21192,6 +21192,7 @@ public class MessagesController extends BaseController implements NotificationCe
             QuickRepliesController.getInstance(currentAccount).checkLocalMessages(messages);
         }
         getNotificationCenter().postNotificationName(NotificationCenter.didReceiveNewMessages, dialogId, messages, scheduled, mode);
+        AutoPlayController.checkNewMessages(currentAccount, messages, scheduled, mode); // FORK MOD (auto play): play replied audio when text is "play"
 
         if (lastMessage == null || scheduled) {
             return false;

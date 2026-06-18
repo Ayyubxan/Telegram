@@ -1111,6 +1111,7 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
             castItem.addView(castItemButton, 0, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
             updateColors();
         }
+        optionsButton.addSubItem(100, R.drawable.msg_autodelete, "Sleep timer"); // FORK MOD (sleep timer): under Chromecast
         if (optionsIcon != null) {
             optionsIcon.setCasting(CastSync.isActive(), true);
         }
@@ -1685,6 +1686,37 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
         }
     }
 
+    private void showSleepTimerDialog() { // FORK MOD (sleep timer)
+        if (parentActivity == null) {
+            return;
+        }
+        final int[] mins = {10, 20, 30, 40, 50, 60, 70, 80, 90};
+        final java.util.ArrayList<CharSequence> labels = new java.util.ArrayList<>();
+        final java.util.ArrayList<Integer> values = new java.util.ArrayList<>();
+        if (org.telegram.messenger.SleepTimer.isActive()) {
+            labels.add("Turn off timer");
+            values.add(0);
+        }
+        for (int m : mins) {
+            labels.add(m + " min");
+            values.add(m);
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(parentActivity);
+        builder.setTitle("Sleep timer");
+        builder.setItems(labels.toArray(new CharSequence[0]), (dialog, which) -> {
+            int v = values.get(which);
+            if (v <= 0) {
+                org.telegram.messenger.SleepTimer.cancel();
+                android.widget.Toast.makeText(parentActivity, "Sleep timer off", android.widget.Toast.LENGTH_SHORT).show();
+            } else {
+                org.telegram.messenger.SleepTimer.schedule(v);
+                android.widget.Toast.makeText(parentActivity, "Music will stop in " + v + " min", android.widget.Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton(LocaleController.getString(R.string.Cancel), null);
+        builder.show();
+    }
+
     private void onSubItemClick(int id) {
         final MessageObject messageObject = MediaController.getInstance().getPlayingMessageObject();
         if (messageObject == null || parentActivity == null) {
@@ -1722,6 +1754,8 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
         } else if (id == 6) {
             ChromecastController.getInstance().setCurrentMediaAndCastIfNeeded(MediaController.getInstance().getCurrentChromecastMedia());
             castItemButton.performClick();
+        } else if (id == 100) {
+            showSleepTimerDialog();
         } else if (id == 7) {
             saveToProfile(messageObject, false, () -> {
                 if (savedMusicList != null) {
