@@ -13468,6 +13468,9 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 args.putLong("user_id", UserConfig.getInstance(currentAccount).getClientUserId());
                 presentFragment(new ChatActivity(args));
             });
+            io.add(R.drawable.outline_groups_24, "Nearby (offline)", () -> { // FORK MOD (nearby offline chat)
+                presentFragment(new NearbyActivity());
+            });
             if (ApplicationLoader.applicationLoaderInstance != null) {
                 ApplicationLoader.applicationLoaderInstance.addItemOptions(io);
             }
