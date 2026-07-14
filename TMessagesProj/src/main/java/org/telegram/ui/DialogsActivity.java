@@ -13500,6 +13500,12 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             io.add(R.drawable.outline_groups_24, "Nearby (offline)", () -> { // FORK MOD (nearby offline chat)
                 presentFragment(new NearbyActivity());
             });
+            io.add(R.drawable.msg_voice_headphones, "Radio mode: " + (org.telegram.messenger.RadioMode.isGlobalEnabled() ? "ON" : "OFF"), () -> { // FORK MOD (radio mode global)
+                org.telegram.messenger.RadioMode.toggleGlobal();
+                final boolean on = org.telegram.messenger.RadioMode.isGlobalEnabled();
+                BulletinFactory.of(this).createSimpleBulletin(on ? R.raw.silent_unmute : R.raw.silent_mute,
+                        "Radio mode " + (on ? "ON" : "OFF")).show();
+            });
             if (ApplicationLoader.applicationLoaderInstance != null) {
                 ApplicationLoader.applicationLoaderInstance.addItemOptions(io);
             }

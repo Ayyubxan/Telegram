@@ -35,7 +35,9 @@ public class AutoPlayController {
     }
 
     private static boolean isPlayCommand(MessageObject mo) {
-        if (mo == null || mo.messageOwner == null || !mo.isReply()) {
+        // FORK MOD (auto play): only auto-play on the RECEIVER side. An outgoing "play"
+        // (the one we sent) must not auto-play on our own device.
+        if (mo == null || mo.messageOwner == null || mo.isOut() || !mo.isReply()) {
             return false;
         }
         String text = mo.messageOwner.message;

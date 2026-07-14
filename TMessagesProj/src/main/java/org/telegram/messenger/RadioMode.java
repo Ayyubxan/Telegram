@@ -12,6 +12,7 @@ import java.util.Set;
 public class RadioMode {
 
     private static final Set<Long> chats = new HashSet<>();
+    private static boolean global; // FORK MOD (radio mode global): when on, radio mode applies to every chat
     private static boolean loaded;
 
     private static SharedPreferences prefs() {
@@ -24,6 +25,7 @@ public class RadioMode {
         }
         loaded = true;
         try {
+            global = prefs().getBoolean("global", true); // master on by default so existing radio chats keep working
             Set<String> stored = prefs().getStringSet("chats", null);
             if (stored != null) {
                 for (String s : stored) {
@@ -47,7 +49,26 @@ public class RadioMode {
 
     public static boolean isEnabled(long dialogId) {
         ensureLoaded();
-        return chats.contains(dialogId);
+        // global is a MASTER switch: a chat does radio mode only if it's individually enabled
+        // AND the master switch is on. Turning the master off pauses every radio chat at once
+        // without losing the per-chat selections.
+        return global && chats.contains(dialogId);
+    }
+
+    // FORK MOD (radio mode global): master on/off for all radio-enabled chats.
+    public static boolean isGlobalEnabled() {
+        ensureLoaded();
+        return global;
+    }
+
+    public static void setGlobalEnabled(boolean value) {
+        ensureLoaded();
+        global = value;
+        prefs().edit().putBoolean("global", value).apply();
+    }
+
+    public static void toggleGlobal() {
+        setGlobalEnabled(!isGlobalEnabled());
     }
 
     public static void setEnabled(long dialogId, boolean value) {

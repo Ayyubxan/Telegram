@@ -1117,6 +1117,7 @@ public class ChatActivity extends BaseFragment implements
 
     private ChatMessageCell dummyMessageCell;
     protected FireworksOverlay fireworksOverlay;
+    private org.telegram.ui.Components.LoveEffectOverlay loveEffectOverlay; // FORK MOD (love effect)
 
     private boolean swipeBackEnabled = true;
 
@@ -8652,6 +8653,7 @@ public class ChatActivity extends BaseFragment implements
         messagesSearchListContainer.addView(hashtagHistoryView, LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT);
 
         contentView.addView(fireworksOverlay = new FireworksOverlay(context), LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
+        contentView.addView(loveEffectOverlay = new org.telegram.ui.Components.LoveEffectOverlay(context), LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT)); // FORK MOD (love effect)
 
         if (getDialogId() < 0 && chatMode == MODE_DEFAULT && !isInsideContainer && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             messageMetricsView = new ChatActivityMessageMetricsView(context);
@@ -25183,6 +25185,7 @@ public class ChatActivity extends BaseFragment implements
         for (int a = 0, N = arr.size(); a < N; a++) {
             FileLog.d("processNewMessages " + a + " our of " + N);
             MessageObject messageObject = arr.get(a);
+            maybePlayLoveEffect(messageObject); // FORK MOD (love effect)
             if (!isAd) {
                 isAd = messageObject.isSponsored();
             }
@@ -26837,6 +26840,61 @@ public class ChatActivity extends BaseFragment implements
                 .setDuration(Bulletin.DURATION_PROLONG)
                 .setOnHideListener(this::checkConversionDateTimeToast)
                 .show(true);
+        }
+        // FORK MOD (love effect): when opening a chat whose latest message is "Sevaman", celebrate.
+        // Try twice in case messages haven't finished loading yet.
+        AndroidUtilities.runOnUIThread(this::checkLoveEffectOnOpen, 700);
+        AndroidUtilities.runOnUIThread(this::checkLoveEffectOnOpen, 1600);
+    }
+
+    // FORK MOD (love effect)
+    private boolean isLoveMessage(MessageObject mo) {
+        if (mo == null || mo.isOut() || mo.messageOwner == null) {
+            return false;
+        }
+        String text = mo.messageOwner.message;
+        return text != null && text.toLowerCase().contains("sevaman");
+    }
+
+    private void checkLoveEffectOnOpen() {
+        if (paused || messages == null || messages.isEmpty()) {
+            return;
+        }
+        // Find the newest incoming message; celebrate only if it is a "Sevaman".
+        MessageObject newest = null;
+        for (int i = 0; i < messages.size(); i++) {
+            MessageObject mo = messages.get(i);
+            if (mo == null || mo.isOut() || mo.getId() <= 0) {
+                continue;
+            }
+            if (newest == null || mo.getId() > newest.getId()) {
+                newest = mo;
+            }
+        }
+        if (isLoveMessage(newest)) {
+            playLoveEffect(newest);
+        }
+    }
+
+    private void maybePlayLoveEffect(MessageObject mo) {
+        if (!paused && isLoveMessage(mo)) {
+            playLoveEffect(mo);
+        }
+    }
+
+    private void playLoveEffect(MessageObject mo) {
+        if (loveEffectOverlay == null) {
+            return;
+        }
+        long dialogId = mo.getDialogId();
+        int id = mo.getId();
+        // Fire exactly once per "Sevaman" message, ever (persisted), and only in this chat.
+        if (org.telegram.messenger.LoveEffect.wasShown(dialogId, id)) {
+            return;
+        }
+        org.telegram.messenger.LoveEffect.markShown(dialogId, id);
+        if (!loveEffectOverlay.isRunning()) {
+            loveEffectOverlay.start(fireworksOverlay, 10000);
         }
     }
 
