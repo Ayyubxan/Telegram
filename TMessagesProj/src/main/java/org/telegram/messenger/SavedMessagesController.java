@@ -184,6 +184,7 @@ public class SavedMessagesController {
     }
 
     public int getMessagesCount(long dialogId) {
+        if (LockedChats.isSuppressed(dialogId)) return 0; // FORK MOD (locked chats)
         for (int i = 0; i < allDialogs.size(); ++i) {
             SavedDialog d = allDialogs.get(i);
             if (d.dialogId == dialogId)
@@ -193,6 +194,7 @@ public class SavedMessagesController {
     }
 
     public boolean containsDialog(long dialogId) {
+        if (LockedChats.isSuppressed(dialogId)) return false; // FORK MOD (locked chats)
         for (int i = 0; i < allDialogs.size(); ++i) {
             SavedDialog d = allDialogs.get(i);
             if (d.dialogId == dialogId)
@@ -1143,6 +1145,10 @@ public class SavedMessagesController {
 
     private final LongSparseArray<ArrayList<Utilities.Callback<Boolean>>> checkMessagesCallbacks = new LongSparseArray<>();
     public void hasSavedMessages(long did, Utilities.Callback<Boolean> whenDone) {
+        if (LockedChats.isSuppressed(did)) { // FORK MOD (locked chats): no "Saved" tab for a hidden peer
+            if (whenDone != null) whenDone.run(false);
+            return;
+        }
         final SavedDialog savedDialog = findSavedDialog(did);
         if (savedDialog != null && savedDialog.messagesCount > 0 && savedDialog.messagesCountLoaded) {
             if (whenDone != null) whenDone.run(true);

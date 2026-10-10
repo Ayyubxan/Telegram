@@ -10370,6 +10370,10 @@ public class SharedMediaLayout extends FrameLayout implements NotificationCenter
             if (loading) {
                 return;
             }
+            if (org.telegram.messenger.LockedChats.isSuppressed(dialog_id)) { // FORK MOD (locked chats): no groups in common
+                endReached = true;
+                return;
+            }
             TLRPC.TL_messages_getCommonChats req = new TLRPC.TL_messages_getCommonChats();
             long uid;
             if (DialogObject.isEncryptedDialog(dialog_id)) {

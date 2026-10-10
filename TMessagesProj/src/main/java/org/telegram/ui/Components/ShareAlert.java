@@ -2932,6 +2932,9 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
                 if (dialog.id == selfUserId) {
                     continue;
                 }
+                if (org.telegram.messenger.LockedChats.isSuppressed(dialog.id)) { // FORK MOD (locked chats)
+                    continue;
+                }
                 if (!DialogObject.isEncryptedDialog(dialog.id)) {
                     if (DialogObject.isUserDialog(dialog.id)) {
                         if (dialog.folder_id == 1) {
@@ -3399,6 +3402,12 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
                         MessagesController.getInstance(currentAccount).putChat(chat, true);
                     }
                 }
+                for (int a = 0; a < result.size(); a++) { // FORK MOD (locked chats)
+                    if (org.telegram.messenger.LockedChats.isSuppressedObject(((DialogSearchResult) result.get(a)).object)) {
+                        result.remove(a);
+                        a--;
+                    }
+                }
                 boolean becomeEmpty = !searchResult.isEmpty() && result.isEmpty();
                 boolean isEmpty = searchResult.isEmpty() && result.isEmpty();
                 if (becomeEmpty) {
@@ -3595,7 +3604,7 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
                                 cell.setColors(Theme.key_voipgroup_nameText, Theme.key_voipgroup_inviteMembersBackground);
                             }
 
-                            TLRPC.TL_topPeer peer = MediaDataController.getInstance(currentAccount).hints.get(position);
+                            TLRPC.TL_topPeer peer = MediaDataController.getInstance(currentAccount).getVisibleHints().get(position); // FORK MOD (locked chats)
                             TLRPC.Chat chat = null;
                             TLRPC.User user = null;
                             long did = 0;
@@ -3623,7 +3632,7 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
                     });
                     horizontalListView.setOnItemClickListener((view1, position) -> {
                         HintDialogCell cell = (HintDialogCell) view1;
-                        TLRPC.TL_topPeer peer = MediaDataController.getInstance(currentAccount).hints.get(position);
+                        TLRPC.TL_topPeer peer = MediaDataController.getInstance(currentAccount).getVisibleHints().get(position); // FORK MOD (locked chats)
                         TLRPC.Dialog dialog = new TLRPC.TL_dialog();
                         TLRPC.Chat chat = null;
                         TLRPC.User user = null;

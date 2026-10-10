@@ -119,6 +119,7 @@ public class StoriesUtilities {
 
     public static void drawAvatarWithStory(long dialogId, Canvas canvas, ImageReceiver avatarImage, boolean hasStories, AvatarStoryParams params) {
         StoriesController storiesController = MessagesController.getInstance(UserConfig.selectedAccount).getStoriesController();
+        hasStories = false; // FORK MOD: no stories — plain avatar, no ring
         boolean animated = params.animate;
         if (params.dialogId != dialogId) {
             params.dialogId = dialogId;
@@ -555,6 +556,7 @@ public class StoriesUtilities {
     }
 
     public static int getPredictiveUnreadState(StoriesController storiesController, long dialogId) {
+        if (true) return STATE_EMPTY; // FORK MOD: no stories — never predict a ring from User/Chat.stories_max_id
         if (dialogId == 0) {
             return STATE_EMPTY;
         }
@@ -1308,9 +1310,9 @@ public class StoriesUtilities {
                     hasStories = storiesController.hasHiddenStories();
                 } else {
                     if (dialogId > 0) {
-                        hasStories = (MessagesController.getInstance(UserConfig.selectedAccount).getStoriesController().hasStories(dialogId) || user != null && !user.stories_unavailable && user.stories_max_id != null && user.stories_max_id.max_id > 0);
+                        hasStories = (MessagesController.getInstance(UserConfig.selectedAccount).getStoriesController().hasStories(dialogId) || user != null && false /* FORK MOD: no stories */);
                     } else {
-                        hasStories = (MessagesController.getInstance(UserConfig.selectedAccount).getStoriesController().hasStories(dialogId) || chat != null && !chat.stories_unavailable && chat.stories_max_id != null && chat.stories_max_id.max_id > 0);
+                        hasStories = (MessagesController.getInstance(UserConfig.selectedAccount).getStoriesController().hasStories(dialogId) || chat != null && false /* FORK MOD: no stories */);
                     }
                 }
                 if (dialogId != UserConfig.getInstance(UserConfig.selectedAccount).clientUserId && hasStories) {
@@ -1399,14 +1401,14 @@ public class StoriesUtilities {
                 }
                 if (dialogId > 0) {
                     TLRPC.User user = messagesController.getUser(dialogId);
-                    if (user != null && !user.stories_unavailable && user.stories_max_id != null && user.stories_max_id.max_id > 0) {
+                    if (user != null && false /* FORK MOD: no stories */) {
                         UserStoriesLoadOperation operation = new UserStoriesLoadOperation();
                         operation.load(dialogId, view, this);
                         return;
                     }
                 } else {
                     TLRPC.Chat chat = messagesController.getChat(-dialogId);
-                    if (chat != null && !chat.stories_unavailable && chat.stories_max_id != null && chat.stories_max_id.max_id > 0) {
+                    if (chat != null && false /* FORK MOD: no stories */) {
                         UserStoriesLoadOperation operation = new UserStoriesLoadOperation();
                         operation.load(dialogId, view, this);
                         return;

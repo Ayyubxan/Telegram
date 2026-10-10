@@ -1,5 +1,7 @@
 package org.telegram.messenger;
 
+import org.telegram.tgnet.TLRPC;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -87,5 +89,38 @@ public class LockedChats {
     // lock is engaged.
     public static boolean isSuppressed(long dialogId) {
         return hidden && isLocked(dialogId);
+    }
+
+    // Same check for the TL objects that search / hints / share lists carry around.
+    public static boolean isSuppressedObject(Object obj) {
+        if (!hidden || obj == null) {
+            return false;
+        }
+        if (obj instanceof TLRPC.User) {
+            return isLocked(((TLRPC.User) obj).id);
+        } else if (obj instanceof TLRPC.Chat) {
+            return isLocked(-((TLRPC.Chat) obj).id);
+        } else if (obj instanceof TLRPC.Dialog) {
+            return isLocked(((TLRPC.Dialog) obj).id);
+        } else if (obj instanceof TLRPC.TL_topPeer) {
+            return isSuppressedPeer(((TLRPC.TL_topPeer) obj).peer);
+        } else if (obj instanceof TLRPC.Peer) {
+            return isSuppressedPeer((TLRPC.Peer) obj);
+        }
+        return false;
+    }
+
+    public static boolean isSuppressedPeer(TLRPC.Peer peer) {
+        if (!hidden || peer == null) {
+            return false;
+        }
+        if (peer.user_id != 0) {
+            return isLocked(peer.user_id);
+        } else if (peer.channel_id != 0) {
+            return isLocked(-peer.channel_id);
+        } else if (peer.chat_id != 0) {
+            return isLocked(-peer.chat_id);
+        }
+        return false;
     }
 }

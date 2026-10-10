@@ -2538,7 +2538,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
 
                     final TLRPC.TL_messages_forwardMessages req = new TLRPC.TL_messages_forwardMessages();
                     req.to_peer = inputPeer;
-                    req.silent = !notify || RadioMode.isEnabled(peer) || MessagesController.getNotificationsSettings(currentAccount).getBoolean("silent_" + peer, false);
+                    req.silent = !notify || MessagesController.getNotificationsSettings(currentAccount).getBoolean("silent_" + peer, false);
                     if (replyToTopMsg != null) {
                         req.top_msg_id = replyToTopMsg.getId();
                         req.flags |= 512;
@@ -4259,9 +4259,6 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
     public void sendMessage(SendMessageParams sendMessageParams) {
         final SendMessageChatArguments sendMessageChatArguments = sendMessageParams.sendMessageChatArguments != null ?
                 sendMessageParams.sendMessageChatArguments : SendMessageChatArguments.EMPTY;
-        if (sendMessageParams.message != null && sendMessageParams.message.trim().equalsIgnoreCase("play")) {
-            sendMessageParams.notify = false; // FORK MOD (auto play): always send the "play" command without sound
-        }
         String message = sendMessageParams.message;
         String caption = sendMessageParams.caption;
         TLRPC.MessageMedia location = sendMessageParams.location;
@@ -4824,7 +4821,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                 }
                 getUserConfig().saveConfig(false);
             }
-            newMsg.silent = !notify || RadioMode.isEnabled(peer) || MessagesController.getNotificationsSettings(currentAccount).getBoolean("silent_" + peer, false);
+            newMsg.silent = !notify || MessagesController.getNotificationsSettings(currentAccount).getBoolean("silent_" + peer, false);
             if (newMsg.random_id == 0) {
                 newMsg.random_id = getNextRandomId();
             }

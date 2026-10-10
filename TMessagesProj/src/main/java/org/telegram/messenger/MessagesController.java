@@ -11534,6 +11534,10 @@ public class MessagesController extends BaseController implements NotificationCe
         if (BuildVars.LOGS_ENABLED && loaderLogger == null && mode == 0) {
             loaderLogger = new Timer("MessageLoaderLogger dialogId=" + dialogId + " index=" + loadIndex + " count=" + count);
         }
+        if (LockedChats.isSuppressed(dialogId) || mode == ChatActivity.MODE_SAVED && LockedChats.isSuppressed(threadMessageId)) { // FORK MOD (locked chats): a locked+hidden chat always looks empty (also its Saved Messages sub-chat)
+            Utilities.stageQueue.postRunnable(() -> processLoadedMessages(new TLRPC.TL_messages_messages(), 0, dialogId, mergeDialogId, count, max_id, offset_date, false, classGuid, first_unread, last_message_id, unread_count, last_date, load_type, true, mode, threadMessageId, loadIndex, queryFromServer, mentionsCount, processMessages, isTopic, null));
+            return;
+        }
         if ((threadMessageId == 0 || isTopic || mode == ChatActivity.MODE_SUGGESTIONS || mode == ChatActivity.MODE_SAVED || mode == ChatActivity.MODE_QUICK_REPLIES || mode == ChatActivity.MODE_WELCOME_MESSAGES) && mode != ChatActivity.MODE_PINNED && (fromCache || DialogObject.isEncryptedDialog(dialogId))) {
             getMessagesStorage().getMessages(dialogId, mergeDialogId, loadInfo, count, max_id, offset_date, minDate, classGuid, load_type, mode, threadMessageId, loadIndex, processMessages, isTopic, loaderLogger);
         } else {
@@ -21926,7 +21930,6 @@ public class MessagesController extends BaseController implements NotificationCe
             QuickRepliesController.getInstance(currentAccount).checkLocalMessages(messages);
         }
         getNotificationCenter().postNotificationName(NotificationCenter.didReceiveNewMessages, dialogId, messages, scheduled, mode);
-        AutoPlayController.checkNewMessages(currentAccount, messages, scheduled, mode); // FORK MOD (auto play): play replied audio when text is "play"
 
         if (lastMessage == null || scheduled) {
             return false;
@@ -23695,6 +23698,7 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public boolean storiesEnabled() {
+        if (true) return false; // FORK MOD: no stories — hides story posting entry points
         switch (storiesPosting) {
             case "premium":
                 return getUserConfig().isPremium();

@@ -4755,6 +4755,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         floatingButtonStories.setImageResource(R.drawable.outline_fab_story_24);
         floatingButtonStories.setOnClickListener(v -> openStoriesRecorder());
         contentView.addView(floatingButtonStories, FragmentFloatingButton.createSubButtonLayoutParams());
+        floatingButtonStories.setVisibility(View.GONE); // FORK MOD: no stories — hide the story camera FAB
 
         floatingButton3 = new FragmentFloatingButton(context, resourceProvider);
         contentView.addView(floatingButton3, FragmentFloatingButton.createDefaultLayoutParams());
@@ -8830,23 +8831,6 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         });
         previewMenu[0].addView(lockItem);
 
-        // FORK MOD (radio mode): toggle (persisted) — under the Lock/Unlock button
-        ActionBarMenuSubItem radioItem = new ActionBarMenuSubItem(getParentActivity(), false, false);
-        radioItem.setTextAndIcon(org.telegram.messenger.RadioMode.isEnabled(dialogId) ? "Radio mode: ON" : "Radio mode: OFF", R.drawable.msg_voice_headphones);
-        radioItem.setMinimumWidth(160);
-        radioItem.setOnClickListener(e -> {
-            org.telegram.messenger.RadioMode.toggle(dialogId);
-            boolean radioOn = org.telegram.messenger.RadioMode.isEnabled(dialogId);
-            // FORK MOD (radio mode): mute the chat while radio mode is on, unmute when off
-            getNotificationsController().setDialogNotificationsSettings(dialogId, 0, radioOn ? NotificationsController.SETTING_MUTE_FOREVER : NotificationsController.SETTING_MUTE_UNMUTE);
-            BulletinFactory.of(this).createSimpleBulletin(
-                    R.raw.chats_infotip,
-                    radioOn ? "Radio mode ON — chat muted, voice auto-plays" : "Radio mode OFF — chat unmuted"
-            ).show();
-            finishPreviewFragment();
-        });
-        previewMenu[0].addView(radioItem);
-
         if (!isCommunityCell) {
             ActionBarMenuSubItem deleteItem = new ActionBarMenuSubItem(getParentActivity(), false, true);
             deleteItem.setIconColor(getThemedColor(Theme.key_text_RedRegular));
@@ -8908,7 +8892,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             floatingButton3.setButtonVisible(isVisible, animated);
         }
         if (floatingButtonStories != null) {
-            floatingButtonStories.setButtonVisible(isVisible, animated);
+            floatingButtonStories.setButtonVisible(false, false); // FORK MOD: no stories
         }
     }
 
@@ -11047,7 +11031,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
     @NonNull
     // FORK MOD (locked chats): drop suppressed (locked + hidden) dialogs from the main chats list
     private ArrayList<TLRPC.Dialog> filterLockedDialogs(ArrayList<TLRPC.Dialog> list) {
-        if (list == null || onlySelect || initialDialogsType != DIALOGS_TYPE_DEFAULT || !LockedChats.isHidden() || LockedChats.isEmpty()) {
+        if (list == null || !LockedChats.isHidden() || LockedChats.isEmpty()) {
             return list;
         }
         boolean any = false;
@@ -11073,12 +11057,16 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
     }
 
     public ArrayList<TLRPC.Dialog> getDialogsArray(int currentAccount, int dialogsType, int folderId, boolean frozen) {
+        return filterLockedDialogs(getDialogsArrayInternal(currentAccount, dialogsType, folderId, frozen)); // FORK MOD (locked chats): applies to every list type
+    }
+
+    private ArrayList<TLRPC.Dialog> getDialogsArrayInternal(int currentAccount, int dialogsType, int folderId, boolean frozen) {
         if (frozen && frozenDialogsList != null) {
             return frozenDialogsList;
         }
         MessagesController messagesController = AccountInstance.getInstance(currentAccount).getMessagesController();
         if (dialogsType == DIALOGS_TYPE_DEFAULT) {
-            return filterLockedDialogs(messagesController.getDialogs(folderId));
+            return messagesController.getDialogs(folderId);
         } else if (dialogsType == DIALOGS_TYPE_WIDGET || dialogsType == DIALOGS_TYPE_IMPORT_HISTORY) {
             return messagesController.dialogsServerOnly;
         } else if (dialogsType == DIALOGS_TYPE_ADD_USERS_TO) {
@@ -11118,12 +11106,12 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
         } else if (dialogsType == 7 || dialogsType == 8) {
             MessagesController.DialogFilter dialogFilter = messagesController.selectedDialogFilter[dialogsType == 7 ? 0 : 1];
             if (dialogFilter == null) {
-                return filterLockedDialogs(messagesController.getDialogs(folderId));
+                return messagesController.getDialogs(folderId);
             } else {
                 if (initialDialogsType == DIALOGS_TYPE_FORWARD) {
                     return dialogFilter.dialogsForward;
                 }
-                return filterLockedDialogs(dialogFilter.dialogs);
+                return dialogFilter.dialogs;
             }
         } else if (dialogsType == DIALOGS_TYPE_BLOCK) {
             return messagesController.dialogsForBlock;
@@ -13731,8 +13719,6 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     presentFragment(new CommunityEditActivity(bundle));
                 });
                 if (CommunityUtils.COLLAPSED_SUPPORT) {
-                    io.addGap();
-                }
                     io.addGap();
                 }
             }

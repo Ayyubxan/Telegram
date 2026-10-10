@@ -8668,7 +8668,6 @@ public class MessageObject {
         }
         return messageOwner.rich_message;
     }
-    }
 
     public void generateLayout(TLRPC.User fromUser) {
         if (type == TYPE_ARTICLE) {

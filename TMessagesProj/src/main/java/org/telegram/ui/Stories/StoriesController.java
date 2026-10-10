@@ -265,6 +265,7 @@ public class StoriesController {
     }
 
     public TL_stories.PeerStories getStoriesFromFullPeer(long dialogId) {
+        if (true) return null; // FORK MOD: stories hidden everywhere (profile/chat avatar ring)
         if (dialogId > 0) {
             TLRPC.UserFull userFull = MessagesController.getInstance(currentAccount).getUserFull(dialogId);
             if (userFull != null && userFull.stories != null && !userFull.stories.checkedExpired) {
@@ -680,6 +681,7 @@ public class StoriesController {
     }
 
     public TL_stories.PeerStories getStories(long peerId) {
+        if (true) return null; // FORK MOD: stories hidden everywhere
         return allStoriesMap.get(peerId);
     }
 
@@ -1751,6 +1753,7 @@ public class StoriesController {
     }
 
     public boolean hasHiddenStories() {
+        if (true) return false; // FORK MOD: stories hidden everywhere
         return !hiddenListStories.isEmpty();
     }
 

@@ -3848,6 +3848,13 @@ public class MediaDataController extends BaseController {
         int max_id = 0;
         long queryWithDialog = dialogId;
         boolean firstQuery = !internal;
+        if (LockedChats.isSuppressed(dialogId)) { // FORK MOD (locked chats): in-chat search finds nothing
+            searchResultMessages.clear();
+            lastReturnedNum = 0;
+            loadingMoreSearchMessages = false;
+            getNotificationCenter().postNotificationName(NotificationCenter.chatSearchResultsAvailable, guid, 0, getMask(), dialogId, 0, 0, true);
+            return;
+        }
         if (reqId != 0) {
             loadingMoreSearchMessages = false;
             getConnectionsManager().cancelRequest(reqId, true);
@@ -4157,6 +4164,10 @@ public class MediaDataController extends BaseController {
 
     public void loadMedia(long dialogId, int count, int max_id, int min_id, int type, long topicId, int fromCache, int classGuid, int requestIndex, ReactionsLayoutInBubble.VisibleReaction tag, String query) {
         boolean isChannel = DialogObject.isChatDialog(dialogId) && ChatObject.isChannel(-dialogId, currentAccount);
+        if (LockedChats.isSuppressed(dialogId)) { // FORK MOD (locked chats): shared media looks empty
+            AndroidUtilities.runOnUIThread(() -> getNotificationCenter().postNotificationName(NotificationCenter.mediaDidLoad, dialogId, 0, new ArrayList<MessageObject>(), classGuid, type, true, min_id != 0, requestIndex));
+            return;
+        }
 
         if (BuildVars.LOGS_ENABLED) {
             FileLog.d("load media did " + dialogId + " count = " + count + " max_id " + max_id + " type = " + type + " cache = " + fromCache + " classGuid = " + classGuid);
@@ -4233,6 +4244,10 @@ public class MediaDataController extends BaseController {
     }
 
     public void getMediaCounts(long dialogId, long topicId, int classGuid) {
+        if (LockedChats.isSuppressed(dialogId)) { // FORK MOD (locked chats): all media counters are zero
+            AndroidUtilities.runOnUIThread(() -> getNotificationCenter().postNotificationName(NotificationCenter.mediaCountsDidLoad, dialogId, topicId, new int[MEDIA_TYPES_COUNT]));
+            return;
+        }
         getMessagesStorage().getStorageQueue().postRunnable(() -> {
             try {
                 int[] counts = new int[]{-1, -1, -1, -1, -1, -1, -1, -1, -1};
@@ -4363,6 +4378,10 @@ public class MediaDataController extends BaseController {
     }
 
     public void getMediaCount(long dialogId, long topicId, int type, int classGuid, boolean fromCache) {
+        if (LockedChats.isSuppressed(dialogId)) { // FORK MOD (locked chats)
+            AndroidUtilities.runOnUIThread(() -> getNotificationCenter().postNotificationName(NotificationCenter.mediaCountDidLoad, dialogId, topicId, 0, fromCache, type));
+            return;
+        }
         if (fromCache || DialogObject.isEncryptedDialog(dialogId)) {
             getMediaCountDatabase(dialogId, topicId, type, classGuid);
         } else {
@@ -4982,6 +5001,21 @@ public class MediaDataController extends BaseController {
     //---------------- MEDIA END ----------------
 
     public ArrayList<TLRPC.TL_topPeer> hints = new ArrayList<>();
+
+    // FORK MOD (locked chats): top peers without the locked+hidden ones (used by search hints and the share sheet)
+    public ArrayList<TLRPC.TL_topPeer> getVisibleHints() {
+        if (!LockedChats.isHidden() || LockedChats.isEmpty() || hints.isEmpty()) {
+            return hints;
+        }
+        ArrayList<TLRPC.TL_topPeer> out = new ArrayList<>(hints.size());
+        for (int i = 0; i < hints.size(); i++) {
+            TLRPC.TL_topPeer p = hints.get(i);
+            if (p != null && !LockedChats.isSuppressedPeer(p.peer)) {
+                out.add(p);
+            }
+        }
+        return out;
+    }
     public ArrayList<TLRPC.TL_topPeer> inlineBots = new ArrayList<>();
     public ArrayList<TLRPC.TL_topPeer> guestBots = new ArrayList<>();
     public ArrayList<TLRPC.TL_topPeer> webapps = new ArrayList<>();
@@ -5966,6 +6000,9 @@ public class MediaDataController extends BaseController {
     private LongSparseArray<Boolean> loadingPinnedMessages = new LongSparseArray<>();
 
     public void loadPinnedMessages(long dialogId, int maxId, int fallback) {
+        if (LockedChats.isSuppressed(dialogId)) { // FORK MOD (locked chats): no pinned bar
+            return;
+        }
         if (loadingPinnedMessages.indexOfKey(dialogId) >= 0) {
             return;
         }
@@ -6022,6 +6059,9 @@ public class MediaDataController extends BaseController {
     }
 
     public ArrayList<MessageObject> loadPinnedMessages(long dialogId, long channelId, ArrayList<Integer> mids, boolean useQueue) {
+        if (LockedChats.isSuppressed(dialogId)) { // FORK MOD (locked chats): no pinned bar
+            return new ArrayList<>();
+        }
         if (useQueue) {
             getMessagesStorage().getStorageQueue().postRunnable(() -> loadPinnedMessageInternal(dialogId, channelId, mids, false));
         } else {

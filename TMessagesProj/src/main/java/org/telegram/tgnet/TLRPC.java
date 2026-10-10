@@ -57510,19 +57510,12 @@ public class TLRPC {
         public TL_textWithEntities summaryText; //custom
         public String translatedSummaryLanguage; //custom
         public TL_textWithEntities translatedSummaryText; //custom
-<<<<<<< HEAD
-<<<<<<< HEAD
         public boolean forkDeleted; //custom (FORK MOD: server asked to delete, kept locally)
         public ArrayList<String> forkEditHistory; //custom (FORK MOD: previous message texts, oldest first)
         public ArrayList<Integer> forkEditHistoryDates; //custom (FORK MOD: dates parallel to forkEditHistory)
-=======
-        public long ephemeralReceiverBotId; //custom
->>>>>>> 9bcf3d2769c6d3f07105a992e5d9493e33ac3348
-=======
         public int ephemeralAnchorMsgId; // custom
         public long ephemeralReceiverBotId; //custom
         public boolean welcomeTemplateFirst; // custom
->>>>>>> 62b56a07ca7e30e39f7fd00a6728d6bbd716ca1c
 
         private static Message fromConstructor(int constructor) {
             switch (constructor) {

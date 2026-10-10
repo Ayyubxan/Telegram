@@ -607,7 +607,7 @@ public class UserSelectorBottomSheet extends BottomSheetWithRecyclerListView imp
 
     private void initHints(boolean needUpdate) {
         if (hints.isEmpty()) {
-            hints.addAll(MediaDataController.getInstance(currentAccount).hints);
+            hints.addAll(MediaDataController.getInstance(currentAccount).getVisibleHints());
             if (needUpdate) {
                 updateItems(true, true);
             }

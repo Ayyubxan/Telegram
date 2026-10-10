@@ -251,7 +251,7 @@ public class DialogsSearchAdapter extends RecyclerListView.SelectionAdapter {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             HintDialogCell cell = (HintDialogCell) holder.itemView;
 
-            TLRPC.TL_topPeer peer = MediaDataController.getInstance(currentAccount).hints.get(position);
+            TLRPC.TL_topPeer peer = MediaDataController.getInstance(currentAccount).getVisibleHints().get(position); // FORK MOD (locked chats)
             TLRPC.Dialog dialog = new TLRPC.TL_dialog();
             TLRPC.Chat chat = null;
             TLRPC.User user = null;
@@ -278,7 +278,7 @@ public class DialogsSearchAdapter extends RecyclerListView.SelectionAdapter {
 
         @Override
         public int getItemCount() {
-            return MediaDataController.getInstance(currentAccount).hints.size();
+            return MediaDataController.getInstance(currentAccount).getVisibleHints().size(); // FORK MOD (locked chats)
         }
     }
 
@@ -629,6 +629,9 @@ public class DialogsSearchAdapter extends RecyclerListView.SelectionAdapter {
                                 continue;
                             }
                             MessageObject msg = messageObjects.get(a);
+                            if (msg != null && org.telegram.messenger.LockedChats.isSuppressed(msg.getDialogId())) { // FORK MOD (locked chats)
+                                continue;
+                            }
                             if (!searchForumResultMessages.isEmpty()) {
                                 boolean foundDuplicate = false;
                                 for (int i = 0; i < searchForumResultMessages.size(); ++i) {
@@ -990,7 +993,7 @@ public class DialogsSearchAdapter extends RecyclerListView.SelectionAdapter {
             }
             searchWas = true;
             for (int i = 0; i < result.size(); ++i) {
-                if (!filter(result.get(i))) {
+                if (!filter(result.get(i)) || org.telegram.messenger.LockedChats.isSuppressedObject(result.get(i))) { // FORK MOD (locked chats)
                     result.remove(i);
                     i--;
                 }
@@ -1705,7 +1708,8 @@ public class DialogsSearchAdapter extends RecyclerListView.SelectionAdapter {
     }
 
     private boolean hasHints() {
-        return !searchWas && !MediaDataController.getInstance(currentAccount).hints.isEmpty() && (dialogsType != DialogsActivity.DIALOGS_TYPE_START_ATTACH_BOT || dialogsActivity.allowUsers);
+        return !searchWas && !MediaDataController.getInstance(currentAccount).getVisibleHints().isEmpty() && // FORK MOD (locked chats)
+                 (dialogsType != DialogsActivity.DIALOGS_TYPE_START_ATTACH_BOT || dialogsActivity.allowUsers);
     }
 
     private int messagesSectionPosition = -1;
@@ -2331,7 +2335,7 @@ public class DialogsSearchAdapter extends RecyclerListView.SelectionAdapter {
             filteredRecentSearchObjects.clear();
             final int count = recentSearchObjects.size();
             for (int i = 0; i < count; ++i) {
-                if (delegate != null && delegate.getSearchForumDialogId() == recentSearchObjects.get(i).did || !filter(recentSearchObjects.get(i).object)) {
+                if (delegate != null && delegate.getSearchForumDialogId() == recentSearchObjects.get(i).did || !filter(recentSearchObjects.get(i).object) || org.telegram.messenger.LockedChats.isSuppressed(recentSearchObjects.get(i).did)) { // FORK MOD (locked chats)
                     continue;
                 }
                 filteredRecentSearchObjects.add(recentSearchObjects.get(i));
@@ -2345,7 +2349,7 @@ public class DialogsSearchAdapter extends RecyclerListView.SelectionAdapter {
             if (obj == null || obj.object == null) {
                 continue;
             }
-            if (delegate != null && delegate.getSearchForumDialogId() == obj.did || !filter(recentSearchObjects.get(i).object)) {
+            if (delegate != null && delegate.getSearchForumDialogId() == obj.did || !filter(recentSearchObjects.get(i).object) || org.telegram.messenger.LockedChats.isSuppressed(obj.did)) { // FORK MOD (locked chats)
                 continue;
             }
             String title = null, username = null;

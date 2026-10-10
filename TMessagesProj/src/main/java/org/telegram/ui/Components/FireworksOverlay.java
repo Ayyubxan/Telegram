@@ -40,8 +40,6 @@ public class FireworksOverlay extends View {
     private static final int fallParticlesCount = SharedConfig.getDevicePerformanceClass() == SharedConfig.PERFORMANCE_CLASS_LOW ? 20 : 30;
     private boolean isFebruary14;
     private boolean withStars;
-    private boolean forceHearts; // FORK MOD (love effect): force heart particles regardless of date
-    private boolean pendingHearts;
 
     private static int[] colors = new int[]{
             0xff2CBCE8,
@@ -222,7 +220,7 @@ public class FireworksOverlay extends View {
         Particle particle = new Particle();
         try {
             particle.type = (byte) Utilities.random.nextInt(2);
-            if ((isFebruary14 || forceHearts) && particle.type == 0) {
+            if (isFebruary14 && particle.type == 0) {
                 particle.type = 2;
                 particle.colorType = (byte) Utilities.random.nextInt(heartColors.length);
             } else if (withStars && Utilities.random.nextBoolean()) {
@@ -264,16 +262,8 @@ public class FireworksOverlay extends View {
         return started;
     }
 
-    // FORK MOD (love effect): fire a burst made of hearts regardless of the calendar date.
-    public void startHearts() {
-        pendingHearts = true;
-        start(false);
-    }
-
     public void start(boolean withStars) {
         this.withStars = withStars;
-        this.forceHearts = pendingHearts;
-        pendingHearts = false;
 //        particles.clear();
         setLayerType(View.LAYER_TYPE_HARDWARE, null);
         started = true;
@@ -285,7 +275,7 @@ public class FireworksOverlay extends View {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int month = calendar.get(Calendar.MONTH);
         isFebruary14 = month == 1 && (BuildVars.DEBUG_PRIVATE_VERSION || day == 14);
-        if (isFebruary14 || forceHearts) {
+        if (isFebruary14) {
             loadHeartDrawables();
         } else if (withStars) {
             loadStarsDrawables();

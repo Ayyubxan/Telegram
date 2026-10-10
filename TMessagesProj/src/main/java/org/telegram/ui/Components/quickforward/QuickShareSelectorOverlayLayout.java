@@ -150,7 +150,7 @@ public class QuickShareSelectorOverlayLayout extends View {
         dialogs.add(selfUserId);
 
         if (config.suggestContacts) {
-            final ArrayList<TLRPC.TL_topPeer> hints = MediaDataController.getInstance(currentAccount).hints;
+            final ArrayList<TLRPC.TL_topPeer> hints = MediaDataController.getInstance(currentAccount).getVisibleHints();
             for (TLRPC.TL_topPeer peer : hints) {
                 if (peer.peer.user_id == 0) {
                     continue;
