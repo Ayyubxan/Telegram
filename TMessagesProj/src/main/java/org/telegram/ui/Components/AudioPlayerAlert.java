@@ -1105,12 +1105,6 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
             castAvailable = false;
         }
         castItemButton.setVisibility(View.INVISIBLE);
-        if (castAvailable) {
-            castItem = optionsButton.addSubItem(6, R.drawable.menu_video_chromecast, getString(R.string.VideoPlayerChromecast));
-            castItem.addView(castItemButton, 0, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
-            updateColors();
-        }
-        optionsButton.addSubItem(100, R.drawable.msg_autodelete, "Sleep timer"); // FORK MOD (sleep timer): under Chromecast
         if (optionsIcon != null) {
             optionsIcon.setCasting(CastSync.isActive(), true);
         }
@@ -2943,6 +2937,11 @@ public class AudioPlayerAlert extends BottomSheet implements NotificationCenter.
             castItem.addView(castItemButton, 0, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.MATCH_PARENT));
             updateColors();
         }
+        // FORK MOD (sleep timer): under Chromecast
+        o.add(R.drawable.msg_autodelete, org.telegram.messenger.SleepTimer.isActive() ? "Sleep timer · on" : "Sleep timer", () -> {
+            o.dismiss();
+            onSubItemClick(100);
+        });
         o.addIf(isMyList(), R.drawable.msg_delete, getString(R.string.ProfilePlaylistRemoveFromProfile), true, () -> {
             o.dismiss();
             onSubItemClick(7);

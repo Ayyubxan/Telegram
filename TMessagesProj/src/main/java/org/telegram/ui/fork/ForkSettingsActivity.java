@@ -13,11 +13,9 @@ import org.telegram.messenger.R;
 import org.telegram.messenger.UserObject;
 import org.telegram.messenger.nexo.Dates;
 import org.telegram.messenger.nexo.ForkBackup;
-import org.telegram.messenger.nexo.HabitBackup;
-import org.telegram.messenger.nexo.HabitStore;
+import org.telegram.messenger.nexo.LocalBackup;
 import org.telegram.messenger.nexo.Nexo;
 import org.telegram.messenger.nexo.NexoPrefs;
-import org.telegram.messenger.nexo.Repeat;
 import org.telegram.tgnet.TLObject;
 import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.Components.AlertsCreator;
@@ -37,7 +35,7 @@ import java.util.List;
 
 /**
  * FORK MOD: Settings → Mods — the fork's own settings: locked chats (visible only while they are revealed)
- * and the Telegram backup of the fork's data (habits, module settings, locked chats).
+ * and the Telegram backup of the fork's data (module settings, locked chats).
  */
 public class ForkSettingsActivity extends HabitsSettingsBase {
     private static final int ID_BACKUP_CHAT = 1, ID_BACKUP_TIME = 2, ID_BACKUP_NOW = 3, ID_RESTORE = 4, ID_LAST = 5, ID_ENCRYPT = 6;
@@ -96,13 +94,13 @@ public class ForkSettingsActivity extends HabitsSettingsBase {
         items.add(UItem.asHeader(LocaleController.getString(R.string.ForkBackup)));
         long dialogId = prefs.getBackupDialogId();
         items.add(UItem.asButton(ID_BACKUP_CHAT, LocaleController.getString(R.string.ForkBackupChat), dialogId == 0 ? LocaleController.getString(R.string.ForkBackupNotSet) : peerName(dialogId)));
-        items.add(UItem.asButton(ID_BACKUP_TIME, LocaleController.getString(R.string.ForkBackupTime), Repeat.hhmm(prefs.getBackupMinutes())));
+        items.add(UItem.asButton(ID_BACKUP_TIME, LocaleController.getString(R.string.ForkBackupTime), String.format(java.util.Locale.US, "%02d:%02d", prefs.getBackupMinutes() / 60, prefs.getBackupMinutes() % 60)));
         long last = prefs.getLastTelegramBackupAt();
-        items.add(UItem.asButton(ID_LAST, LocaleController.getString(R.string.ForkBackupLast), last == 0 ? LocaleController.getString(R.string.HabitsNever) : Dates.daysAgo(java.time.temporal.ChronoUnit.DAYS.between(Instant.ofEpochMilli(last).atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now()))));
+        items.add(UItem.asButton(ID_LAST, LocaleController.getString(R.string.ForkBackupLast), last == 0 ? "never" : Dates.daysAgo(java.time.temporal.ChronoUnit.DAYS.between(Instant.ofEpochMilli(last).atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now()))));
         items.add(UItem.asButton(ID_ENCRYPT, "Encryption", prefs.isBackupEncrypted() ? "On · passphrase set" : "Off · plain JSON"));
         items.add(UItem.asButton(ID_BACKUP_NOW, LocaleController.getString(R.string.ForkBackupNow)).accent());
         items.add(UItem.asButton(ID_RESTORE, LocaleController.getString(R.string.ForkBackupRestore)));
-        items.add(UItem.asShadow(LocaleController.formatString(R.string.ForkBackupInfo, HabitBackup.KEEP_DAYS)));
+        items.add(UItem.asShadow(LocaleController.formatString(R.string.ForkBackupInfo, LocalBackup.KEEP_DAYS)));
     }
 
     @Override

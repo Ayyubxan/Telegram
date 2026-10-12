@@ -23,7 +23,6 @@ import java.util.Locale;
  * FORK MOD (Nexo): auto mode: notices "Copy" being tapped on the phone and opens the invisible window for a moment
  * to send the clipboard to the Mac. No text or screen content is stored anywhere — it only watches for the
  * "Copy" button being pressed and the system clipboard overlay appearing.
- * Also drives screen-time blocking ({@link AppGuard}) and automatic habit marking ({@link AutoMarker}) on app switches.
  */
 public class ClipAccessibilityService extends AccessibilityService {
     private static final String[] COPY_WORDS = {
@@ -58,15 +57,6 @@ public class ClipAccessibilityService extends AccessibilityService {
         CharSequence pkgCs = event.getPackageName();
         if (pkgCs == null) return;
         String pkg = pkgCs.toString();
-        // Screen time: the foreground app changed — check the limit / "do not enter" block and auto marks
-        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED && !"com.android.systemui".equals(pkg)) {
-            try {
-                AppGuard.onForeground(this, pkg);
-                AutoMarker.run(this, false);
-            } catch (Exception e) {
-                FileLog.e(e);
-            }
-        }
         if (pkg.equals(getPackageName())) return;
         boolean copy = false;
         switch (event.getEventType()) {

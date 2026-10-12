@@ -694,11 +694,8 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
         items.add(SettingCell.Factory.of(8, IconBackgroundColors.CYAN.top, IconBackgroundColors.CYAN.bottom, R.drawable.settings_devices, getString(R.string.SettingsDevices), getString(R.string.SettingsDevicesInfo)));
         items.add(SettingCell.Factory.of(9, IconBackgroundColors.ORANGE_DEEP.top, IconBackgroundColors.ORANGE_DEEP.bottom, R.drawable.settings_power, getString(R.string.SettingsPowerSaving), getString(R.string.SettingsPowerSavingInfo)));
         items.add(SettingCell.Factory.of(10, IconBackgroundColors.PURPLE.top, IconBackgroundColors.PURPLE.bottom, R.drawable.settings_language, getString(R.string.SettingsLanguage), LocaleController.getCurrentLanguageName()));
-        // FORK MOD (Nexo): habits settings (rewards, reminders, Mac sync…)
-        items.add(SettingCell.Factory.of(40, IconBackgroundColors.GREEN.top, IconBackgroundColors.GREEN.bottom, R.drawable.settings_habits, getString(R.string.Habits), getString(R.string.HabitsSettingsSubtitle)));
         items.add(SettingCell.Factory.of(41, IconBackgroundColors.GRAY.top, IconBackgroundColors.GRAY.bottom, R.drawable.settings_devices, getString(R.string.MacClipboard), getString(R.string.MacClipboardSubtitle)));
         items.add(SettingCell.Factory.of(42, IconBackgroundColors.ORANGE_DEEP.top, IconBackgroundColors.ORANGE_DEEP.bottom, R.drawable.settings_mods, getString(R.string.ForkMods), getString(R.string.ForkModsSubtitle)));
-        items.add(SettingCell.Factory.of(43, IconBackgroundColors.GREEN.top, IconBackgroundColors.GREEN.bottom, R.drawable.settings_finance, getString(R.string.Finance), getString(R.string.FinanceSubtitle))); // FORK MOD (Finance)
 
         items.add(UItem.asShadow(null));
 
@@ -844,17 +841,11 @@ public class SettingsActivity extends BaseFragment implements NotificationCenter
             case 10:
                 presentSettingFragment(new LanguageSelectActivity());
                 break;
-            case 40: // FORK MOD (Nexo)
-                presentSettingFragment(new org.telegram.ui.habits.HabitsSettingsActivity());
-                break;
             case 41: // FORK MOD (Nexo)
                 presentSettingFragment(new org.telegram.ui.habits.MacSyncActivity());
                 break;
             case 42: // FORK MOD
                 presentSettingFragment(new org.telegram.ui.fork.ForkSettingsActivity());
-                break;
-            case 43: // FORK MOD (Finance)
-                presentSettingFragment(new org.telegram.ui.finance.FinanceSettingsActivity());
                 break;
 
             case 11:

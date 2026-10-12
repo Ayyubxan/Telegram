@@ -3,7 +3,7 @@ package org.telegram.messenger.nexo;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-/** FORK MOD (Nexo): English date helpers used by the habits UI and notifications */
+/** FORK MOD (Nexo): English date helpers (backup captions, Mods screen) */
 public class Dates {
     public static final String[] MONTHS = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     public static final String[] MONTHS_SHORT = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};

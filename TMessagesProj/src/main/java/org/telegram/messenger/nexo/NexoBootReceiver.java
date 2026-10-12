@@ -10,10 +10,7 @@ public class NexoBootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         try {
             SyncService.start(context);
-            // When the time or the time zone changes the reminders are re-set to the right time too
-            HabitReminder.schedule(context);
-            HabitAlarms.schedule(context);
-            if (Intent.ACTION_TIMEZONE_CHANGED.equals(intent.getAction())) PrayerTravel.notify(context);
+            ForkBackup.schedule(context);
         } catch (Exception e) {
             org.telegram.messenger.FileLog.e(e);
         }

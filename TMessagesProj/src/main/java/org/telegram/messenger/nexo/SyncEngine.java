@@ -48,9 +48,6 @@ public class SyncEngine {
     public final BleTransport ble;
     public final InternetTransport internet;
 
-    /** Habits live on the phone only (the Mac no longer syncs them); the engine just owns the store */
-    public final HabitStore habits;
-
     private final LinkedHashSet<String> seen = new LinkedHashSet<>();
     private long lastClipTs = 0L;
     private Pending pending;
@@ -94,7 +91,6 @@ public class SyncEngine {
         lan = new LanTransport(this.ctx, this);
         ble = new BleTransport(this.ctx, this);
         internet = new InternetTransport(this);
-        habits = new HabitStore(this.ctx);
     }
 
     public GroupKey getKey() {

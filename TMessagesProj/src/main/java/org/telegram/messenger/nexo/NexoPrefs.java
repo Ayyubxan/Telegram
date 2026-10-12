@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-/** FORK MOD (Nexo): settings of the habits / Mac-sync module (SharedPreferences "nexo"). */
+/** FORK MOD (Nexo): settings of the Mac-sync module and the fork backup (SharedPreferences "nexo"). */
 public class NexoPrefs {
     private final SharedPreferences p;
     public final String deviceId;
@@ -76,31 +76,13 @@ public class NexoPrefs {
     public boolean isImagesEnabled() { return p.getBoolean("imagesEnabled", true); }
     public void setImagesEnabled(boolean v) { p.edit().putBoolean("imagesEnabled", v).apply(); }
 
-    public boolean isHabitReminder() { return p.getBoolean("habitReminder", true); }
-    public void setHabitReminder(boolean v) { p.edit().putBoolean("habitReminder", v).apply(); }
-
-    /** Evening reminder time: minutes from midnight (default 21:00) */
-    public int getHabitReminderMinutes() { return p.getInt("habitReminderMinutes", 21 * 60); }
-    public void setHabitReminderMinutes(int v) { p.edit().putInt("habitReminderMinutes", v).apply(); }
 
     /** Last manual/auto backup time (ms), 0 — never */
     public long getLastBackupAt() { return p.getLong("lastBackupAt", 0); }
     public void setLastBackupAt(long v) { p.edit().putLong("lastBackupAt", v).apply(); }
 
-    /** Prayer times: city name (PrayerTimes.CITIES) or PrayerTimes.AUTO; school 1 — Hanafi, 0 — Shafi */
-    public String getPrayerCity() { String s = p.getString("prayerCity", null); return s == null ? "Tashkent" : s; }
-    public void setPrayerCity(String v) { p.edit().putString("prayerCity", v).apply(); }
 
-    public double getPrayerLat() { return p.getFloat("prayerLat", 0f); }
-    public void setPrayerLat(double v) { p.edit().putFloat("prayerLat", (float) v).apply(); }
-    public double getPrayerLon() { return p.getFloat("prayerLon", 0f); }
-    public void setPrayerLon(double v) { p.edit().putFloat("prayerLon", (float) v).apply(); }
-    public String getPrayerPlace() { return p.getString("prayerPlace", null); }
-    public void setPrayerPlace(String v) { p.edit().putString("prayerPlace", v).apply(); }
-
-    public int getPrayerSchool() { return p.getInt("prayerSchool", 1); }
-    public void setPrayerSchool(int v) { p.edit().putInt("prayerSchool", v).apply(); }
-
+    /** Mac sync: send every copied text automatically (accessibility service) */
     public boolean isAutoModeEnabled() { return p.getBoolean("autoMode", true); }
     public void setAutoModeEnabled(boolean v) { p.edit().putBoolean("autoMode", v).apply(); }
 

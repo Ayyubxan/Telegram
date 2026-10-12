@@ -19,13 +19,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * FORK MOD (Nexo): automatic backup — one file per day `Download/Telegram/Habits/habits-YYYY-MM-DD.json`,
+ * FORK MOD: local copies of the fork backup — one file per day `Download/Telegram/Backup/telegram-backup-YYYY-MM-DD.json`,
  * refreshed a minute after a change; files older than {@link #KEEP_DAYS} days are deleted.
  * Download survives an uninstall and is easy to move to a new phone.
  */
-public class HabitBackup {
+public class LocalBackup {
     public static final int KEEP_DAYS = 7;
-    public static final String FOLDER = "Download/Telegram/Habits";
+    public static final String FOLDER = "Download/Telegram/Backup";
     private static final String PREFIX = "telegram-backup-";
     private static final long DEBOUNCE_MS = 60_000L;
 
@@ -43,7 +43,7 @@ public class HabitBackup {
                 } catch (Throwable e) {
                     org.telegram.messenger.FileLog.e(e);
                 }
-            }, "nexo-backup");
+            }, "fork-backup");
             t.start();
         };
         pending = r;
@@ -58,9 +58,7 @@ public class HabitBackup {
     }
 
     public static synchronized void write(Context ctx) throws Exception {
-        HabitStore store = Nexo.store();
-        if (store.isEmpty()) return;
-        LocalDate today = HabitStore.today();
+        LocalDate today = LocalDate.now();
         boolean enc = Nexo.prefs().isBackupEncrypted();
         String name = PREFIX + today + (enc ? ForkCrypto.EXT : ".json");
         byte[] bytes = ForkBackup.fileBytes();
@@ -106,7 +104,7 @@ public class HabitBackup {
             // Android 8–9: writing to the shared Download needs a permission — the app's own folder instead
             File base = ctx.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
             if (base == null) return;
-            File dir = new File(base, "Habits");
+            File dir = new File(base, "Backup");
             dir.mkdirs();
             FileOutputStream fos = new FileOutputStream(new File(dir, name));
             try {

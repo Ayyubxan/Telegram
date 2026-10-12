@@ -28,10 +28,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * FORK MOD (Nexo): backup of everything the fork adds on top of Telegram — habits, finance, module settings (Mac pairing,
+ * FORK MOD: backup of everything the fork adds on top of Telegram — module settings (Mac pairing,
  * reminders, prayer city…) and the locked-chat list. Telegram's own data is not included.
  * The file is sent daily to a chosen Telegram chat at a chosen time (when the device is online); local copies are
- * kept for a few days by {@link HabitBackup}.
+ * kept for a few days by {@link LocalBackup}.
  */
 public class ForkBackup {
     public static final String ENVELOPE = "telegram-fork-backup";
@@ -46,14 +46,12 @@ public class ForkBackup {
                 .put("v", VERSION)
                 .put("exportedAt", System.currentTimeMillis())
                 .put("device", Nexo.engine().deviceName)
-                .put("habits", new JSONObject(new String(Nexo.store().fullJson(), StandardCharsets.UTF_8)))
                 .put("prefs", Nexo.prefs().exportJson())
-                .put("lockedChats", new JSONArray(LockedChats.all()))
-                .put("finance", org.telegram.messenger.finance.FinanceBackup.export()); // FORK MOD (Finance)
+                .put("lockedChats", new JSONArray(LockedChats.all()));
             return o.toString(2).getBytes(StandardCharsets.UTF_8);
         } catch (Exception e) {
             FileLog.e(e);
-            return Nexo.store().backupJson(Nexo.engine().deviceName);
+            return "{}".getBytes(StandardCharsets.UTF_8);
         }
     }
 
@@ -80,51 +78,42 @@ public class ForkBackup {
         return ForkCrypto.decrypt(bytes, Nexo.prefs().getBackupPassphrase());
     }
 
-    /** {habits, marks} counts, or null if the bytes are not a backup (new envelope, old Nexo envelope or raw habits JSON) */
+    /** {locked chats, settings} counts, or null if the bytes are not a fork backup */
     public static int[] summary(byte[] bytes) {
-        JSONObject habits = habitsOf(bytes);
-        if (habits == null) return null;
-        JSONArray arr = habits.optJSONArray("habits");
-        if (arr == null) return null;
-        int alive = 0;
-        for (int i = 0; i < arr.length(); i++) if (!arr.optJSONObject(i).optBoolean("del")) alive++;
-        JSONArray marks = habits.optJSONArray("marks");
-        return new int[]{alive, marks == null ? 0 : marks.length()};
+        JSONObject o = envelope(bytes);
+        if (o == null) return null;
+        JSONArray locked = o.optJSONArray("lockedChats");
+        JSONObject prefs = o.optJSONObject("prefs");
+        return new int[]{locked == null ? 0 : locked.length(), prefs == null ? 0 : prefs.length()};
     }
 
-    private static JSONObject habitsOf(byte[] bytes) {
+    private static JSONObject envelope(byte[] bytes) {
         try {
             JSONObject o = new JSONObject(new String(bytes, StandardCharsets.UTF_8));
-            if (ENVELOPE.equals(o.optString("fork"))) return o.getJSONObject("habits");
-            if ("habits-backup".equals(o.optString("nexo"))) return o.getJSONObject("data");
-            return o.has("habits") ? o : null;
+            return ENVELOPE.equals(o.optString("fork")) ? o : null;
         } catch (Exception e) {
             return null;
         }
     }
 
-    /** Restores: habits are merged (newest record wins), settings and locked chats are applied. */
+    /** Restores: settings and locked chats are applied. */
     public static boolean restore(byte[] bytes) {
-        JSONObject habits = habitsOf(bytes);
-        if (habits == null) return false;
-        boolean ok = Nexo.store().importBackup(habits.toString().getBytes(StandardCharsets.UTF_8));
+        JSONObject o = envelope(bytes);
+        if (o == null) return false;
         try {
-            JSONObject o = new JSONObject(new String(bytes, StandardCharsets.UTF_8));
-            if (ENVELOPE.equals(o.optString("fork"))) {
-                JSONObject prefs = o.optJSONObject("prefs");
-                if (prefs != null) Nexo.prefs().importJson(prefs);
-                JSONArray locked = o.optJSONArray("lockedChats");
-                if (locked != null) {
-                    for (int i = 0; i < locked.length(); i++) LockedChats.setLocked(locked.getLong(i), true);
-                }
-                org.telegram.messenger.finance.FinanceBackup.restore(o.optJSONObject("finance")); // FORK MOD (Finance)
-                Nexo.engine().postApplySettings();
-                schedule(Nexo.ctx());
+            JSONObject prefs = o.optJSONObject("prefs");
+            if (prefs != null) Nexo.prefs().importJson(prefs);
+            JSONArray locked = o.optJSONArray("lockedChats");
+            if (locked != null) {
+                for (int i = 0; i < locked.length(); i++) LockedChats.setLocked(locked.getLong(i), true);
             }
+            Nexo.engine().postApplySettings();
+            schedule(Nexo.ctx());
+            return true;
         } catch (Exception e) {
             FileLog.e(e);
+            return false;
         }
-        return ok;
     }
 
     // region Telegram
@@ -137,12 +126,12 @@ public class ForkBackup {
         return ConnectionsManager.getInstance(UserConfig.selectedAccount).getConnectionState() == ConnectionsManager.ConnectionStateConnected;
     }
 
-    /** Daily alarm at the chosen time (HabitReceiver.ACTION_BACKUP); checks also run from other alarms and on app start */
+    /** Daily alarm at the chosen time (ForkBackupReceiver); checks also run on app start */
     public static void schedule(Context ctx) {
         AlarmManager am = ContextCompat.getSystemService(ctx, AlarmManager.class);
         if (am == null) return;
         PendingIntent pi = PendingIntent.getBroadcast(ctx, ALARM_REQUEST,
-            new Intent(ctx, HabitReceiver.class).setAction(HabitReceiver.ACTION_BACKUP),
+            new Intent(ctx, ForkBackupReceiver.class).setAction(ForkBackupReceiver.ACTION_BACKUP),
             PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         if (!isConfigured()) {
             am.cancel(pi);
@@ -186,7 +175,8 @@ public class ForkBackup {
             boolean enc = Nexo.prefs().isBackupEncrypted();
             File file = new File(dir, fileName());
             try (FileOutputStream out = new FileOutputStream(file)) { out.write(fileBytes()); }
-            String caption = "Telegram fork backup · " + Dates.longDate(LocalDate.now()) + (enc ? " · encrypted" : "") + "\nHabits, finance, settings and locked chats. Restore: Settings → Mods → Restore from file.";
+            String caption = "Telegram fork backup · " + Dates.longDate(LocalDate.now()) + (enc ? " · encrypted" : "")
+                + "\nSettings and locked chats. Restore: Settings → Mods → Restore from file.";
             AndroidUtilities.runOnUIThread(() -> SendMessagesHelper.prepareSendingDocument(
                 AccountInstance.getInstance(UserConfig.selectedAccount), file.getAbsolutePath(), file.getAbsolutePath(), null,
                 caption, enc ? "application/octet-stream" : "application/json", dialogId, null, null, null, null, null, true, 0, null, null, false));

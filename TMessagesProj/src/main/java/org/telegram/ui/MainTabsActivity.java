@@ -278,88 +278,18 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
         showAccountChangeHint();
     }
 
-    /** FORK MOD (Nexo): the Habits tab badge — how many of today's habits are still unmarked */
     private void checkContactsTabBadge() {
         if (tabsView != null && tabs[INDEX_CONTACTS] != null) {
-            int left = 0;
-            try {
-                left = org.telegram.ui.habits.HabitsActivity.activeCount(org.telegram.messenger.nexo.Nexo.store());
-            } catch (Throwable ignore) {}
-            tabs[INDEX_CONTACTS].setCounter(left > 0 ? String.valueOf(left) : null, false, true);
+            final boolean hasPermission = Build.VERSION.SDK_INT >= 23 && ContactsController.hasContactsPermission();
+            if (hasPermission) {
+                MessagesController.getGlobalNotificationsSettings().edit().putBoolean("askAboutContacts2", true).apply();
+            }
+            if (Build.VERSION.SDK_INT >= 23 && UserConfig.getInstance(currentAccount).syncContacts && !hasPermission && MessagesController.getGlobalNotificationsSettings().getBoolean("askAboutContacts2", true)) {
+                tabs[INDEX_CONTACTS].setCounter("!", true, true);
+            } else {
+                tabs[INDEX_CONTACTS].setCounter(null, true, true);
+            }
         }
-    }
-
-    private final Runnable habitsBadgeListener = this::checkContactsTabBadge;
-
-    /** FORK MOD (Finance): the Finance tab badge — bot messages waiting in the Inbox */
-    private void checkFinanceTabBadge() {
-        if (tabsView != null && tabs[INDEX_SETTINGS] != null) {
-            int n = org.telegram.messenger.finance.BotImport.pendingCount();
-            tabs[INDEX_SETTINGS].setCounter(n > 0 ? String.valueOf(n) : null, false, true);
-        }
-    }
-
-    private final Runnable financeBadgeListener = this::checkFinanceTabBadge;
-
-    /** FORK MOD (Nexo): long-press on the Habits tab */
-    public boolean openHabitsSelector(View anchor) {
-        if (getContext() == null || getParentActivity() == null) return false;
-        final ItemOptions o = ItemOptions.makeOptions(this, anchor);
-        o.add(R.drawable.msg_add, getString(R.string.HabitsNew), () -> presentFragment(new org.telegram.ui.habits.HabitEditActivity(null)));
-        o.add(R.drawable.msg_calendar, getString(R.string.HabitsCalendar), () -> presentFragment(new org.telegram.ui.habits.HabitsCalendarActivity()));
-        o.setBlur(true);
-        o.translate(0, -dp(4));
-        o.setGravity(Gravity.LEFT);
-        final ShapeDrawable bg = Theme.createRoundRectDrawable(dp(28), getThemedColor(Theme.key_windowBackgroundWhite));
-        bg.getPaint().setShadowLayer(dp(6), 0, dp(1), Theme.multAlpha(0xFF000000, 0.15f));
-        o.setScrimViewBackground(bg);
-        o.show();
-        return true;
-    }
-
-    /** FORK MOD (Finance): long-press on the Finance tab */
-    public boolean openFinanceSelector(View anchor) {
-        if (getContext() == null || getParentActivity() == null) return false;
-        final ItemOptions o = ItemOptions.makeOptions(this, anchor);
-        o.add(R.drawable.msg_add, getString(R.string.FinanceNewExpense), () -> presentFragment(org.telegram.ui.finance.TxEditActivity.create(org.telegram.messenger.finance.Tx.EXPENSE, null, null)));
-        o.add(R.drawable.msg_add, getString(R.string.FinanceNewIncome), () -> presentFragment(org.telegram.ui.finance.TxEditActivity.create(org.telegram.messenger.finance.Tx.INCOME, null, null)));
-        o.add(R.drawable.msg_add, "New asset", () -> presentFragment(new org.telegram.ui.finance.AssetEditActivity(null, null)));
-        o.add(R.drawable.msg_add, "New debt", () -> presentFragment(new org.telegram.ui.finance.DebtEditActivity(null, 0, null)));
-        o.add(R.drawable.msg_payment_card, getString(R.string.FinanceAccounts), () -> presentFragment(new org.telegram.ui.finance.AccountsActivity()));
-        o.add(R.drawable.msg_stats, getString(R.string.FinanceWealth), () -> presentFragment(new org.telegram.ui.finance.WealthActivity(null)));
-        o.add(R.drawable.msg_viewchats, getString(R.string.FinanceDebts), () -> presentFragment(new org.telegram.ui.finance.DebtsActivity(null, 0)));
-        o.add(R.drawable.msg_stats, getString(R.string.FinanceReports), () -> presentFragment(new org.telegram.ui.finance.ReportsActivity(null)));
-        if (org.telegram.messenger.finance.BotImport.pendingCount() > 0) o.add(R.drawable.msg_list, getString(R.string.FinanceInbox), () -> presentFragment(new org.telegram.ui.finance.InboxActivity()));
-        o.add(R.drawable.msg_list, getString(R.string.FinanceTransactions), () -> presentFragment(org.telegram.ui.finance.TxListActivity.all(null)));
-        o.setBlur(true);
-        o.translate(0, -dp(4));
-        final ShapeDrawable bg = Theme.createRoundRectDrawable(dp(28), getThemedColor(Theme.key_windowBackgroundWhite));
-        bg.getPaint().setShadowLayer(dp(6), 0, dp(1), Theme.multAlpha(0xFF000000, 0.15f));
-        o.setScrimViewBackground(bg);
-        o.show();
-        return true;
-    }
-
-    /** FORK MOD: switch to the Chats tab (the Telegram launcher icon) */
-    public void selectChatsTab() {
-        if (viewPager == null) { pendingPosition = POSITION_CHATS; return; }
-        if (viewPager.getCurrentPosition() == POSITION_CHATS) return;
-        selectTab(POSITION_CHATS, true);
-        viewPager.scrollToPosition(POSITION_CHATS);
-    }
-
-    /** FORK MOD (Finance): switch to the Finance tab (launcher icon) */
-    public void selectFinanceTab() {
-        if (viewPager == null) { pendingPosition = POSITION_CALLS_OR_SETTINGS; return; }
-        selectTab(POSITION_CALLS_OR_SETTINGS, true);
-        viewPager.scrollToPosition(POSITION_CALLS_OR_SETTINGS);
-    }
-
-    /** FORK MOD (Nexo): switch to the Habits tab (notifications, widget) */
-    public void selectHabitsTab() {
-        if (viewPager == null) { pendingPosition = POSITION_CONTACTS; return; }
-        selectTab(POSITION_CONTACTS, true);
-        viewPager.scrollToPosition(POSITION_CONTACTS);
     }
 
     @Override
@@ -382,13 +312,12 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
 
         tabs = new GlassTabView[5];
         tabs[INDEX_CHATS] = GlassTabView.createMainTab(context, resourceProvider, GlassTabView.TabAnimation.CHATS, R.string.MainTabsChats);
-        tabs[INDEX_CONTACTS] = GlassTabView.createMainTab(context, resourceProvider, GlassTabView.TabAnimation.CHECKLIST, R.string.MainTabsHabits); // FORK MOD (Nexo): Habits replaces Contacts
-        tabs[INDEX_SETTINGS] = GlassTabView.createMainTab(context, resourceProvider, GlassTabView.TabAnimation.WALLET, R.string.Finance); // FORK MOD (Finance): Finance replaces Settings
+        tabs[INDEX_CONTACTS] = GlassTabView.createMainTab(context, resourceProvider, GlassTabView.TabAnimation.CONTACTS, R.string.MainTabsContacts);
+        tabs[INDEX_SETTINGS] = GlassTabView.createMainTab(context, resourceProvider, GlassTabView.TabAnimation.SETTINGS, R.string.Settings);
         tabs[INDEX_CALLS] = GlassTabView.createMainTab(context, resourceProvider, GlassTabView.TabAnimation.CALLS, R.string.MainTabsCalls);
         tabs[INDEX_PROFILE] = GlassTabView.createAvatar(context, resourceProvider, currentAccount, R.string.MainTabsProfile);
         tabs[INDEX_CHATS].setOnLongClickListener(this::openFoldersSelector);
-        tabs[INDEX_CONTACTS].setOnLongClickListener(this::openHabitsSelector); // FORK MOD (Nexo)
-        tabs[INDEX_SETTINGS].setOnLongClickListener(this::openFinanceSelector); // FORK MOD (Finance)
+        tabs[INDEX_CONTACTS].setOnLongClickListener(this::openContactsSelector);
         tabs[INDEX_CALLS].setOnLongClickListener(this::openCallsSelector);
         tabs[INDEX_PROFILE].setOnLongClickListener(this::openAccountSelector);
 
@@ -396,7 +325,6 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
         tabsView.addTabToIgnoreClick(tabs[INDEX_CONTACTS]);
         tabsView.addTabToIgnoreClick(tabs[INDEX_PROFILE]);
         tabsView.addTabToIgnoreClick(tabs[INDEX_CALLS]);
-        tabsView.addTabToIgnoreClick(tabs[INDEX_SETTINGS]); // FORK MOD (Finance)
 
         for (int index = 0; index < tabs.length; index++) {
             final GlassTabView view = tabs[index];
@@ -423,10 +351,8 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
             tabsView.setViewVisible(view, true, false);
         }
         checkUi_callTabVisible(getUserConfig().showCallsTab, false);
-        checkFinanceTabBadge(); // FORK MOD (Finance)
 
         selectTab(viewPager.getCurrentPosition(), false);
-        applyPendingPosition(); // FORK MOD
 
         iBlur3SourceColor.setColor(getThemedColor(Theme.key_windowBackgroundWhite));
 
@@ -846,31 +772,7 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
 
     @Override
     protected int getStartPosition() {
-        if (pendingPosition >= 0) { // FORK MOD: launcher icon chose a tab before the pager existed
-            final int p = pendingPosition;
-            pendingPosition = -1;
-            return p;
-        }
         return POSITION_CHATS;
-    }
-
-    /** FORK MOD: tab to open once the view exists (launcher icon tapped before the tabs were created) */
-    private static int pendingPosition = -1;
-
-    public static void setPendingPosition(int position) {
-        pendingPosition = position;
-    }
-
-    public static final int PENDING_HABITS = POSITION_CONTACTS;
-    public static final int PENDING_CHATS = POSITION_CHATS;
-    public static final int PENDING_FINANCE = POSITION_CALLS_OR_SETTINGS;
-
-    private void applyPendingPosition() {
-        if (pendingPosition < 0 || viewPager == null) return;
-        final int p = pendingPosition;
-        pendingPosition = -1;
-        selectTab(p, false);
-        viewPager.scrollToPosition(p);
     }
 
     private DialogsActivity dialogsActivity;
@@ -905,15 +807,21 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
     @Override
     protected BaseFragment createBaseFragmentAt(int position) {
         if (position == POSITION_CONTACTS) {
-            // FORK MOD (Nexo): Habits tab instead of Contacts
             Bundle args = new Bundle();
+            args.putBoolean("needPhonebook", true);
+            args.putBoolean("needFinishFragment", false);
             args.putBoolean("hasMainTabs", true);
-            return new org.telegram.ui.habits.HabitsActivity(args);
+            return new ContactsActivity(args);
         } else if (position == POSITION_CALLS_OR_SETTINGS) {
-            // FORK MOD (Finance): the Finance tab lives here instead of Settings / Calls (Settings — via the Profile tab)
+            if (getUserConfig().showCallsTab) {
+                Bundle args = new Bundle();
+                args.putBoolean("needFinishFragment", false);
+                args.putBoolean("hasMainTabs", true);
+                return new CallLogActivity(args);
+            }
             Bundle args = new Bundle();
             args.putBoolean("hasMainTabs", true);
-            return new org.telegram.ui.finance.FinanceActivity(args);
+            return new SettingsActivity(args);
         } else if (position == POSITION_CHATS) {
             Bundle args = new Bundle();
             args.putBoolean("hasMainTabs", true);
@@ -1118,17 +1026,12 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
             .addGlobal(NotificationCenter.appUpdateAvailable)
             .addGlobal(NotificationCenter.appUpdateLoading)
             .addGlobal(NotificationCenter.needSetDayNightTheme);
-        org.telegram.messenger.nexo.Nexo.store().addListener(habitsBadgeListener); // FORK MOD (Nexo)
-        org.telegram.messenger.finance.Finance.addListener(financeBadgeListener); // FORK MOD (Finance)
-        checkFinanceTabBadge();
 
         return super.onFragmentCreate();
     }
 
     @Override
     public void onFragmentDestroy() {
-        org.telegram.messenger.nexo.Nexo.store().removeListener(habitsBadgeListener); // FORK MOD (Nexo)
-        org.telegram.messenger.finance.Finance.removeListener(financeBadgeListener); // FORK MOD (Finance)
         Bulletin.removeDelegate(this);
         Bulletin.removeDelegate(contentView);
 
@@ -1184,9 +1087,8 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
 
     private void checkUi_callTabVisible(boolean callTabsVisible, boolean animated) {
         if (tabsView != null) {
-            // FORK MOD (Finance): the Finance tab is always shown; the Calls tab never replaces it
-            tabsView.setViewVisible(tabs[INDEX_SETTINGS], true, animated);
-            tabsView.setViewVisible(tabs[INDEX_CALLS], false, animated);
+            tabsView.setViewVisible(tabs[INDEX_SETTINGS], !callTabsVisible, animated);
+            tabsView.setViewVisible(tabs[INDEX_CALLS], callTabsVisible, animated);
         }
     }
 
