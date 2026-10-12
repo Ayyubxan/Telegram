@@ -17442,7 +17442,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
                 messageObject != null && (MessagesController.getInstance(currentAccount).isPeerNoForwards(messageObject.getDialogId()) ||
                 (messageObject.messageOwner != null && messageObject.messageOwner.noforwards)) || messageObject != null && messageObject.hasRevealedExtendedMedia()
             ) {
-                windowLayoutParams.flags |= WindowManager.LayoutParams.FLAG_SECURE;
+                windowLayoutParams.flags &=~ WindowManager.LayoutParams.FLAG_SECURE; // FORK MOD: screenshots always allowed
                 AndroidUtilities.logFlagSecure();
             } else {
                 windowLayoutParams.flags &=~ WindowManager.LayoutParams.FLAG_SECURE;

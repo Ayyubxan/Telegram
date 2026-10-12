@@ -1,0 +1,5 @@
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/fork_icon_habits_bg" />
+    <foreground android:drawable="@drawable/fork_icon_habits_fg" />
+    <monochrome android:drawable="@drawable/fork_icon_habits_fg" />
+</adaptive-icon>

@@ -1853,6 +1853,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
     }
 
     public void sendScreenshotMessage(TLRPC.User user, int messageId, TLRPC.Message resendMessage) {
+        if (true) return; // FORK MOD: never tell the other side about screenshots
         if (user == null || messageId == 0 || user.id == getUserConfig().getClientUserId()) {
             return;
         }
@@ -3065,6 +3066,18 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                 if (messageObject.editingMessage != null) {
                     String oldMessge = newMsg.message;
                     newMsg.message = messageObject.editingMessage.toString();
+                    // FORK MOD (edit history): own edits are stored locally before the server answers — keep the previous text
+                    if (oldMessge != null && !TextUtils.equals(oldMessge, newMsg.message) && !DialogObject.isEncryptedDialog(messageObject.getDialogId())) {
+                        TLRPC.Chat forkChat = messageObject.getDialogId() < 0 ? getMessagesController().getChat(-messageObject.getDialogId()) : null;
+                        if (forkChat == null || !ChatObject.isChannel(forkChat) || forkChat.megagroup) {
+                            if (newMsg.forkEditHistory == null) {
+                                newMsg.forkEditHistory = new ArrayList<>();
+                                newMsg.forkEditHistoryDates = new ArrayList<>();
+                            }
+                            newMsg.forkEditHistory.add(oldMessge);
+                            newMsg.forkEditHistoryDates.add(newMsg.edit_date != 0 ? newMsg.edit_date : newMsg.date);
+                        }
+                    }
                     messageObject.caption = null;
                     if (type == 1) {
                         if (messageObject.editingMessageEntities != null) {
@@ -3097,6 +3110,10 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                 ArrayList<TLRPC.Message> arr = new ArrayList<>();
                 arr.add(newMsg);
                 getMessagesStorage().putMessages(arr, false, true, false, 0, messageObject.scheduled ? 1 : 0, 0);
+                // FORK MOD (edit history): the plain put does not persist the local params of an existing row — write them explicitly
+                if (newMsg.forkEditHistory != null && !newMsg.forkEditHistory.isEmpty() && !messageObject.scheduled) {
+                    getMessagesStorage().updateMessageCustomParams(messageObject.getDialogId(), newMsg);
+                }
                 getMessagesController().getTopicsController().processEditedMessage(newMsg);
 
                 messageObject.type = -1;

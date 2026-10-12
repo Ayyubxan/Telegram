@@ -64,7 +64,7 @@ public class FlagSecureReason {
             return;
         }
 
-        if (isSecuredNow(window)) {
+        if (isSecuredNow(window) && false) { // FORK MOD: screenshots are always allowed
             window.addFlags(WindowManager.LayoutParams.FLAG_SECURE);
             AndroidUtilities.logFlagSecure();
         } else {

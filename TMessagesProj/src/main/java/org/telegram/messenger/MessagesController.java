@@ -6699,7 +6699,7 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public boolean isChatNoForwards(TLRPC.Chat chat) {
-        if (chat == null) {
+        if (chat == null || true) { // FORK MOD: content protection is ignored (saving / forwarding / screenshots allowed)
             return false;
         }
         if (chat.migrated_to != null) {
@@ -6724,7 +6724,7 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public boolean isUserNoForwards(TLRPC.UserFull userFull) {
-        if (userFull == null) {
+        if (userFull == null || true) { // FORK MOD: content protection is ignored
             return false;
         }
 
@@ -8289,6 +8289,17 @@ public class MessagesController extends BaseController implements NotificationCe
             LongSparseArray<ArrayList<Integer>> task = currentDeletingTaskMids != null ? currentDeletingTaskMids.clone() : null;
             LongSparseArray<ArrayList<Integer>> taskMedia = currentDeletingTaskMediaMids != null ? currentDeletingTaskMediaMids.clone() : null;
             AndroidUtilities.runOnUIThread(() -> {
+                // FORK MOD (keep timed media): self-destruct timers never delete messages or media locally;
+                // the task queue is still advanced so nothing loops forever
+                if (true) {
+                    Utilities.stageQueue.postRunnable(() -> {
+                        getNewDeleteTask(task, taskMedia);
+                        currentDeletingTaskTime = 0;
+                        currentDeletingTaskMids = null;
+                        currentDeletingTaskMediaMids = null;
+                    });
+                    return;
+                }
                 if (task != null) {
                     for (int a = 0, N = task.size(); a < N; a++) {
                         ArrayList<Integer> mids = task.valueAt(a);
@@ -14484,9 +14495,7 @@ public class MessagesController extends BaseController implements NotificationCe
 
     public void doDeleteShowOnceTask(long taskId, long dialogId, int mid) {
         getMessagesStorage().removePendingTask(taskId);
-        ArrayList<Integer> mids = new ArrayList<>();
-        mids.add(mid);
-        getMessagesStorage().emptyMessagesMedia(dialogId, mids);
+        // FORK MOD (keep timed media): the media stays
     }
 
     public void markMessageAsRead2(long dialogId, int mid, TLRPC.InputChannel inputChannel, int ttl, long taskId) {

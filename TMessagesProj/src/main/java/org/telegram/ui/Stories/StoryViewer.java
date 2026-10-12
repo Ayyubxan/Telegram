@@ -2885,7 +2885,7 @@ public class StoryViewer implements NotificationCenter.NotificationCenterDelegat
             }
             if (ATTACH_TO_FRAGMENT) {
                 if (fragment.getParentActivity() != null) {
-                    if (allowScreenshots) {
+                    if (allowScreenshots || true) { // FORK MOD: screenshots always allowed
                         fragment.getParentActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
                         AndroidUtilities.logFlagSecure();
                     } else {
@@ -2894,7 +2894,7 @@ public class StoryViewer implements NotificationCenter.NotificationCenterDelegat
                     }
                 }
             } else {
-                if (allowScreenshots) {
+                if (allowScreenshots || true) { // FORK MOD
                     windowLayoutParams.flags &= ~WindowManager.LayoutParams.FLAG_SECURE;
                     AndroidUtilities.logFlagSecure();
                 } else {

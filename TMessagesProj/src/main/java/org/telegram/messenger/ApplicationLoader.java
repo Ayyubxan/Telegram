@@ -273,6 +273,8 @@ public class ApplicationLoader extends Application {
             DownloadController.getInstance(a);
         }
         BillingController.getInstance().startConnection();
+        // FORK MOD (Nexo): habits + Mac sync module
+        org.telegram.messenger.nexo.Nexo.init(applicationContext);
     }
 
     public ApplicationLoader() {

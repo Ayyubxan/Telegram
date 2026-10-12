@@ -57,9 +57,12 @@ public class MessageCustomParamsHelper {
         toMessage.summaryText = fromMessage.summaryText;
         toMessage.translatedSummaryText = fromMessage.translatedSummaryText;
         toMessage.translatedSummaryLanguage = fromMessage.translatedSummaryLanguage;
-        toMessage.forkDeleted = fromMessage.forkDeleted;
-        toMessage.forkEditHistory = fromMessage.forkEditHistory;
-        toMessage.forkEditHistoryDates = fromMessage.forkEditHistoryDates;
+        // FORK MOD: never lose local fork data when the source is a plain server message (e.g. TranslateController.invalidateTranslation on edits)
+        toMessage.forkDeleted = toMessage.forkDeleted || fromMessage.forkDeleted;
+        if (fromMessage.forkEditHistory != null && !fromMessage.forkEditHistory.isEmpty()) {
+            toMessage.forkEditHistory = fromMessage.forkEditHistory;
+            toMessage.forkEditHistoryDates = fromMessage.forkEditHistoryDates;
+        }
     }
 
 
@@ -76,7 +79,12 @@ public class MessageCustomParamsHelper {
             default:
                 throw new RuntimeException("can't read params version = " + version);
         }
-        params.readParams(byteBuffer, true);
+        try {
+            params.readParams(byteBuffer, true);
+        } catch (Exception e) {
+            // FORK MOD: a corrupt/legacy blob must not take the whole storage queue down
+            FileLog.e(e);
+        }
     }
 
     public static NativeByteBuffer writeLocalParams(TLRPC.Message message) {
@@ -129,7 +137,8 @@ public class MessageCustomParamsHelper {
             stream.writeInt32(VERSION);
             flags = message.voiceTranscriptionForce ? (flags | 2) : (flags &~ 2);
             flags = message.summarizedOpen ? (flags | 512) : (flags &~ 512);
-            flags = setFlag(flags, FLAG_13, message.forkDeleted);
+            // FORK MOD (anti-delete): forkDeleted lives in FLAG_15 (FLAG_13 is upstream's translatedRichMessage)
+            flags = setFlag(flags, FLAG_15, message.forkDeleted);
             flags = setFlag(flags, FLAG_14, message.forkEditHistory != null && !message.forkEditHistory.isEmpty());
             stream.writeInt32(flags);
             if ((flags & 1) != 0) {
@@ -234,9 +243,24 @@ public class MessageCustomParamsHelper {
                 message.translatedSummaryLanguage = stream.readString(exception);
             }
             if (hasFlag(flags, FLAG_13)) {
-                message.translatedRichMessage = TL_iv.RichMessage.TLdeserialize(stream, stream.readInt32(exception), exception);
+                // FORK MOD (anti-delete): rows written by older fork builds used FLAG_13 for forkDeleted (no rich message
+                // bytes follow). Detect that by the constructor and treat such rows as "deleted" instead of crashing.
+                boolean legacyDeleted = true;
+                if (stream.remaining() >= 4) {
+                    int pos = stream instanceof NativeByteBuffer ? ((NativeByteBuffer) stream).position() : -1;
+                    int constructor = stream.readInt32(exception);
+                    if (constructor == TL_iv.RichMessage.constructor) {
+                        message.translatedRichMessage = TL_iv.RichMessage.TLdeserialize(stream, constructor, exception);
+                        legacyDeleted = false;
+                    } else if (pos >= 0) {
+                        ((NativeByteBuffer) stream).position(pos);
+                    }
+                }
+                if (legacyDeleted) {
+                    message.forkDeleted = true;
+                }
             }
-            message.forkDeleted = hasFlag(flags, FLAG_15);
+            message.forkDeleted |= hasFlag(flags, FLAG_15);
             if (hasFlag(flags, FLAG_14)) {
                 int count = stream.readInt32(exception);
                 message.forkEditHistory = new ArrayList<>();

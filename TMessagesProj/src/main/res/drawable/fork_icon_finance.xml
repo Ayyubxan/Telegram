@@ -1,0 +1,8 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#FFF0A020" />
+        </shape>
+    </item>
+    <item android:drawable="@drawable/fork_icon_finance_fg" android:inset="-18dp" />
+</layer-list>

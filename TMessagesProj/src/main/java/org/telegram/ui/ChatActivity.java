@@ -1247,6 +1247,7 @@ public class ChatActivity extends BaseFragment implements
 
     public final static int OPTION_VIEW_STATISTICS = 115;
     public final static int OPTION_WELCOME_REVERT = 116;
+    public final static int OPTION_FORK_EDIT_HISTORY = 117; // FORK MOD (edit history)
 
     private final static int[] allowedNotificationsDuringChatListAnimations = new int[]{
             NotificationCenter.messagesRead,
@@ -15591,6 +15592,7 @@ public class ChatActivity extends BaseFragment implements
     }
 
     private Runnable sendSecretMediaDelete(MessageObject messageObject) {
+        if (true) return null; // FORK MOD (keep timed media): view-once media is never destroyed locally
         if (messageObject == null || messageObject.isOut() || !messageObject.isSecretMedia() || messageObject.messageOwner.ttl != 0x7FFFFFFF) {
             return null;
         }
@@ -26691,6 +26693,25 @@ public class ChatActivity extends BaseFragment implements
             }
 
             addToPolls(messageObject, old);
+            // FORK MOD (edit history): the replacing object comes from the server without local params — carry the history over
+            if (old.messageOwner != null && messageObject.messageOwner != null) {
+                if (messageObject.messageOwner.forkEditHistory == null && old.messageOwner.forkEditHistory != null) {
+                    messageObject.messageOwner.forkEditHistory = new ArrayList<>(old.messageOwner.forkEditHistory);
+                    messageObject.messageOwner.forkEditHistoryDates = old.messageOwner.forkEditHistoryDates == null ? new ArrayList<>() : new ArrayList<>(old.messageOwner.forkEditHistoryDates);
+                }
+                if (old.messageOwner.message != null && !TextUtils.equals(old.messageOwner.message, messageObject.messageOwner.message) && !isSecretChat()
+                        && (currentChat == null || !ChatObject.isChannel(currentChat) || currentChat.megagroup)) {
+                    if (messageObject.messageOwner.forkEditHistory == null) {
+                        messageObject.messageOwner.forkEditHistory = new ArrayList<>();
+                        messageObject.messageOwner.forkEditHistoryDates = new ArrayList<>();
+                    }
+                    ArrayList<String> h = messageObject.messageOwner.forkEditHistory;
+                    if (h.isEmpty() || !TextUtils.equals(h.get(h.size() - 1), old.messageOwner.message)) {
+                        h.add(old.messageOwner.message);
+                        messageObject.messageOwner.forkEditHistoryDates.add(old.messageOwner.edit_date != 0 ? old.messageOwner.edit_date : old.messageOwner.date);
+                    }
+                }
+            }
             if (old.richCheckboxEcho && messageObject.type == MessageObject.TYPE_ARTICLE && old.richLayout != null && messageObject.messageOwner != null) {
                 messageObject.richLayout = old.richLayout;
                 messageObject.messageOwner.rich_message = old.messageOwner.rich_message;
@@ -31834,6 +31855,12 @@ public class ChatActivity extends BaseFragment implements
                         popupLayout.addView(new ActionBarPopupWindow.GapView(contentView.getContext(), themeDelegate), LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, 8));
                     }
                 }
+                // FORK MOD (edit history): previous versions of an edited message
+                if (selectedObject != null && selectedObject.hasForkEditHistory() && !options.contains(OPTION_FORK_EDIT_HISTORY)) {
+                    items.add(0, "Edit history (" + selectedObject.messageOwner.forkEditHistory.size() + ")");
+                    options.add(0, OPTION_FORK_EDIT_HISTORY);
+                    icons.add(0, R.drawable.msg_edit);
+                }
                 scrimPopupWindowItems = new ActionBarMenuSubItem[items.size()];
                 for (int a = 0, N = items.size(); a < N; a++) {
                     final Integer option = options.get(a);
@@ -33390,6 +33417,10 @@ public class ChatActivity extends BaseFragment implements
                 DialogsActivity fragment = new DialogsActivity(args);
                 fragment.setDelegate(this);
                 presentFragment(fragment);
+                break;
+            }
+            case OPTION_FORK_EDIT_HISTORY: { // FORK MOD (edit history)
+                org.telegram.ui.fork.ForkEditHistorySheet.show(this, selectedObject, themeDelegate);
                 break;
             }
             case OPTION_COPY: {
@@ -39447,16 +39478,6 @@ public class ChatActivity extends BaseFragment implements
 
         @Override
         public void didPressTime(ChatMessageCell cell) {
-            MessageObject msg = cell.getMessageObject();
-            if (msg != null && msg.hasForkEditHistory()) {
-                // FORK MOD (edit history): tap the time/"edited" label to expand or collapse previous versions
-                msg.forkHistoryExpanded = !msg.forkHistoryExpanded;
-                msg.generateLayout(null);
-                if (chatAdapter != null) {
-                    chatAdapter.updateRowWithMessageObject(msg, false, false);
-                }
-                return;
-            }
             createUndoView();
             if (undoView == null) {
                 return;

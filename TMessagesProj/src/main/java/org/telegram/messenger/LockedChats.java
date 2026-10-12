@@ -59,6 +59,12 @@ public class LockedChats {
         return locked.isEmpty();
     }
 
+    /** All locked dialog ids (for the settings list and backups) */
+    public static java.util.List<Long> all() {
+        ensureLoaded();
+        return new java.util.ArrayList<>(locked);
+    }
+
     public static void setLocked(long dialogId, boolean value) {
         ensureLoaded();
         if (value) {

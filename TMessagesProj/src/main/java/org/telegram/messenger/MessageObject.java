@@ -8650,7 +8650,7 @@ public class MessageObject {
                 old = "";
             }
             int date = (messageOwner.forkEditHistoryDates != null && i < messageOwner.forkEditHistoryDates.size()) ? messageOwner.forkEditHistoryDates.get(i) : 0;
-            sb.append("\n✎ ");
+            sb.append(i == 0 ? "\n\n✎ " : "\n✎ "); // blank line between the current text and the history
             if (date != 0) {
                 sb.append(LocaleController.getInstance().getFormatterDay().format((long) date * 1000)).append(": ");
             }
@@ -8735,8 +8735,14 @@ public class MessageObject {
         }
 
         CharSequence text = messageText;
-        if (forkHistoryExpanded && hasForkEditHistory()) {
-            text = new SpannableStringBuilder(text).append(buildForkEditHistoryText()); // FORK MOD (edit history)
+        if (hasForkEditHistory()) {
+            // FORK MOD (edit history): previous versions live inside the bubble, below the current text
+            SpannableStringBuilder sb = new SpannableStringBuilder(text);
+            int start = sb.length();
+            sb.append(buildForkEditHistoryText());
+            sb.setSpan(new android.text.style.RelativeSizeSpan(0.85f), start, sb.length(), android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            sb.setSpan(new android.text.style.ForegroundColorSpan(Theme.getColor(isOutOwner() ? Theme.key_chat_outTimeText : Theme.key_chat_inTimeText)), start, sb.length(), android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            text = sb;
         }
         try {
             textLayoutOriginalWidth = maxWidth;

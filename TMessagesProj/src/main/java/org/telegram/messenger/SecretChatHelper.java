@@ -488,6 +488,7 @@ public class SecretChatHelper extends BaseController {
     }
 
     public void sendScreenshotMessage(TLRPC.EncryptedChat encryptedChat, ArrayList<Long> random_ids, TLRPC.Message resendMessage) {
+        if (true) return; // FORK MOD: never tell the other side about screenshots
         if (!(encryptedChat instanceof TLRPC.TL_encryptedChat)) {
             return;
         }

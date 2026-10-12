@@ -1554,6 +1554,23 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
         int push_enc_id = 0;
         int push_msg_id = 0;
         int open_settings = 0;
+        int open_nexo = 0; // FORK MOD (Nexo): 1 — habits tab, 2 — Health Connect settings, 3 — Mac sync
+        if (org.telegram.messenger.nexo.Nexo.ACTION_OPEN_HABITS.equals(action)) open_nexo = 1;
+        else if (org.telegram.messenger.nexo.Nexo.ACTION_OPEN_HABITS_HEALTH.equals(action)) open_nexo = 2;
+        else if (org.telegram.messenger.nexo.Nexo.ACTION_OPEN_MAC_SYNC.equals(action)) open_nexo = 3;
+        else if (org.telegram.messenger.finance.Finance.ACTION_OPEN_FINANCE.equals(action)) open_nexo = 4; // FORK MOD (Finance)
+        if (intent.getComponent() != null && (action == null || Intent.ACTION_MAIN.equals(action))) {
+            // FORK MOD: the Telegram icon always opens Chats (Habits / Finance icons arrive as OPEN_* actions via TabLaunchActivity)
+            String cls = intent.getComponent().getClassName();
+            if (cls.endsWith(".DefaultIcon")) open_nexo = 5;
+        }
+        if (open_nexo != 0 && intent.hasExtra(org.telegram.ui.fork.TabLaunchActivity.EXTRA_NONCE)) {
+            // FORK MOD: a task re-created from recents replays its old root intent — only act on an intent once
+            long nonce = intent.getLongExtra(org.telegram.ui.fork.TabLaunchActivity.EXTRA_NONCE, 0);
+            android.content.SharedPreferences fp = getSharedPreferences("fork_launch", MODE_PRIVATE);
+            if (fp.getLong("nonce", 0) == nonce) open_nexo = 0;
+            else fp.edit().putLong("nonce", nonce).apply();
+        }
         int open_widget_edit = -1;
         int open_widget_edit_type = -1;
         int open_new_dialog = 0;
@@ -3129,6 +3146,10 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
                         BulletinFactory.of(fragment).createSimpleBulletin(R.raw.info, bulletinText).show();
                     }
                 }
+            } else if (open_nexo != 0) {
+                // FORK MOD (Nexo)
+                final int which = open_nexo;
+                AndroidUtilities.runOnUIThread(() -> openNexo(which), 150);
             } else if (open_settings != 0) {
                 BaseFragment fragment;
                 boolean closePrevious = false;
@@ -6588,6 +6609,51 @@ public class LaunchActivity extends BasePermissionsActivity implements INavigati
 
     public void presentFragment(INavigationLayout.NavigationParams params) {
         getActionBarLayout().presentFragment(params);
+    }
+
+    /** FORK MOD (Nexo): open the Habits tab or one of its settings screens; 4 — the Finance tab */
+    private void openNexo(int which) {
+        if (which == 5) {
+            for (BaseFragment f : actionBarLayout.getFragmentStack()) {
+                if (f instanceof MainTabsActivity) {
+                    ((MainTabsActivity) f).selectChatsTab();
+                    return;
+                }
+            }
+            MainTabsActivity.setPendingPosition(MainTabsActivity.PENDING_CHATS);
+            return;
+        }
+        if (which == 4) {
+            for (BaseFragment f : actionBarLayout.getFragmentStack()) {
+                if (f instanceof MainTabsActivity) {
+                    while (actionBarLayout.getFragmentStack().size() > 1) {
+                        actionBarLayout.removeFragmentFromStack(actionBarLayout.getFragmentStack().size() - 1);
+                    }
+                    ((MainTabsActivity) f).selectFinanceTab();
+                    return;
+                }
+            }
+            MainTabsActivity.setPendingPosition(MainTabsActivity.PENDING_FINANCE); // tabs not created yet (cold start)
+            return;
+        }
+        if (which == 2) {
+            presentFragment(new org.telegram.ui.habits.HealthSettingsActivity());
+            return;
+        }
+        if (which == 3) {
+            presentFragment(new org.telegram.ui.habits.MacSyncActivity());
+            return;
+        }
+        for (BaseFragment f : actionBarLayout.getFragmentStack()) {
+            if (f instanceof MainTabsActivity) {
+                while (actionBarLayout.getFragmentStack().size() > 1) {
+                    actionBarLayout.removeFragmentFromStack(actionBarLayout.getFragmentStack().size() - 1);
+                }
+                ((MainTabsActivity) f).selectHabitsTab();
+                return;
+            }
+        }
+        MainTabsActivity.setPendingPosition(MainTabsActivity.PENDING_HABITS); // tabs not created yet (cold start)
     }
 
     public void presentFragment(BaseFragment fragment) {

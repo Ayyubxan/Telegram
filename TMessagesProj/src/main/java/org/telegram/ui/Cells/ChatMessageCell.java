@@ -4176,7 +4176,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
     }
 
     private boolean checkDateMotionEvent(MotionEvent event) {
-        if (!currentMessageObject.isImportedForward() && !currentMessageObject.hasForkEditHistory()) { // FORK MOD (edit history): allow tapping time to expand history
+        if (!currentMessageObject.isImportedForward()) {
             return false;
         }
         int x = (int) getEventX(event);

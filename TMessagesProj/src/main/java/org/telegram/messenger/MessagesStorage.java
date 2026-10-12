@@ -4736,6 +4736,7 @@ public class MessagesStorage extends BaseController {
     }
 
     public void emptyMessagesMedia(long dialogId, ArrayList<Integer> mids) {
+        if (true) return; // FORK MOD (keep timed media): expired / viewed-once media is kept
         storageQueue.postRunnable(() -> {
             SQLiteCursor cursor = null;
             SQLitePreparedStatement state = null;
@@ -16391,7 +16392,7 @@ public class MessagesStorage extends BaseController {
                                         }
                                         message.forkEditHistory.add(oldMessage.message);
                                         message.forkEditHistoryDates.add(oldMessage.edit_date != 0 ? oldMessage.edit_date : oldMessage.date);
-                                        while (message.forkEditHistory.size() > 20) {
+                                        while (message.forkEditHistory.size() > 200) {
                                             message.forkEditHistory.remove(0);
                                             if (!message.forkEditHistoryDates.isEmpty()) {
                                                 message.forkEditHistoryDates.remove(0);
