@@ -1,0 +1,61 @@
+{
+  "" : {
+    "const-values" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Nexo-primary.swiftconstvalues",
+    "dependencies" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Nexo-primary.d",
+    "diagnostics" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Nexo-primary.dia",
+    "emit-module-dependencies" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Nexo-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Nexo-primary-emit-module.dia",
+    "pch" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Nexo-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Nexo-primary.swiftdeps"
+  },
+  "/Users/Ayyub/Code/Telegram/Telegram/mac/Sources/Nexo/BleTransport.swift" : {
+    "index-unit-output-path" : "/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/BleTransport.o",
+    "llvm-bc" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/BleTransport.bc",
+    "object" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/BleTransport.o"
+  },
+  "/Users/Ayyub/Code/Telegram/Telegram/mac/Sources/Nexo/ClipboardWatcher.swift" : {
+    "index-unit-output-path" : "/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/ClipboardWatcher.o",
+    "llvm-bc" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/ClipboardWatcher.bc",
+    "object" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/ClipboardWatcher.o"
+  },
+  "/Users/Ayyub/Code/Telegram/Telegram/mac/Sources/Nexo/Crypto.swift" : {
+    "index-unit-output-path" : "/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Crypto.o",
+    "llvm-bc" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Crypto.bc",
+    "object" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Crypto.o"
+  },
+  "/Users/Ayyub/Code/Telegram/Telegram/mac/Sources/Nexo/InternetTransport.swift" : {
+    "index-unit-output-path" : "/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/InternetTransport.o",
+    "llvm-bc" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/InternetTransport.bc",
+    "object" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/InternetTransport.o"
+  },
+  "/Users/Ayyub/Code/Telegram/Telegram/mac/Sources/Nexo/LanTransport.swift" : {
+    "index-unit-output-path" : "/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/LanTransport.o",
+    "llvm-bc" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/LanTransport.bc",
+    "object" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/LanTransport.o"
+  },
+  "/Users/Ayyub/Code/Telegram/Telegram/mac/Sources/Nexo/NexoApp.swift" : {
+    "index-unit-output-path" : "/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/NexoApp.o",
+    "llvm-bc" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/NexoApp.bc",
+    "object" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/NexoApp.o"
+  },
+  "/Users/Ayyub/Code/Telegram/Telegram/mac/Sources/Nexo/Notifier.swift" : {
+    "index-unit-output-path" : "/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Notifier.o",
+    "llvm-bc" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Notifier.bc",
+    "object" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Notifier.o"
+  },
+  "/Users/Ayyub/Code/Telegram/Telegram/mac/Sources/Nexo/Settings.swift" : {
+    "index-unit-output-path" : "/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Settings.o",
+    "llvm-bc" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Settings.bc",
+    "object" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Settings.o"
+  },
+  "/Users/Ayyub/Code/Telegram/Telegram/mac/Sources/Nexo/SyncEngine.swift" : {
+    "index-unit-output-path" : "/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/SyncEngine.o",
+    "llvm-bc" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/SyncEngine.bc",
+    "object" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/SyncEngine.o"
+  },
+  "/Users/Ayyub/Code/Telegram/Telegram/mac/Sources/Nexo/Wire.swift" : {
+    "index-unit-output-path" : "/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Wire.o",
+    "llvm-bc" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Wire.bc",
+    "object" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Wire.o"
+  }
+}

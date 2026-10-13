@@ -1,0 +1,11 @@
+{
+  "/Users/Ayyub/Code/Telegram/Telegram/mac/Sources/Nexo/BleTransport.swift" : {
+    "abi-baseline-json" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Nexo.abi.json",
+    "const-values" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Nexo-primary.swiftconstvalues",
+    "dependencies" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Nexo-primary.d",
+    "diagnostics" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Nexo-primary.dia",
+    "swiftdoc" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Nexo.swiftdoc",
+    "swiftmodule" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Nexo.swiftmodule",
+    "swiftsourceinfo" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Nexo.swiftsourceinfo"
+  }
+}

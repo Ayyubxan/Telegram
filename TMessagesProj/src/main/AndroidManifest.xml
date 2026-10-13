@@ -721,6 +721,8 @@
             android:name="org.telegram.messenger.nexo.SendClipboardActivity"
             android:excludeFromRecents="true"
             android:exported="true"
+            android:icon="@drawable/fork_icon_mac"
+            android:roundIcon="@drawable/fork_icon_mac"
             android:label="Send to Mac"
             android:noHistory="true"
             android:taskAffinity=""
