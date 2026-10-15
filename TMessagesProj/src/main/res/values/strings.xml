@@ -11240,26 +11240,12 @@
     <string name="MacClipboardSubtitle">Clipboard and files with your Mac</string>
     <string name="MacClipboardA11yDescription">Sends copied text to your Mac automatically. Only the \"Copy\" tap is observed; screen text is never read or stored.</string>
     <string name="ForkMods">Mods</string>
-    <string name="ForkModsSubtitle">Locked chats, Telegram backup</string>
+    <string name="ForkModsSubtitle">Locked chats, webhooks, export</string>
     <string name="ForkLockedChats">Locked chats</string>
     <string name="ForkLockedChatsHidden">Hidden. Long-press the lock icon in Chats to reveal them.</string>
     <string name="ForkLockedChatsEmpty">No locked chats. Long-press a chat → Lock.</string>
     <string name="ForkLockedChatsInfo">Tap a chat to unlock it.</string>
     <string name="ForkUnlock">Unlock</string>
     <string name="ForkUnlockChatConfirm">Unlock \"%1$s\"?</string>
-    <string name="ForkBackup">Telegram backup</string>
-    <string name="ForkBackupChat">Send to</string>
-    <string name="ForkBackupNotSet">Not set</string>
-    <string name="ForkBackupTime">Time</string>
-    <string name="ForkBackupLast">Last sent</string>
-    <string name="ForkBackupNow">Back up now</string>
-    <string name="ForkBackupRestore">Restore from file</string>
-    <string name="ForkBackupInfo">Module settings and locked chats are sent daily to the chosen chat (once the device is online). Local copies: last %1$d days in Download/Telegram/Backup. With a passphrase the files are AES-256 encrypted; without one they are plain JSON.</string>
-    <string name="ForkBackupChooseChat">Choose a chat first</string>
-    <string name="ForkBackupSent">Backup sent</string>
     <string name="ForkBackupInvalid">This is not a backup file</string>
-    <string name="ForkBackupRestoreTitle">Restore from the backup?</string>
-    <string name="ForkBackupRestoreText">%1$d locked chats, %2$d settings. Current locked chats are kept.</string>
-    <string name="ForkBackupRestoreButton">Restore</string>
-    <string name="ForkBackupRestored">Restored</string>
 </resources>

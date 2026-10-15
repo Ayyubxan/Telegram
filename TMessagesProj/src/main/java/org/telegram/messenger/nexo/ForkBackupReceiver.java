@@ -6,15 +6,14 @@ import android.content.Intent;
 
 import org.telegram.messenger.FileLog;
 
-/** FORK MOD: the daily backup alarm — sends the fork backup to the chosen chat (once online) and writes the local copy */
+/** FORK MOD: alarm receiver — webhook retries (the old daily-backup action now only flushes webhooks too) */
 public class ForkBackupReceiver extends BroadcastReceiver {
     public static final String ACTION_BACKUP = "org.telegram.messenger.fork.BACKUP";
 
     @Override
     public void onReceive(Context ctx, Intent intent) {
         try {
-            ForkBackup.checkDue(ctx);
-            LocalBackup.schedule(ctx);
+            Webhooks.flush(ctx);
         } catch (Exception e) {
             FileLog.e(e);
         }

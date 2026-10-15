@@ -25,6 +25,18 @@ public class NexoPrefs {
             p.edit().putString("deviceId", id).apply();
         }
         deviceId = id;
+        SharedPreferences.Editor ed = null;
+        for (String k : DEAD) if (p.contains(k)) { if (ed == null) ed = p.edit(); ed.remove(k); }
+        if (ed != null) ed.apply();
+    }
+
+    /** Keys of removed features (daily backup, Finance/Habits bridges): dropped on start, never exported or imported */
+    private static final String[] DEAD = {"lastTelegramBackupAt", "lastBackupAt", "backupDialogId", "backupMinutes", "financeDialogs"};
+
+    private static boolean local(String k) {
+        if ("deviceId".equals(k) || k.startsWith("relayLastId.") || "backupPassphrase".equals(k)) return true;
+        for (String d : DEAD) if (d.equals(k)) return true;
+        return false;
     }
 
     public String getKeyB64() { return p.getString("key", null); }
@@ -77,14 +89,15 @@ public class NexoPrefs {
     public void setImagesEnabled(boolean v) { p.edit().putBoolean("imagesEnabled", v).apply(); }
 
 
-    /** Last manual/auto backup time (ms), 0 — never */
-    public long getLastBackupAt() { return p.getLong("lastBackupAt", 0); }
-    public void setLastBackupAt(long v) { p.edit().putLong("lastBackupAt", v).apply(); }
 
 
     /** Mac sync: send every copied text automatically (accessibility service) */
     public boolean isAutoModeEnabled() { return p.getBoolean("autoMode", true); }
     public void setAutoModeEnabled(boolean v) { p.edit().putBoolean("autoMode", v).apply(); }
+
+    /** Webhooks: JSON array of hooks (see Webhooks.Hook) */
+    public String getWebhooks() { return p.getString("webhooks", "[]"); }
+    public void setWebhooks(String json) { p.edit().putString("webhooks", json).apply(); }
 
     public String getRelayServer() { String s = p.getString("relayServer", null); return s == null ? "https://ntfy.sh" : s; }
     public void setRelayServer(String v) { p.edit().putString("relayServer", v).apply(); }
@@ -106,30 +119,20 @@ public class NexoPrefs {
         p.edit().putString("knownPeers", new JSONObject(v).toString()).apply();
     }
 
-    // region Telegram backup
-
-    /** Chat the daily backup file is sent to (0 — not set) */
-    public long getBackupDialogId() { return p.getLong("backupDialogId", 0); }
-    public void setBackupDialogId(long v) { p.edit().putLong("backupDialogId", v).apply(); }
-
-    /** Backup time: minutes from midnight (default 03:00) */
-    public int getBackupMinutes() { return p.getInt("backupMinutes", 3 * 60); }
-    public void setBackupMinutes(int v) { p.edit().putInt("backupMinutes", v).apply(); }
+    // region Fork backup (export / import file)
 
     /** Backup encryption passphrase ("" — plain JSON). Kept in app-private prefs; excluded from exportJson. */
     public String getBackupPassphrase() { return p.getString("backupPassphrase", ""); }
     public void setBackupPassphrase(String s) { p.edit().putString("backupPassphrase", s == null ? "" : s).apply(); }
     public boolean isBackupEncrypted() { return !getBackupPassphrase().isEmpty(); }
 
-    public long getLastTelegramBackupAt() { return p.getLong("lastTelegramBackupAt", 0); }
-    public void setLastTelegramBackupAt(long v) { p.edit().putLong("lastTelegramBackupAt", v).apply(); }
 
     /** All settings as JSON (device id and relay cursors are per device and are left out) */
     public JSONObject exportJson() {
         JSONObject o = new JSONObject();
         for (Map.Entry<String, ?> e : p.getAll().entrySet()) {
             String k = e.getKey();
-            if ("deviceId".equals(k) || k.startsWith("relayLastId.") || "lastTelegramBackupAt".equals(k) || "lastBackupAt".equals(k) || "backupPassphrase".equals(k)) continue;
+            if (local(k)) continue;
             try { o.put(k, e.getValue()); } catch (Exception ignore) {}
         }
         return o;
@@ -140,7 +143,7 @@ public class NexoPrefs {
         Iterator<String> it = o.keys();
         while (it.hasNext()) {
             String k = it.next();
-            if ("deviceId".equals(k)) continue;
+            if (local(k)) continue;
             Object v = o.opt(k);
             if (v instanceof Boolean) ed.putBoolean(k, (Boolean) v);
             else if (v instanceof Integer) ed.putInt(k, (Integer) v);

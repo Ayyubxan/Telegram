@@ -105,6 +105,12 @@
             <action android:name="android.intent.action.VIEW"/>
             <data android:scheme="ton"/>
         </intent>
+        <!-- FORK MOD: webhook "app:" targets must be visible (Android 11+ package visibility) -->
+        <package android:name="uz.rizq.app"/>
+        <package android:name="uz.rizq.app.debug"/>
+        <intent>
+            <action android:name="org.telegram.messenger.fork.WEBHOOK"/>
+        </intent>
     </queries>
 
     <application

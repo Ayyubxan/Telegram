@@ -10,7 +10,7 @@ public class NexoBootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         try {
             SyncService.start(context);
-            ForkBackup.schedule(context);
+            Webhooks.flush(context);
         } catch (Exception e) {
             org.telegram.messenger.FileLog.e(e);
         }

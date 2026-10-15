@@ -42,12 +42,22 @@ public class Nexo {
         scheduled = true;
         try {
             engine();
-            ForkBackup.schedule(ctx);
-            ForkBackup.checkDue(ctx);
             SyncService.start(ctx);
+            Webhooks.init(ctx); // FORK MOD: forward chosen chats to webhooks
         } catch (Throwable e) {
             org.telegram.messenger.FileLog.e(e);
         }
+    }
+
+    private static final java.util.List<Runnable> listeners = new java.util.ArrayList<>();
+    public static void addListener(Runnable r) { synchronized (listeners) { if (!listeners.contains(r)) listeners.add(r); } }
+    public static void removeListener(Runnable r) { synchronized (listeners) { listeners.remove(r); } }
+    /** Fork-side state changed (webhook stats etc.) — UI thread */
+    public static void notifyChanged() {
+        org.telegram.messenger.AndroidUtilities.runOnUIThread(() -> {
+            java.util.List<Runnable> copy; synchronized (listeners) { copy = new java.util.ArrayList<>(listeners); }
+            for (Runnable r : copy) { try { r.run(); } catch (Throwable e) { org.telegram.messenger.FileLog.e(e); } }
+        });
     }
 
     /** Intent that opens the Mac clipboard settings */
