@@ -2,733 +2,733 @@
   {
     "isFramework" : true,
     "moduleName" : "Accessibility",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/Accessibility.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/Accessibility.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "AppKit",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/AppKit.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/AppKit.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "ColorSync",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/ColorSync.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/ColorSync.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "Combine",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/Combine.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/Combine.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "CoreAudio",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/CoreAudio.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/CoreAudio.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "CoreData",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/CoreData.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/CoreData.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "CoreFoundation",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/CoreFoundation.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/CoreFoundation.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "CoreGraphics",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/CoreGraphics.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/CoreGraphics.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "CoreImage",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/CoreImage.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/CoreImage.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "CoreMedia",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/CoreMedia.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/CoreMedia.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "CoreText",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/CoreText.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/CoreText.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "CoreTransferable",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/CoreTransferable.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/CoreTransferable.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "CoreVideo",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/CoreVideo.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/CoreVideo.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "CryptoKit",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/CryptoKit.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/CryptoKit.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "Darwin",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/Darwin.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/Darwin.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "DataDetection",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/DataDetection.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/DataDetection.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "DeveloperToolsSupport",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/DeveloperToolsSupport.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/DeveloperToolsSupport.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "Dispatch",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/Dispatch.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/Dispatch.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "Distributed",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/Distributed.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/Distributed.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "Foundation",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/Foundation.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/Foundation.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "IOKit",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/IOKit.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/IOKit.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "ImageIO",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/ImageIO.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/ImageIO.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "LocalAuthentication",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/LocalAuthentication.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/LocalAuthentication.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "Metal",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/Metal.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/Metal.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "Network",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/Network.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/Network.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "OSLog",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/OSLog.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/OSLog.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "ObjectiveC",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/ObjectiveC.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/ObjectiveC.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "Observation",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/Observation.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/Observation.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "QuartzCore",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/QuartzCore.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/QuartzCore.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "Spatial",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/Spatial.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/Spatial.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "Swift",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/Swift.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/Swift.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "SwiftUI",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/SwiftUI.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/SwiftUI.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "SwiftUICore",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/SwiftUICore.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/SwiftUICore.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : true,
     "moduleName" : "Symbols",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/Symbols.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/Symbols.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "Synchronization",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/Synchronization.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/Synchronization.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "System",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/System.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/System.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "UniformTypeIdentifiers",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/UniformTypeIdentifiers.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/UniformTypeIdentifiers.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "XPC",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/XPC.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/XPC.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "_Builtin_float",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/_Builtin_float.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/_Builtin_float.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "_Concurrency",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/_Concurrency.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/_Concurrency.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "_DarwinFoundation1",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/_DarwinFoundation1.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/_DarwinFoundation1.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "_DarwinFoundation2",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/_DarwinFoundation2.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/_DarwinFoundation2.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "_DarwinFoundation3",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/_DarwinFoundation3.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/_DarwinFoundation3.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "_StringProcessing",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/_StringProcessing.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/_StringProcessing.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "os",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/os.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/os.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "isFramework" : false,
     "moduleName" : "simd",
-    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.0\/simd.swiftmodule\/arm64e-apple-macos.swiftmodule"
+    "modulePath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/swift\/macosx\/prebuilt-modules\/27.2\/simd.swiftmodule\/arm64e-apple-macos.swiftmodule"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/Accessibility.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Accessibility-3D4JEPETR5FAYXSDGMNN3VCPU.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Accessibility-6H75XVWQ42TLLKJMMEJYKQ33A.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Accessibility"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/AppKit.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/AppKit-4Q6267MDEOX49N1WG6CRJP3VJ.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/AppKit-8UOV8JYN32Z8WUQAIHU0UUNIO.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "AppKit"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/ApplicationServices.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/ApplicationServices-4BD86LBDTA411DKHPTL6NLWW0.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/ApplicationServices-D6DDRA5JL889ZLJORPRCA32F6.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "ApplicationServices"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/CFNetwork.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CFNetwork-6Q0S35SVLBJK53GB9IQ2DS7K8.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CFNetwork-9O2FFHAOHDOUA4GPWWKIW2ANR.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CFNetwork"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/cups.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CUPS-12S0PBRRPY83Q7ULSC1YBHUHK.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CUPS-LA8NTJTDEO0MDAAUHQAKDB1Z.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CUPS"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/ColorSync.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/ColorSync-1XS3YJZAD7NYVQZNOJ8PVZEJT.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/ColorSync-BYNZO56SZSWEWN3LHO29U8Z82.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "ColorSync"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/CoreAudio.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreAudio-1WNJUFS3QAQWFC4EQDO6E8K84.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreAudio-EFS1JHPZ9QL77G0B5GTB8LDED.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreAudio"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/CoreAudioTypes.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreAudioTypes-7EVO56EBVCUWCBWFKNBZZZUCD.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreAudioTypes-5CZ1AXWYZFVES4G9FFVUVATSC.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreAudioTypes"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/CoreBluetooth.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreBluetooth-EBQ2NY3NVNKFRPBENIBNDI4UE.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreBluetooth-ZSFQTQZGOVPVTEQVV5FL8VFU.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreBluetooth"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/CoreData.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreData-5GYU4IJ7AVWY1V2J1PY49ZHT8.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreData-EQBTZZR10LYH0LN5WK9WWYN6U.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreData"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/CoreFoundation.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreFoundation-9W9A3VTYR9LR2HH96CGGLB1ZN.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreFoundation-2EQ89HPGULU3NQF9SLFWE88Y8.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreFoundation"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/CoreGraphics.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreGraphics-CTP8D9W6A01SVLHUCK2Q10051.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreGraphics-6V4YVIWI9CAK4U7157I6C1LEP.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreGraphics"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/CoreImage.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreImage-8K1KWECMW11STAU09X8VFQHCA.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreImage-C1UXP1L00FZZ81AROKSWA460.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreImage"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/CoreMedia.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreMedia-8VIKXPDYZ8BMYUV3GM3JXMO38.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreMedia-A3VI3P915DFYI78WZY1VZBQ4Z.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreMedia"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/CoreServices.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreServices-3QV1LV3DLVP3WMJMNK257CKS6.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreServices-CM02ZWR4039CKB8BMI7UT187B.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreServices"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/CoreText.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreText-780OE8466UCEL9S8MN9DGZJ6G.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreText-DTOY7T1HTMES8EABPFQRT6OT8.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreText"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/CoreTransferable.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreTransferable-9BHYFQ2KWAHTU9V5LGMBLHYJH.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreTransferable-F3MJ39KKVKLA3YXI8N9X3LXSM.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreTransferable"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/CoreVideo.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreVideo-2PHR1PVDABKHPGL1X6APAF0B.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/CoreVideo-9RIW2MACK341AZEHXGU2Q4XQS.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "CoreVideo"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/Darwin.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Darwin-4WXKCFFHATUAVI53Y2CA805PB.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Darwin-BN6BUI8DHEH3OKVE115ZHTKNE.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Darwin"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/DataDetection.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/DataDetection-B1EEXJSETVJW0ZWKQ2OVRNKW2.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/DataDetection-66Z3QPD3G1D8MEZYJKH6MOEVS.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "DataDetection"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/DeveloperToolsSupport.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/DeveloperToolsSupport-5FD4ZBR1N32LEJYIW9QHAECZE.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/DeveloperToolsSupport-3SFOJE7H8983V4WY4M9JKA6H9.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "DeveloperToolsSupport"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/DiskArbitration.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/DiskArbitration-CHQH7P049W0OSYUAAY0Y5I566.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/DiskArbitration-EHY1Z172AW65A7VB89LPNAV0C.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "DiskArbitration"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/dispatch.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Dispatch-8F5YZSFR3EEJ9DD2N626CNRKO.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Dispatch-ELLBIM4BPHJE9P7OSWZMT0TP8.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Dispatch"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/Foundation.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Foundation-D674ZQUR6HOJEUF42DFA5N0YE.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Foundation-2B26E1A0XLKULQ7VNB8FKB3QF.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Foundation"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/IOKit.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/IOKit-6LDU9A5ADL6XWYDKACCAFEEJ5.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/IOKit-6RUJEC7EDSI26ZSBSIB4I26NI.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "IOKit"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/IOSurface.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/IOSurface-2LLO9YTOK7RIE35IW5MGGMYUY.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/IOSurface-3BHKLC0J1K6Y0KW3F8SGSZTFZ.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "IOSurface"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/ImageIO.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/ImageIO-184NMWGU8XL4JSXM8CUCLWC2W.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/ImageIO-B7VLCS53EYRE01QZXB84IX1BK.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "ImageIO"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/LocalAuthentication.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/LocalAuthentication-DD8LWA04FDVAAD6Z8WY3PDBI3.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/LocalAuthentication-479Z1QZI7BG24JNGQ10W08DF8.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "LocalAuthentication"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/DarwinBasic.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/MachO-9M8QFMHBK3J9IJX535COULJN.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/MachO-3VK53SDWEMIQITZFLBNLN7ITZ.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "MachO"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/Metal.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Metal-E44DWGC97O3NCX1AVW12FCYZQ.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Metal-BDZ0R4QH9O794HK6374GYADAW.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Metal"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/Network.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Network-4XR7TRCJ9FUE19OEADDKYFNO6.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Network-DZGLN5TXLCG7G2B6J4H48V9YI.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Network"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/OSLog.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/OSLog-5GS4Q0HW8W5NKH4CQ6AIRL8G6.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/OSLog-CSKP8EMIXQ7NS8ECI312MORCX.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "OSLog"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/ObjectiveC.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/ObjectiveC-3294N9MPCV8U1LCV7WFAZVBX5.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/ObjectiveC-9TDUOIH94I9PGZB7XVFYN6YVT.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "ObjectiveC"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/OpenGL.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/OpenGL-11WNNDPJ5XCX9HS19EFLARWM6.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/OpenGL-F0N3TC7U87CD73OKZ27O30PXZ.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "OpenGL"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/QuartzCore.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/QuartzCore-4QT83D02OK3LFAELWK77FKSDI.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/QuartzCore-2XJFZ4P5RGGQ8463RIUFDQEU.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "QuartzCore"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/Security.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Security-B0RI7SA0RUQ0Y2556N1TWNV3U.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Security-BSIQJG48NHGQH4LFYHGTWPT9.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Security"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/ServiceManagement.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/ServiceManagement-D5HOZ20X4WIFBS6YT0K5WFMIZ.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/ServiceManagement-AMA31L7PFBTM0JIJ6WA8USJIP.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "ServiceManagement"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/Spatial\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Spatial-6KB0P3XQTEGULGHP1U6SGX58Q.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Spatial-EQH8R6A9MON5VA6Y5N259SEAA.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Spatial"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/lib\/swift\/shims\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/SwiftShims-61RY29ZA9N6K5J28KQWBNGN9L.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/SwiftShims-8WF156QJJX21EA63FXKL8THHA.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "SwiftShims"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/SwiftUI.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/SwiftUI-93YV0LF01SELNZQCJU1HW3CRS.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/SwiftUI-982WCERUUZAV3REMODSNDDVZM.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "SwiftUI"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/SwiftUICore.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/SwiftUICore-9FR6PGOHJ3UB79FX9J4TNK7VQ.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/SwiftUICore-B3Z7H3NZO6T5ENCPRL8VEJMVE.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "SwiftUICore"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/Symbols.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Symbols-35E23R5966Y21PH11COHD7AJW.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/Symbols-2X9DQEEOPLH44YKF30FOZFLLM.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "Symbols"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/UniformTypeIdentifiers.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/UniformTypeIdentifiers-8IQF70R2QVQJSKVC53R5EA9I4.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/UniformTypeIdentifiers-CRM9C579WK63QBX7N90J1NJCS.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "UniformTypeIdentifiers"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/System\/Library\/Frameworks\/UserNotifications.framework\/Modules\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/UserNotifications-EUIEGC4IU1DX36THZGG15PTFW.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/UserNotifications-CU2T3TNZZIDBHCFIH2FQ0IKQM.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "UserNotifications"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/xpc.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/XPC-5EI2TVYMS3QL4H94G1V7ZJM1H.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/XPC-7SV8E4CT8FF6RPDTLYS75DGQH.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "XPC"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/DarwinFoundation1.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_AvailabilityInternal-AM3GOP8DTOZAENB29OM8FRNKW.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_AvailabilityInternal-9HH5964CT3XID62KI9XX8H091.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_AvailabilityInternal"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/21\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_float-ED47U8VW64B97Q6ACFRSRN1SE.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_float-7617VGUKIOZDHMIKBDHL03MX0.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_float"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/21\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_intrinsics-BYBLZBGVHC5LFLNACH6OEKBXC.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_intrinsics-AFE284DAF1U7ITZDQP7H9CF9I.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_intrinsics"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/21\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_inttypes-3EJWWMU8F5BHBD1J3GPKZ3D6G.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_inttypes-CZTQN9KTRPFAW107JDDI1QC10.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_inttypes"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/21\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_limits-BY7WT8K4H6K6AYSP2XVTBZBL7.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_limits-5VRX8BPMZI4R4O9PAEGMD298Q.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_limits"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/21\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stdarg-2OQQM31C5NYG2Q2WCAAK86G7S.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stdarg-81THHNHYNQ8RNEGTN39HF133M.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_stdarg"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/21\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stdatomic-97UEB0EAGS5PHFRWVQQFFH527.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stdatomic-1X1248XROE78S2AQ5OE3FVPK4.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_stdatomic"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/21\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stdbool-DCXNRR50Z4Z5OYAI7L7LKLYTE.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stdbool-98RI0KKXFDUL9NZN1UNXIBO90.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_stdbool"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/21\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stddef-4ZFV64WTABFDXZ99SZMB0KAVM.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stddef-7R2TIADUX570W6229RJBZ6HW2.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_stddef"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/21\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stdint-BXU3QK84R6MLO0UNNUOWHYLGG.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_stdint-EOD0C42A3SNGR8TP6NAMBGO4A.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_stdint"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/21\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_tgmath-9EMQQMM0L7TIAEHQ3J62429G5.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_Builtin_tgmath-44305O2ADML584Y8C7PV03FB2.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_Builtin_tgmath"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/DarwinFoundation1.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_DarwinFoundation1-11IK3OP6165US7ONRAOTHR7EJ.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_DarwinFoundation1-4HGBOWH33SD6R0186F4K5M9XR.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_DarwinFoundation1"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/DarwinFoundation2.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_DarwinFoundation2-465N9NA0UHF2XGSW6677GDPVU.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_DarwinFoundation2-B5CTU5Y7UMCL9JWKP5ESL53U.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_DarwinFoundation2"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/DarwinFoundation3.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_DarwinFoundation3-4PNP994C204UUUO66C628Y3CY.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_DarwinFoundation3-MV3O6UEJ56RX9Y675OIPPG4Q.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_DarwinFoundation3"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/lib\/swift\/shims\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_SwiftConcurrencyShims-2FAB5WIDTCS9KDYCCDKCN4JSY.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/_SwiftConcurrencyShims-9QNK21AT8GOW56HG8KTA03KLW.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "_SwiftConcurrencyShims"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/dnssd.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/dnssd-1I34R6WMKN7TVLPL8GNVPB2SM.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/dnssd-27YOM1CZR4VYBJHXV3EJEYKOM.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "dnssd"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/launch.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/launch-5FIUWZWHV5XDKI7RP38Q8ICO8.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/launch-B9IFQ3RJ0Y1P8QHVLO70U7N0F.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "launch"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/libDER\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/libDER-CYGVLHBJ5OOFH9SRC2K54RN1K.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/libDER-8H5WSUXKQ85FX03TCM5V959VI.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "libDER"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/libkern.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/libkern-1W37V5IE3MQ6CF0URVGDAPM8M.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/libkern-DA4EAI9DTFUH87JT9FAY3PKUC.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "libkern"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/os.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/os-EYQSM886VZXLSVIU180Y3EIBD.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/os-DVOMRAR180W4D8C12P81IJRA9.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "os"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/os.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/os_object-6JQHYDB70NH0NVOR55X2SR71X.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/os_object-1WTOQTTWPEVBV74T2255N27A9.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "os_object"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/os.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/os_workgroup-9GCL8CRVV6EXO8QWB0ZJC9AB6.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/os_workgroup-AO724KP8F71I31KLNDKUYWTTK.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "os_workgroup"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/21\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/ptrauth-7UCB6AWFIOXNCXLXOPJQNNU9E.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/ptrauth-EC43N0TBCNEV5HAXMPAQJ22W0.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "ptrauth"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Toolchains\/XcodeDefault.xctoolchain\/usr\/lib\/clang\/21\/include\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/ptrcheck-2H8HBCSB1NKJIWFMABZHV5F44.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/ptrcheck-5PG9UUSIK29V3SZWO6R0QHM5H.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "ptrcheck"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/simd\/module.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/simd-58MU74GL9XM8I428GEY1WY151.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/simd-6DRTWZO3ON2CG63KIF8DMNSMP.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "simd"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/c_standard_library.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/string_h-GBMN2EP4ZQNHZCTABG8ZDIML.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/string_h-5192ZVGWQYS78JKBM09TRRNDX.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "string_h"
   },
   {
     "clangModuleMapPath" : "\/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX.sdk\/usr\/include\/DarwinFoundation2.modulemap",
-    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/sys_types-B8EF6L383YUY4EJ72HDC5VQRA.pcm",
+    "clangModulePath" : "\/Users\/Ayyub\/Code\/Telegram\/Telegram\/mac\/.build\/out\/SDKExplicitPrecompiledModules\/sys_types-CBJVCNGE5UCSNTRTMPW00T4O6.pcm",
     "isBridgingHeaderDependency" : false,
     "isFramework" : false,
     "moduleName" : "sys_types"

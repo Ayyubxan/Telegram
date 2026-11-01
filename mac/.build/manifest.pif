@@ -5,11 +5,11 @@
       "name" : "Nexo",
       "path" : "/Users/Ayyub/Code/Telegram/Telegram/mac",
       "projects" : [
-        "b25bc29046ffedbc0128791834441f33a94643db641d4da57a21b6ac5a3790a6",
+        "937a3e22f61510253a413ae1f0ddbb1f37746595844a424609b9a71db8cd3d50",
         "30c99561a2ed7199c0ccfad6f63e1eea6da5d4cb32f842be611e5621fa6e2a39"
       ]
     },
-    "signature" : "10bd0efa3127834c7f55c764a6be0810c7de376154e580c86e62dabc57962e3f",
+    "signature" : "f451b6a19f3b4df2275333e4bb6787695ab32bb5ef9a698eb98f83ede36bfcfd",
     "type" : "workspace"
   },
   {
@@ -225,6 +225,14 @@
               {
                 "fileType" : "sourcecode.swift",
                 "guid" : "PACKAGE:mac::MAINGROUP::REF_2::REF_3",
+                "name" : "FleetPage.swift",
+                "path" : "FleetPage.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:mac::MAINGROUP::REF_2::REF_4",
                 "name" : "InternetTransport.swift",
                 "path" : "InternetTransport.swift",
                 "sourceTree" : "<group>",
@@ -232,7 +240,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:mac::MAINGROUP::REF_2::REF_4",
+                "guid" : "PACKAGE:mac::MAINGROUP::REF_2::REF_5",
                 "name" : "LanTransport.swift",
                 "path" : "LanTransport.swift",
                 "sourceTree" : "<group>",
@@ -240,7 +248,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:mac::MAINGROUP::REF_2::REF_5",
+                "guid" : "PACKAGE:mac::MAINGROUP::REF_2::REF_6",
                 "name" : "NexoApp.swift",
                 "path" : "NexoApp.swift",
                 "sourceTree" : "<group>",
@@ -248,7 +256,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:mac::MAINGROUP::REF_2::REF_6",
+                "guid" : "PACKAGE:mac::MAINGROUP::REF_2::REF_7",
                 "name" : "Notifier.swift",
                 "path" : "Notifier.swift",
                 "sourceTree" : "<group>",
@@ -256,7 +264,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:mac::MAINGROUP::REF_2::REF_7",
+                "guid" : "PACKAGE:mac::MAINGROUP::REF_2::REF_8",
                 "name" : "Settings.swift",
                 "path" : "Settings.swift",
                 "sourceTree" : "<group>",
@@ -264,7 +272,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:mac::MAINGROUP::REF_2::REF_8",
+                "guid" : "PACKAGE:mac::MAINGROUP::REF_2::REF_9",
                 "name" : "SyncEngine.swift",
                 "path" : "SyncEngine.swift",
                 "sourceTree" : "<group>",
@@ -272,7 +280,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:mac::MAINGROUP::REF_2::REF_9",
+                "guid" : "PACKAGE:mac::MAINGROUP::REF_2::REF_10",
                 "name" : "Wire.swift",
                 "path" : "Wire.swift",
                 "sourceTree" : "<group>",
@@ -314,6 +322,14 @@
               {
                 "fileType" : "sourcecode.swift",
                 "guid" : "PACKAGE:mac::MAINGROUP::REF_3::REF_3",
+                "name" : "FleetPage.swift",
+                "path" : "FleetPage.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:mac::MAINGROUP::REF_3::REF_4",
                 "name" : "InternetTransport.swift",
                 "path" : "InternetTransport.swift",
                 "sourceTree" : "<group>",
@@ -321,7 +337,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:mac::MAINGROUP::REF_3::REF_4",
+                "guid" : "PACKAGE:mac::MAINGROUP::REF_3::REF_5",
                 "name" : "LanTransport.swift",
                 "path" : "LanTransport.swift",
                 "sourceTree" : "<group>",
@@ -329,7 +345,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:mac::MAINGROUP::REF_3::REF_5",
+                "guid" : "PACKAGE:mac::MAINGROUP::REF_3::REF_6",
                 "name" : "NexoApp.swift",
                 "path" : "NexoApp.swift",
                 "sourceTree" : "<group>",
@@ -337,7 +353,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:mac::MAINGROUP::REF_3::REF_6",
+                "guid" : "PACKAGE:mac::MAINGROUP::REF_3::REF_7",
                 "name" : "Notifier.swift",
                 "path" : "Notifier.swift",
                 "sourceTree" : "<group>",
@@ -345,7 +361,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:mac::MAINGROUP::REF_3::REF_7",
+                "guid" : "PACKAGE:mac::MAINGROUP::REF_3::REF_8",
                 "name" : "Settings.swift",
                 "path" : "Settings.swift",
                 "sourceTree" : "<group>",
@@ -353,7 +369,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:mac::MAINGROUP::REF_3::REF_8",
+                "guid" : "PACKAGE:mac::MAINGROUP::REF_3::REF_9",
                 "name" : "SyncEngine.swift",
                 "path" : "SyncEngine.swift",
                 "sourceTree" : "<group>",
@@ -361,7 +377,7 @@
               },
               {
                 "fileType" : "sourcecode.swift",
-                "guid" : "PACKAGE:mac::MAINGROUP::REF_3::REF_9",
+                "guid" : "PACKAGE:mac::MAINGROUP::REF_3::REF_10",
                 "name" : "Wire.swift",
                 "path" : "Wire.swift",
                 "sourceTree" : "<group>",
@@ -387,12 +403,12 @@
       "projectIsPackage" : "true",
       "projectName" : "Nexo",
       "targets" : [
-        "43738c170818a9c1c955d70b03e8d8642f926f93eb5ff374c22fc29460568ad6",
-        "a9cab3eda276956dee6e6498344e172c63628cedd2cf29a2825ce2c765e89f46",
+        "61c1d0e19b6efe0a794445423b7ac237975b0dbe3725b5be7b79fc06e5d92238",
+        "e74b84bfc8e0790758b78c4d5983c3000060475d027ff92db2c84be89cb0ed5c",
         "da21e45a8bcc93778bb528f64c77cb0dc0a5a2ed4b6ddd9338be7e21031f4da1"
       ]
     },
-    "signature" : "b25bc29046ffedbc0128791834441f33a94643db641d4da57a21b6ac5a3790a6",
+    "signature" : "937a3e22f61510253a413ae1f0ddbb1f37746595844a424609b9a71db8cd3d50",
     "type" : "project"
   },
   {
@@ -586,6 +602,15 @@
 
               ],
               "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:mac::MAINGROUP::REF_2::REF_10",
+              "guid" : "PACKAGE-PRODUCT:mac_Nexo.Nexo::BUILDPHASE_0::10",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
             }
           ],
           "guid" : "PACKAGE-PRODUCT:mac_Nexo.Nexo::BUILDPHASE_0",
@@ -611,7 +636,7 @@
       "productTypeIdentifier" : "com.apple.product-type.tool",
       "type" : "standard"
     },
-    "signature" : "43738c170818a9c1c955d70b03e8d8642f926f93eb5ff374c22fc29460568ad6",
+    "signature" : "61c1d0e19b6efe0a794445423b7ac237975b0dbe3725b5be7b79fc06e5d92238",
     "type" : "target"
   },
   {
@@ -836,6 +861,15 @@
 
               ],
               "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:mac::MAINGROUP::REF_3::REF_10",
+              "guid" : "PACKAGE-TARGET:Nexo-655FD177E-testable::BUILDPHASE_0::10",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
             }
           ],
           "guid" : "PACKAGE-TARGET:Nexo-655FD177E-testable::BUILDPHASE_0",
@@ -861,7 +895,7 @@
       "productTypeIdentifier" : "org.swift.product-type.common.object",
       "type" : "standard"
     },
-    "signature" : "a9cab3eda276956dee6e6498344e172c63628cedd2cf29a2825ce2c765e89f46",
+    "signature" : "e74b84bfc8e0790758b78c4d5983c3000060475d027ff92db2c84be89cb0ed5c",
     "type" : "target"
   },
   {

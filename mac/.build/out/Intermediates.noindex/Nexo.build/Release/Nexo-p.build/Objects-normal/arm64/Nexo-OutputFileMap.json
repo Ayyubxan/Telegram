@@ -23,6 +23,11 @@
     "llvm-bc" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Crypto.bc",
     "object" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/Crypto.o"
   },
+  "/Users/Ayyub/Code/Telegram/Telegram/mac/Sources/Nexo/FleetPage.swift" : {
+    "index-unit-output-path" : "/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/FleetPage.o",
+    "llvm-bc" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/FleetPage.bc",
+    "object" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/FleetPage.o"
+  },
   "/Users/Ayyub/Code/Telegram/Telegram/mac/Sources/Nexo/InternetTransport.swift" : {
     "index-unit-output-path" : "/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/InternetTransport.o",
     "llvm-bc" : "/Users/Ayyub/Code/Telegram/Telegram/mac/.build/out/Intermediates.noindex/Nexo.build/Release/Nexo-p.build/Objects-normal/arm64/InternetTransport.bc",

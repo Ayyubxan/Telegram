@@ -1,0 +1,4 @@
+Target dependency graph (2 targets)
+Target 'AllExcludingTests' in project 'Aggregate'
+➜ Explicit dependency on target 'Nexo-product' in project 'Nexo'
+Target 'Nexo-product' in project 'Nexo' (no dependencies)

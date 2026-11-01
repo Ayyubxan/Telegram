@@ -140,6 +140,15 @@ struct MenuView: View {
                 .foregroundStyle(.secondary)
             }
 
+            if FleetPage.available {
+                Button {
+                    FleetPage.open(key: engine.settings.groupKey.base64url)
+                } label: {
+                    Label("Yordamchi parki", systemImage: "antenna.radiowaves.left.and.right")
+                }
+                .help("Robot telefonlar holati va hisobot (brauzerda)")
+            }
+
             Divider()
 
             DisclosureGroup("Telefonni ulash", isExpanded: $showPairing) {
