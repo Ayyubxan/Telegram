@@ -40,7 +40,7 @@ public class ForkSettingsActivity extends HabitsSettingsBase {
     private static final int ID_EXPORT = 3, ID_RESTORE = 4, ID_ENCRYPT = 6;
     private static final int REQ_EXPORT = 43;
     private byte[] pendingExport;
-    private static final int ID_HOOK_ADD = 7;
+    private static final int ID_HOOK_ADD = 7, ID_GMAIL = 8;
     private static final int ID_LOCKED_BASE = 1000, ID_HOOK_BASE = 3000;
     private static final int REQ_IMPORT = 42;
     private final ArrayList<Long> lockedShown = new ArrayList<>();
@@ -92,6 +92,11 @@ public class ForkSettingsActivity extends HabitsSettingsBase {
             }
         }
 
+        // Gmail
+        items.add(UItem.asHeader("Gmail"));
+        items.add(UItem.asButton(ID_GMAIL, "Gmail as chats", org.telegram.messenger.gmail.GmailStore.isConnected() ? org.telegram.messenger.gmail.GmailStore.email() : "Not connected"));
+        items.add(UItem.asShadow("Emails arrive as chats, one per sender; replies go out as email."));
+
         // Webhooks
         items.add(UItem.asHeader("Webhooks"));
         java.util.List<org.telegram.messenger.nexo.Webhooks.Hook> hooks = org.telegram.messenger.nexo.Webhooks.all();
@@ -130,6 +135,9 @@ public class ForkSettingsActivity extends HabitsSettingsBase {
         switch (item.id) {
             case ID_HOOK_ADD:
                 presentFragment(new WebhookActivity(null));
+                break;
+            case ID_GMAIL:
+                presentFragment(new GmailSettingsActivity());
                 break;
             case ID_EXPORT:
                 HabitUi.toast(this, "Preparing…");

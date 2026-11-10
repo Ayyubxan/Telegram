@@ -6929,6 +6929,9 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public void reloadUser(long userId) {
+        if (org.telegram.messenger.gmail.GmailIds.isGmailDialog(userId)) { // FORK MOD (gmail)
+            return;
+        }
         TLRPC.TL_users_getUsers req = new TLRPC.TL_users_getUsers();
         TLRPC.InputUser inputPeer = getInputUser(userId);
         if (inputPeer == null) return;
@@ -7760,6 +7763,9 @@ public class MessagesController extends BaseController implements NotificationCe
         loadFullUser(user, classGuid, force, null);
     }
     public void loadFullUser(final TLRPC.User user, int classGuid, boolean force, Utilities.Callback<TLRPC.UserFull> whenReceivedFullUser) {
+        if (user != null && org.telegram.messenger.gmail.GmailIds.isGmailDialog(user.id)) { // FORK MOD (gmail)
+            return;
+        }
         if (user == null || whenReceivedFullUser == null && (loadingFullUsers.contains(user.id) || !force && loadedFullUsers.get(user.id) > 0)) {
             return;
         }
@@ -8140,6 +8146,9 @@ public class MessagesController extends BaseController implements NotificationCe
         loadPeerSettings(currentUser, currentChat, false);
     }
     public void loadPeerSettings(TLRPC.User currentUser, TLRPC.Chat currentChat, boolean force) {
+        if (currentUser != null && org.telegram.messenger.gmail.GmailIds.isGmailDialog(currentUser.id)) { // FORK MOD (gmail): no such peer on the server
+            return;
+        }
         if (currentUser == null && currentChat == null) {
             return;
         }
@@ -9413,6 +9422,10 @@ public class MessagesController extends BaseController implements NotificationCe
                 channelId = 0;
             }
         }
+        if (org.telegram.messenger.gmail.GmailIds.isGmailDialog(dialogId)) { // FORK MOD (gmail): nothing to tell Telegram; the emails go to Gmail's trash
+            org.telegram.messenger.gmail.GmailSync.onMessagesDeleted(currentAccount, dialogId, messages);
+            return;
+        }
         if (cacheOnly) {
             return;
         }
@@ -10255,6 +10268,10 @@ public class MessagesController extends BaseController implements NotificationCe
             return;
         }
 
+        if (org.telegram.messenger.gmail.GmailIds.isGmailDialog(did)) { // FORK MOD (gmail): local only; the emails stay in Gmail
+            org.telegram.messenger.gmail.GmailSync.onDialogDeleted(did);
+            return;
+        }
         if (!DialogObject.isEncryptedDialog(did)) {
             if (peer == null) {
                 peer = getInputPeer(did);
@@ -11433,6 +11450,9 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public boolean sendTyping(long dialogId, long threadMsgId, int action, String emojicon, int classGuid) {
+        if (org.telegram.messenger.gmail.GmailIds.isGmailDialog(dialogId)) { // FORK MOD (gmail)
+            return false;
+        }
         if (action < 0 || action >= sendingTypings.length || dialogId == 0) {
             return false;
         }
@@ -11576,6 +11596,10 @@ public class MessagesController extends BaseController implements NotificationCe
         }
         if (LockedChats.isSuppressed(dialogId) || mode == ChatActivity.MODE_SAVED && LockedChats.isSuppressed(threadMessageId)) { // FORK MOD (locked chats): a locked+hidden chat always looks empty (also its Saved Messages sub-chat)
             Utilities.stageQueue.postRunnable(() -> processLoadedMessages(new TLRPC.TL_messages_messages(), 0, dialogId, mergeDialogId, count, max_id, offset_date, false, classGuid, first_unread, last_message_id, unread_count, last_date, load_type, true, mode, threadMessageId, loadIndex, queryFromServer, mentionsCount, processMessages, isTopic, null));
+            return;
+        }
+        if (org.telegram.messenger.gmail.GmailIds.isGmailDialog(dialogId)) { // FORK MOD (gmail): a sender chat lives only in the local database
+            org.telegram.messenger.gmail.GmailLocal.loadMessages(currentAccount, dialogId, mergeDialogId, count, max_id, offset_date, classGuid, load_type, mode, threadMessageId, loadIndex, processMessages, isTopic);
             return;
         }
         if ((threadMessageId == 0 || isTopic || mode == ChatActivity.MODE_SUGGESTIONS || mode == ChatActivity.MODE_SAVED || mode == ChatActivity.MODE_QUICK_REPLIES || mode == ChatActivity.MODE_WELCOME_MESSAGES) && mode != ChatActivity.MODE_PINNED && (fromCache || DialogObject.isEncryptedDialog(dialogId))) {
@@ -12468,8 +12492,11 @@ public class MessagesController extends BaseController implements NotificationCe
                     hasArchivedChats = true;
                     ensureFolderDialogExists(folderId, folderCreated);
                 }
-                if (DialogObject.isEncryptedDialog(dialogId)) {
+                if (DialogObject.isEncryptedDialog(dialogId) || org.telegram.messenger.gmail.GmailIds.isGmailDialog(dialogId)) { // FORK MOD (gmail): archive stays local and is mirrored to Gmail's INBOX label
                     getMessagesStorage().setDialogsFolderId(null, null, dialogId, folderId);
+                    if (org.telegram.messenger.gmail.GmailIds.isGmailDialog(dialogId)) {
+                        org.telegram.messenger.gmail.GmailSync.onFolderChanged(currentAccount, dialogId, folderId);
+                    }
                 } else {
                     TLRPC.TL_inputFolderPeer folderPeer = new TLRPC.TL_inputFolderPeer();
                     folderPeer.folder_id = folderId;
@@ -12576,7 +12603,7 @@ public class MessagesController extends BaseController implements NotificationCe
                     if (dialog.pinned) {
                         continue;
                     }
-                    if (!DialogObject.isEncryptedDialog(dialog.id) && dialog.top_message > 0) {
+                    if (!DialogObject.isEncryptedDialog(dialog.id) && !org.telegram.messenger.gmail.GmailIds.isGmailDialog(dialog.id) && dialog.top_message > 0) { // FORK MOD (gmail): never an offset peer
                         ArrayList<MessageObject> dialogMessages = dialogMessage.get(dialog.id);
                         MessageObject lastMessage = null;
                         if (dialogMessages != null) {
@@ -13083,7 +13110,7 @@ public class MessagesController extends BaseController implements NotificationCe
 
                 for (int a = 0; a < allDialogs.size(); a++) {
                     TLRPC.Dialog oldDialog = allDialogs.get(a);
-                    if (!DialogObject.isEncryptedDialog(oldDialog.id)) {
+                    if (!DialogObject.isEncryptedDialog(oldDialog.id) && !org.telegram.messenger.gmail.GmailIds.isGmailDialog(oldDialog.id)) { // FORK MOD (gmail): survives a dialog reset
                         dialogs_dict.remove(oldDialog.id);
                         ArrayList<MessageObject> messages = dialogMessage.get(oldDialog.id);
                         dialogMessage.remove(oldDialog.id);
@@ -14616,6 +14643,10 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     private void completeReadTask(ReadTask task) {
+        if (org.telegram.messenger.gmail.GmailIds.isGmailDialog(task.dialogId)) { // FORK MOD (gmail): the read mark goes to Gmail, not to Telegram
+            org.telegram.messenger.gmail.GmailSync.onRead(currentAccount, task.dialogId, task.maxId);
+            return;
+        }
         if (task.replyId != 0 && task.monoForumPeerId == 0) {
             TLRPC.TL_messages_readDiscussion req = new TLRPC.TL_messages_readDiscussion();
             req.msg_id = (int) task.replyId;

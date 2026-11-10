@@ -4721,7 +4721,7 @@ public class MessagesStorage extends BaseController {
                 while (cursor.next()) {
                     long did = cursor.longValue(0);
                     int pinnedNum = cursor.intValue(1);
-                    if (!DialogObject.isEncryptedDialog(did)) {
+                    if (!DialogObject.isEncryptedDialog(did) && !org.telegram.messenger.gmail.GmailIds.isGmailDialog(did)) { // FORK MOD (gmail): a reset must not wipe the local sender chats
                         dids.add(did);
                         if (pinnedNum > 0) {
                             maxPinnedNum = Math.max(pinnedNum, maxPinnedNum);

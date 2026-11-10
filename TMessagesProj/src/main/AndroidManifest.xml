@@ -786,6 +786,7 @@
                 android:resource="@xml/nexo_accessibility_service" />
         </service>
         <receiver android:name="org.telegram.messenger.nexo.ForkBackupReceiver" android:exported="false" />
+        <receiver android:name="org.telegram.messenger.gmail.GmailAlarmReceiver" android:exported="false" /> <!-- FORK MOD (gmail): poll alarm -->
         <receiver android:name="org.telegram.messenger.nexo.NexoBootReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

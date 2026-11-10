@@ -6966,6 +6966,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
     @Override
     public void onResume() {
         super.onResume();
+        org.telegram.messenger.gmail.GmailSync.kick("resume"); // FORK MOD (gmail): catch up when the chat list comes back
         if (dialogStoriesCell != null) {
             dialogStoriesCell.onResume();
         }
@@ -8771,6 +8772,36 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             finishPreviewFragment();
         });
         previewMenu[0].addView(lockItem);
+
+        if (org.telegram.messenger.gmail.GmailIds.isGmailDialog(dialogId)) { // FORK MOD (gmail): sender actions
+            final TLRPC.Dialog gmailDialog = getMessagesController().dialogs_dict.get(dialogId);
+            final boolean gmailArchived = gmailDialog != null && gmailDialog.folder_id == 1;
+            ActionBarMenuSubItem archiveItem = new ActionBarMenuSubItem(getParentActivity(), false, false);
+            archiveItem.setTextAndIcon(gmailArchived ? "Unarchive sender" : "Archive sender", gmailArchived ? R.drawable.msg_unarchive : R.drawable.msg_archive);
+            archiveItem.setMinimumWidth(160);
+            archiveItem.setOnClickListener(e -> {
+                finishPreviewFragment();
+                getMessagesController().addDialogToFolder(dialogId, gmailArchived ? 0 : 1, -1, 0);
+                BulletinFactory.of(this).createSimpleBulletin(R.raw.chats_infotip, gmailArchived ? "Back in the inbox" : "Archived in Gmail too").show();
+            });
+            previewMenu[0].addView(archiveItem);
+
+            ActionBarMenuSubItem spamItem = new ActionBarMenuSubItem(getParentActivity(), false, false);
+            spamItem.setTextAndIcon("Report spam", R.drawable.msg_block);
+            spamItem.setMinimumWidth(160);
+            spamItem.setOnClickListener(e -> {
+                finishPreviewFragment();
+                org.telegram.ui.habits.HabitUi.confirm(this, "Report spam?", "All emails from this sender go to Gmail's Spam and the chat is removed. Later emails from them are ignored.", "Report", true, () ->
+                        org.telegram.messenger.gmail.GmailSync.markSpam(currentAccount, dialogId, err -> {
+                            if (err == null) {
+                                BulletinFactory.of(this).createSimpleBulletin(R.raw.chats_infotip, "Reported as spam").show();
+                            } else {
+                                BulletinFactory.of(this).createErrorBulletin(err).show();
+                            }
+                        }));
+            });
+            previewMenu[0].addView(spamItem);
+        }
 
         if (!isCommunityCell) {
             ActionBarMenuSubItem deleteItem = new ActionBarMenuSubItem(getParentActivity(), false, true);

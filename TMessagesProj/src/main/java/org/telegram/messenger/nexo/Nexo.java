@@ -44,6 +44,7 @@ public class Nexo {
             engine();
             SyncService.start(ctx);
             Webhooks.init(ctx); // FORK MOD: forward chosen chats to webhooks
+            org.telegram.messenger.gmail.GmailSync.init(ctx); // FORK MOD (gmail): resume polling
         } catch (Throwable e) {
             org.telegram.messenger.FileLog.e(e);
         }

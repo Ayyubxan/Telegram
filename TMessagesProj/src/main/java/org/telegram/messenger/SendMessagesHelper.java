@@ -5396,6 +5396,11 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                 }
             }
 
+            if (org.telegram.messenger.gmail.GmailIds.isGmailDialog(peer)) { // FORK MOD (gmail): stored locally above; delivered as an email, never to Telegram
+                org.telegram.messenger.gmail.GmailSync.send(currentAccount, newMsgObj, path, document, photo);
+                return;
+            }
+
             if (BuildVars.LOGS_ENABLED) {
                 if (sendToPeer != null) {
                     FileLog.d("send message user_id = " + sendToPeer.user_id + " chat_id = " + sendToPeer.chat_id + " channel_id = " + sendToPeer.channel_id + " access_hash = " + sendToPeer.access_hash + " notify = " + notify + " silent = " + MessagesController.getNotificationsSettings(currentAccount).getBoolean("silent_" + peer, false));

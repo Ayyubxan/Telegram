@@ -745,6 +745,21 @@ public class FileLoader extends BaseController {
         return fileName != null && loadOperationPathsUI.containsKey(fileName);
     }
 
+    // FORK MOD (gmail): a file fetched outside a FileLoadOperation (Gmail attachment, sender icon) finishes through the same delegate
+    public void forkExternalLoadFinished(String fileName, File file, Object parentObject, int type, boolean failed) {
+        fileLoaderQueue.postRunnable(() -> {
+            loadOperationPathsUI.remove(fileName);
+            if (delegate == null) {
+                return;
+            }
+            if (failed) {
+                delegate.fileDidFailedLoad(fileName, 0);
+            } else {
+                delegate.fileDidLoaded(fileName, file, parentObject, type);
+            }
+        });
+    }
+
     public float getBufferedProgressFromPosition(final float position, final String fileName) {
         if (TextUtils.isEmpty(fileName)) {
             return 0;
@@ -841,6 +856,14 @@ public class FileLoader extends BaseController {
         }
         if (cacheType != 10 && !TextUtils.isEmpty(fileName) && !fileName.contains("" + Integer.MIN_VALUE)) {
             loadOperationPathsUI.put(fileName, new LoadOperationUIObject());
+        }
+        if (document != null && org.telegram.messenger.gmail.GmailFiles.isGmailDocument(document)) { // FORK MOD (gmail): the bytes come from Gmail, not from a DC
+            org.telegram.messenger.gmail.GmailFiles.loadDocument(currentAccount, document, parentObject, fileName);
+            return null;
+        }
+        if (location != null && org.telegram.messenger.gmail.GmailFiles.isGmailAvatar(location)) { // FORK MOD (gmail): sender icon
+            org.telegram.messenger.gmail.GmailFiles.loadAvatar(currentAccount, location, parentObject, fileName);
+            return null;
         }
 
         if (document != null && parentObject instanceof MessageObject && ((MessageObject) parentObject).putInDownloadsStore && !((MessageObject) parentObject).isAnyKindOfSticker()) {
