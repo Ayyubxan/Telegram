@@ -11,8 +11,14 @@ import java.util.ArrayList;
 
 public class MessageCustomParamsHelper {
 
+    private static boolean isCommentEncryptionPreparing(TLRPC.Message message) {
+        return message.action instanceof TLRPC.TL_messageActionGramTransfer
+                && ((TLRPC.TL_messageActionGramTransfer) message.action).comment_encrypted_preparing;
+    }
+
     public static boolean isEmpty(TLRPC.Message message) {
         return (
+            !isCommentEncryptionPreparing(message) &&
             message.voiceTranscription == null &&
             message.translatedVoiceTranscription == null &&
             !message.voiceTranscriptionOpen &&
@@ -128,8 +134,10 @@ public class MessageCustomParamsHelper {
             flags = setFlag(flags, FLAG_11, message.translatedSummaryText != null);
             flags = setFlag(flags, FLAG_12, message.translatedSummaryLanguage != null);
             flags = setFlag(flags, FLAG_13, message.translatedRichMessage != null);
-            flags = setFlag(flags, FLAG_14, message.forkEditHistory != null && !message.forkEditHistory.isEmpty());
+            flags = setFlag(flags, FLAG_14, isCommentEncryptionPreparing(message));
+            // FORK MOD: FLAG_14 is upstream's comment-encryption flag since 13.2; edit history moved to FLAG_16
             flags = setFlag(flags, FLAG_15, message.forkDeleted);
+            flags = setFlag(flags, FLAG_16, message.forkEditHistory != null && !message.forkEditHistory.isEmpty());
         }
 
         @Override
@@ -139,7 +147,7 @@ public class MessageCustomParamsHelper {
             flags = message.summarizedOpen ? (flags | 512) : (flags &~ 512);
             // FORK MOD (anti-delete): forkDeleted lives in FLAG_15 (FLAG_13 is upstream's translatedRichMessage)
             flags = setFlag(flags, FLAG_15, message.forkDeleted);
-            flags = setFlag(flags, FLAG_14, message.forkEditHistory != null && !message.forkEditHistory.isEmpty());
+            flags = setFlag(flags, FLAG_16, message.forkEditHistory != null && !message.forkEditHistory.isEmpty());
             stream.writeInt32(flags);
             if ((flags & 1) != 0) {
                 stream.writeString(message.voiceTranscription);
@@ -186,7 +194,7 @@ public class MessageCustomParamsHelper {
                 message.translatedRichMessage.serializeToStream(stream);
             }
 
-            if (hasFlag(flags, FLAG_14)) {
+            if (hasFlag(flags, FLAG_16)) {
                 int count = message.forkEditHistory.size();
                 stream.writeInt32(count);
                 for (int i = 0; i < count; i++) {
@@ -200,6 +208,11 @@ public class MessageCustomParamsHelper {
         @Override
         public void readParams(InputSerializedData stream, boolean exception) {
             flags = stream.readInt32(true);
+            if (message.action instanceof TLRPC.TL_messageActionGramTransfer) {
+                final TLRPC.TL_messageActionGramTransfer action = (TLRPC.TL_messageActionGramTransfer) message.action;
+                // An update may carry ciphertext while storage still has the old local params.
+                action.comment_encrypted_preparing = !action.comment_encrypted && hasFlag(flags, FLAG_14);
+            }
             if ((flags & 1) != 0) {
                 message.voiceTranscription = stream.readString(exception);
             }
@@ -261,7 +274,10 @@ public class MessageCustomParamsHelper {
                 }
             }
             message.forkDeleted |= hasFlag(flags, FLAG_15);
-            if (hasFlag(flags, FLAG_14)) {
+            // FORK MOD (edit history): FLAG_16 is current; rows written by older fork builds used FLAG_14, which
+            // upstream now reserves for GramTransfer comment encryption (never combined with edit history).
+            boolean legacyEditHistory = hasFlag(flags, FLAG_14) && !(message.action instanceof TLRPC.TL_messageActionGramTransfer);
+            if (hasFlag(flags, FLAG_16) || legacyEditHistory) {
                 int count = stream.readInt32(exception);
                 message.forkEditHistory = new ArrayList<>();
                 message.forkEditHistoryDates = new ArrayList<>();
