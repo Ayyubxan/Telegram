@@ -14,15 +14,15 @@ import java.util.Set;
 // chats re-lock for privacy whenever the app is reopened.
 public class LockedChats {
 
-    private static final Set<Long> locked = new HashSet<>();
+    private static final Set<Long> locked = java.util.Collections.newSetFromMap(new java.util.concurrent.ConcurrentHashMap<>()); // read from the storage thread too
     private static boolean loaded;
-    private static boolean hidden = true; // true = locked chats are currently hidden/suppressed
+    private static volatile boolean hidden = true; // true = locked chats are currently hidden/suppressed
 
     private static SharedPreferences prefs() {
         return ApplicationLoader.applicationContext.getSharedPreferences("fork_locked_chats", Context.MODE_PRIVATE);
     }
 
-    private static void ensureLoaded() {
+    private static synchronized void ensureLoaded() {
         if (loaded) {
             return;
         }

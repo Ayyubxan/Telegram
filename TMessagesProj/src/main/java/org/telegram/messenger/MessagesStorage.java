@@ -2909,6 +2909,9 @@ public class MessagesStorage extends BaseController {
                     unread = cursor.intValue(2);
                     mentions = cursor.intValue(3);
                 }
+                if (LockedChats.isSuppressed(did)) { // FORK MOD (locked chats): a hidden chat adds nothing to the main / archive / folder counters
+                    continue;
+                }
                 if (unread > 0) {
                     dialogsWithUnread.put(did, unread);
                 }
@@ -6325,6 +6328,9 @@ public class MessagesStorage extends BaseController {
                     continue;
                 }
                 long did = array.keyAt(a);
+                if (!read && LockedChats.isSuppressed(did)) { // FORK MOD (locked chats): see calcUnreadCounters
+                    continue;
+                }
                 if (read) {
                     if (b == 0) {
                         dialogsWithUnread.remove(did);

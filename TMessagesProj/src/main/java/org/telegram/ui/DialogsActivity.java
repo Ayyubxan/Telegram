@@ -3203,6 +3203,10 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                         }
                     }
                 }
+                getMessagesStorage().getStorageQueue().postRunnable(() -> { // FORK MOD (locked chats): unread counters (archive, tabs) must follow the hidden state
+                    getMessagesStorage().resetAllUnreadCounters(false);
+                    AndroidUtilities.runOnUIThread(() -> getNotificationCenter().postNotificationName(NotificationCenter.dialogsNeedReload, true));
+                });
                 BulletinFactory.of(this).createSimpleBulletin(
                         LockedChats.isHidden() ? R.raw.passcode_lock_close : R.raw.chats_infotip,
                         LockedChats.isHidden() ? "Locked chats hidden" : "Locked chats shown"
