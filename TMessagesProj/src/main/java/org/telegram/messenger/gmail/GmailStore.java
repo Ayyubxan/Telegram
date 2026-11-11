@@ -96,7 +96,20 @@ public final class GmailStore {
     }
 
     public static void disconnect() {
-        prefs().edit().remove("account").remove("email").remove("history_id").putBoolean("enabled", false).putBoolean("needs_auth", false).apply();
+        prefs().edit().remove("account").remove("email").remove("history_id").remove("refresh_token").putBoolean("enabled", false).putBoolean("needs_auth", false).apply();
+    }
+
+    /** OAuth refresh token of the browser sign-in; null when not signed in */
+    public static String refreshToken() {
+        return prefs().getString("refresh_token", null);
+    }
+
+    public static void setRefreshToken(String token) {
+        if (token == null) {
+            prefs().edit().remove("refresh_token").apply();
+        } else {
+            prefs().edit().putString("refresh_token", token).apply();
+        }
     }
 
     public static boolean isEnabled() {
@@ -158,6 +171,25 @@ public final class GmailStore {
         int mid = prefs().getInt("next_mid", GmailIds.MID_BASE);
         prefs().edit().putInt("next_mid", mid + 1).apply();
         return mid;
+    }
+
+    // ---- folders --------------------------------------------------------------------------------------------------
+
+    /** Folders (dialog filters) whose "Mails" chat type is on; the flag is local, so it is remembered here by filter id */
+    public static boolean isMailFolder(int filterId) {
+        java.util.Set<String> ids = prefs().getStringSet("mail_folders", null);
+        return ids != null && ids.contains(String.valueOf(filterId));
+    }
+
+    public static void setMailFolder(int filterId, boolean on) {
+        java.util.Set<String> ids = prefs().getStringSet("mail_folders", null);
+        java.util.HashSet<String> next = ids == null ? new java.util.HashSet<>() : new java.util.HashSet<>(ids);
+        if (on) {
+            next.add(String.valueOf(filterId));
+        } else {
+            next.remove(String.valueOf(filterId));
+        }
+        prefs().edit().putStringSet("mail_folders", next).apply();
     }
 
     // ---- senders --------------------------------------------------------------------------------------------------

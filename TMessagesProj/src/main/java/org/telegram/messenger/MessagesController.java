@@ -1274,6 +1274,7 @@ public class MessagesController extends BaseController implements NotificationCe
 
     public static int DIALOG_FILTER_FLAG_CHATLIST = 0x00000200;
     public static int DIALOG_FILTER_FLAG_CHATLIST_ADMIN = 0x00000400;
+    public static int DIALOG_FILTER_FLAG_MAILS = 0x00010000; // FORK MOD (gmail): local-only "Mails" chat type of a folder (never sent to the server)
 
     public static class DialogFilter {
         public int id;
@@ -1323,6 +1324,9 @@ public class MessagesController extends BaseController implements NotificationCe
             if ((flags & DIALOG_FILTER_FLAG_EXCLUDE_MUTED) != 0 && messagesController.isDialogMuted(d.id, 0) && d.unread_mentions_count == 0 ||
                     (flags & DIALOG_FILTER_FLAG_EXCLUDE_READ) != 0 && messagesController.getDialogUnreadCount(d) == 0 && !d.unread_mark && d.unread_mentions_count == 0) {
                 return false;
+            }
+            if (org.telegram.messenger.gmail.GmailIds.isGmailDialog(dialogId)) { // FORK MOD (gmail): emails are their own chat type, not "non-contacts"
+                return (flags & DIALOG_FILTER_FLAG_MAILS) != 0;
             }
             if (dialogId > 0) {
                 TLRPC.User user = messagesController.getUser(dialogId);

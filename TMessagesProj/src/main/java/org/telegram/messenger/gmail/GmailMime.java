@@ -493,6 +493,54 @@ public final class GmailMime {
         return out;
     }
 
+    // ---- one-time codes -------------------------------------------------------------------------------------------
+
+    private static final Pattern OTP_KEYWORD = Pattern.compile("(?i)(\\bcode\\b|\\bcodes\\b|\\botp\\b|passcode|one.?time|verification|verify|confirm|authenticat|2fa|two.?factor|security|login|sign.?in|pin\\b|token|\\bkod\\b|tasdiq|parol|\\bкод\\b|пароль|подтвержд)");
+    private static final Pattern OTP_TOKEN = Pattern.compile("(?<![\\d#$€£₽A-Za-z-])(\\d{3}[ -]\\d{3}|\\d{4,8}|(?=[A-Z0-9]*\\d)[A-Z0-9]{6,8})(?![\\d%A-Za-z-])");
+    private static final Pattern OTP_NOISE = Pattern.compile("(?i)(^|[^A-Za-z])(tel|phone|call|\\+\\d|order|invoice|amount|total|usd|eur|uzs|sum|so'm|\\$|€|zip|postal|\\d{1,2}:\\d{2})");
+
+    /**
+     * The one-time code of a verification email, or null. A token counts when it looks like a code (4–8 digits, or
+     * "123 456", or 6–8 upper-case alphanumerics with a digit) and a code-related word is close by, in the subject or
+     * within ~80 characters; years, prices, phone numbers and order ids are filtered out.
+     */
+    public static String findOtp(String subject, String text) {
+        String subj = subject == null ? "" : subject;
+        String body = text == null ? "" : text;
+        boolean subjectHint = OTP_KEYWORD.matcher(subj).find();
+        // a code in the subject itself is the strongest signal ("123456 is your code")
+        String fromSubject = scan(subj, subjectHint);
+        if (fromSubject != null) {
+            return fromSubject;
+        }
+        return scan(body, subjectHint);
+    }
+
+    private static String scan(String s, boolean hintAnywhere) {
+        Matcher m = OTP_TOKEN.matcher(s);
+        while (m.find()) {
+            String token = m.group(1);
+            String digits = token.replace(" ", "").replace("-", "");
+            if (digits.matches("\\d+")) {
+                int year = Integer.parseInt(digits.length() > 9 ? "0" : digits);
+                if (digits.length() == 4 && year >= 1900 && year <= 2100) {
+                    continue; // a year
+                }
+            }
+            int from = Math.max(0, m.start() - 80), to = Math.min(s.length(), m.end() + 80);
+            String around = s.substring(from, to);
+            if (!hintAnywhere && !OTP_KEYWORD.matcher(around).find()) {
+                continue;
+            }
+            String before = s.substring(Math.max(0, m.start() - 24), m.start());
+            if (OTP_NOISE.matcher(before).find()) {
+                continue;
+            }
+            return token;
+        }
+        return null;
+    }
+
     // ---- Telegram text → email ------------------------------------------------------------------------------------
 
     public static String replySubject(String subject) {

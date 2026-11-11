@@ -1,8 +1,6 @@
 package org.telegram.ui.fork;
 
 import android.app.Activity;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -24,7 +22,6 @@ import java.util.ArrayList;
 public class GmailSettingsActivity extends HabitsSettingsBase {
 
     private static final int ID_CONNECT = 1, ID_ENABLED = 2, ID_SYNC = 3, ID_INTERVAL = 4, ID_INITIAL = 5, ID_DISCONNECT = 6, ID_ACCOUNT = 7;
-    private static final int REQ_CONSENT = 7310;
     private static final int[] INTERVALS = {1, 2, 5, 15};
     private static final int[] INITIAL = {20, 30, 50, 100};
 
@@ -57,7 +54,10 @@ public class GmailSettingsActivity extends HabitsSettingsBase {
         if (!GmailStore.isConnected()) {
             items.add(UItem.asShadow("Emails arrive as chats: one chat per sender, with the subject and the message text. Replying sends an email back; archiving or reporting the chat archives or reports the sender in Gmail."));
             items.add(UItem.asButton(ID_CONNECT, "Connect Google account").accent());
-            items.add(UItem.asShadow("A one-time Google sign-in. The first time Google may warn that the app is not verified — open \"Advanced\" and continue; nothing leaves the phone except Gmail API calls."));
+            if (!GmailAuth.trace().isEmpty()) {
+                items.add(UItem.asShadow("Last sign-in attempt:\n" + GmailAuth.trace()));
+            }
+            items.add(UItem.asShadow("A one-time Google sign-in in the browser. Google may warn that the app is not verified — open \"Advanced\" and continue; afterwards close the tab and return here. Nothing leaves the phone except Gmail API calls."));
             return;
         }
         items.add(UItem.asHeader("Account"));
@@ -140,44 +140,18 @@ public class GmailSettingsActivity extends HabitsSettingsBase {
         if (activity == null) {
             return;
         }
-        HabitUi.toast(this, "Opening Google sign-in…");
-        GmailAuth.connect(activity, GmailStore.email(), new GmailAuth.ConnectCallback() {
-            @Override
-            public void needsConsent(PendingIntent intent) {
-                try {
-                    activity.startIntentSenderForResult(intent.getIntentSender(), REQ_CONSENT, null, 0, 0, 0);
-                } catch (Exception e) {
-                    HabitUi.toast(GmailSettingsActivity.this, "Could not open the consent screen: " + e.getMessage());
-                }
-            }
-
-            @Override
-            public void token(String accessToken) {
+        if (!GmailAuth.isConfigured()) {
+            HabitUi.toast(this, "This build has no OAuth client id (GMAIL_OAUTH_CLIENT_ID in local.properties)");
+            return;
+        }
+        HabitUi.toast(this, "Sign in with Google in the browser, then come back here");
+        GmailAuth.connectViaBrowser(activity, (accessToken, error) -> {
+            if (error != null) {
+                HabitUi.toast(this, "Sign-in failed: " + error);
+            } else {
                 finishConnect(accessToken);
             }
-
-            @Override
-            public void failed(String error) {
-                HabitUi.toast(GmailSettingsActivity.this, "Sign-in failed: " + error);
-            }
         });
-    }
-
-    @Override
-    public void onActivityResultFragment(int requestCode, int resultCode, Intent data) {
-        if (requestCode != REQ_CONSENT) {
-            return;
-        }
-        if (resultCode != Activity.RESULT_OK || data == null) {
-            HabitUi.toast(this, "Sign-in cancelled");
-            return;
-        }
-        String token = GmailAuth.fromConsentResult(getContext(), data);
-        if (token == null) {
-            HabitUi.toast(this, "Google returned no token");
-            return;
-        }
-        finishConnect(token);
     }
 
     private void finishConnect(String token) {

@@ -314,6 +314,9 @@ public class FilterCreateActivity extends BaseFragment {
         if ((newFilterFlags & MessagesController.DIALOG_FILTER_FLAG_BOTS) != 0) {
             items.add(ItemInner.asChat(true, LocaleController.getString(R.string.FilterBots), "bots", MessagesController.DIALOG_FILTER_FLAG_BOTS));
         }
+        if ((newFilterFlags & MessagesController.DIALOG_FILTER_FLAG_MAILS) != 0) { // FORK MOD (gmail)
+            items.add(ItemInner.asChat(true, "Mails", "mails", MessagesController.DIALOG_FILTER_FLAG_MAILS));
+        }
 
         if (!newAlwaysShow.isEmpty()) {
             int count = includeExpanded || newAlwaysShow.size() < 8 ? newAlwaysShow.size() : Math.min(5, newAlwaysShow.size());
@@ -1082,6 +1085,7 @@ public class FilterCreateActivity extends BaseFragment {
             hasUserChanged = false;
             creatingNew = false;
             filter.flags = newFilterFlags;
+            org.telegram.messenger.gmail.GmailStore.setMailFolder(filter.id, (newFilterFlags & MessagesController.DIALOG_FILTER_FLAG_MAILS) != 0); // FORK MOD (gmail)
             checkDoneButton(true);
 
             getNotificationCenter().postNotificationName(NotificationCenter.dialogFiltersUpdated);
@@ -1100,6 +1104,7 @@ public class FilterCreateActivity extends BaseFragment {
             }
         }
         filter.flags = newFilterFlags;
+            org.telegram.messenger.gmail.GmailStore.setMailFolder(filter.id, (newFilterFlags & MessagesController.DIALOG_FILTER_FLAG_MAILS) != 0); // FORK MOD (gmail)
         filter.name = newFilterName;
         filter.entities = newFilterNameEntities;
         filter.color = newFilterColor;

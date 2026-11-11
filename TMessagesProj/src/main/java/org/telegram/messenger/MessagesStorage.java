@@ -2846,6 +2846,7 @@ public class MessagesStorage extends BaseController {
     private int[][] contacts = new int[][]{new int[2], new int[2]};
     private int[][] nonContacts = new int[][]{new int[2], new int[2]};
     private int[][] bots = new int[][]{new int[2], new int[2]};
+    private int[][] mails = new int[][]{new int[2], new int[2]}; // FORK MOD (gmail)
     private int[][] channels = new int[][]{new int[2], new int[2]};
     private int[][] groups = new int[][]{new int[2], new int[2]};
     private int[][] communities = new int[][]{new int[2], new int[2]};
@@ -2859,7 +2860,7 @@ public class MessagesStorage extends BaseController {
         try {
             for (int a = 0; a < 2; a++) {
                 for (int b = 0; b < 2; b++) {
-                    contacts[a][b] = nonContacts[a][b] = bots[a][b] = channels[a][b] = groups[a][b] = communities[a][b] = 0;
+                    mails[a][b] = contacts[a][b] = nonContacts[a][b] = bots[a][b] = channels[a][b] = groups[a][b] = communities[a][b] = 0;
                 }
             }
             dialogsWithMentions.clear();
@@ -2958,6 +2959,8 @@ public class MessagesStorage extends BaseController {
                     }
                     if (isUserCollapsedInCommunity(chatsDict, user)) {
                         communities[idx1][idx2]++;
+                    } else if (org.telegram.messenger.gmail.GmailIds.isGmailDialog(user.id)) { // FORK MOD (gmail)
+                        mails[idx1][idx2]++;
                     } else if (user.bot) {
                         bots[idx1][idx2]++;
                     } else if (user.self || user.contact) {
@@ -3062,7 +3065,7 @@ public class MessagesStorage extends BaseController {
                     flags = filter.flags;
                 } else {
                     filter = null;
-                    flags = MessagesController.DIALOG_FILTER_FLAG_ALL_CHATS;
+                    flags = MessagesController.DIALOG_FILTER_FLAG_ALL_CHATS | MessagesController.DIALOG_FILTER_FLAG_MAILS; // FORK MOD (gmail)
                     if (a == N) {
                         if (!getNotificationsController().showBadgeMuted) {
                             flags |= MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_MUTED;
@@ -3098,6 +3101,20 @@ public class MessagesStorage extends BaseController {
                         unreadCount += nonContacts[1][0];
                         if ((flags & MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_MUTED) == 0) {
                             unreadCount += nonContacts[1][1];
+                        }
+                    }
+                }
+                if ((flags & MessagesController.DIALOG_FILTER_FLAG_MAILS) != 0) {
+                    if ((flags & MessagesController.DIALOG_FILTER_FLAG_ONLY_ARCHIVED) == 0) {
+                        unreadCount += mails[0][0];
+                        if ((flags & MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_MUTED) == 0) {
+                            unreadCount += mails[0][1];
+                        }
+                    }
+                    if ((flags & MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_ARCHIVED) == 0) {
+                        unreadCount += mails[1][0];
+                        if ((flags & MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_MUTED) == 0) {
+                            unreadCount += mails[1][1];
                         }
                     }
                 }
@@ -3436,6 +3453,9 @@ public class MessagesStorage extends BaseController {
                     }
                     if (newFilter.exclude_archived) {
                         newFlags |= MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_ARCHIVED;
+                    }
+                    if (org.telegram.messenger.gmail.GmailStore.isMailFolder(newFilter.id)) { // FORK MOD (gmail): the local type survives a server reload
+                        newFlags |= MessagesController.DIALOG_FILTER_FLAG_MAILS;
                     }
                     if (newFilter instanceof TLRPC.TL_dialogFilterChatlist) {
                         newFlags |= MessagesController.DIALOG_FILTER_FLAG_CHATLIST;
@@ -6303,7 +6323,7 @@ public class MessagesStorage extends BaseController {
         }
         for (int a = 0; a < 2; a++) {
             for (int b = 0; b < 2; b++) {
-                contacts[a][b] = nonContacts[a][b] = bots[a][b] = channels[a][b] = groups[a][b] = communities[a][b] = 0;
+                mails[a][b] = contacts[a][b] = nonContacts[a][b] = bots[a][b] = channels[a][b] = groups[a][b] = communities[a][b] = 0;
             }
             mentionChannels[a] = mentionGroups[a] = 0;
         }
@@ -6406,6 +6426,8 @@ public class MessagesStorage extends BaseController {
                 }
                 if (isUserCollapsedInCommunity(chatsDict, user)) {
                     communities[idx1][idx2]++;
+                } else if (org.telegram.messenger.gmail.GmailIds.isGmailDialog(user.id)) { // FORK MOD (gmail)
+                    mails[idx1][idx2]++;
                 } else if (user.bot) {
                     bots[idx1][idx2]++;
                 } else if (user.self || user.contact) {
@@ -6527,7 +6549,7 @@ public class MessagesStorage extends BaseController {
                 flags = filter.flags;
             } else {
                 filter = null;
-                flags = MessagesController.DIALOG_FILTER_FLAG_ALL_CHATS;
+                flags = MessagesController.DIALOG_FILTER_FLAG_ALL_CHATS | MessagesController.DIALOG_FILTER_FLAG_MAILS; // FORK MOD (gmail)
                 if (a == N) {
                     unreadCount = pendingMainUnreadCount;
                     flags |= MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_ARCHIVED;
@@ -6565,6 +6587,20 @@ public class MessagesStorage extends BaseController {
                         unreadCount -= nonContacts[1][0];
                         if ((flags & MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_MUTED) == 0) {
                             unreadCount -= nonContacts[1][1];
+                        }
+                    }
+                }
+                if ((flags & MessagesController.DIALOG_FILTER_FLAG_MAILS) != 0) {
+                    if ((flags & MessagesController.DIALOG_FILTER_FLAG_ONLY_ARCHIVED) == 0) {
+                        unreadCount -= mails[0][0];
+                        if ((flags & MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_MUTED) == 0) {
+                            unreadCount -= mails[0][1];
+                        }
+                    }
+                    if ((flags & MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_ARCHIVED) == 0) {
+                        unreadCount -= mails[1][0];
+                        if ((flags & MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_MUTED) == 0) {
+                            unreadCount -= mails[1][1];
                         }
                     }
                 }
@@ -6764,6 +6800,20 @@ public class MessagesStorage extends BaseController {
                         unreadCount += nonContacts[1][0];
                         if ((flags & MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_MUTED) == 0) {
                             unreadCount += nonContacts[1][1];
+                        }
+                    }
+                }
+                if ((flags & MessagesController.DIALOG_FILTER_FLAG_MAILS) != 0) {
+                    if ((flags & MessagesController.DIALOG_FILTER_FLAG_ONLY_ARCHIVED) == 0) {
+                        unreadCount += mails[0][0];
+                        if ((flags & MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_MUTED) == 0) {
+                            unreadCount += mails[0][1];
+                        }
+                    }
+                    if ((flags & MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_ARCHIVED) == 0) {
+                        unreadCount += mails[1][0];
+                        if ((flags & MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_MUTED) == 0) {
+                            unreadCount += mails[1][1];
                         }
                     }
                 }

@@ -380,6 +380,22 @@ public final class GmailSync {
         ensureUser(account, did, counterpart, name);
 
         List<GmailMime.Body> bodies = GmailMime.toTelegram(p);
+        if (!out) { // FORK MOD (gmail): a one-time code goes on top as monospace — visible in the notification, one tap copies it
+            String otp = GmailMime.findOtp(p.subject, !TextUtils.isEmpty(p.text) ? p.text : bodies.get(0).text);
+            if (otp != null) {
+                GmailMime.Body first = bodies.get(0);
+                String prefix = "🔑 " + otp + "\n";
+                int shift = prefix.length();
+                for (TLRPC.MessageEntity e : first.entities) {
+                    e.offset += shift;
+                }
+                TLRPC.TL_messageEntityCode code = new TLRPC.TL_messageEntityCode();
+                code.offset = "🔑 ".length();
+                code.length = otp.length();
+                first.entities.add(0, code);
+                first.text = prefix + first.text;
+            }
+        }
 
         int date = (int) (p.internalDate / 1000);
         boolean unread = !out && p.labels.contains("UNREAD");

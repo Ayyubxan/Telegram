@@ -102,6 +102,17 @@ public class AvatarDrawable extends Drawable {
     public static final int AVATAR_TYPE_PREMIUM = 25;
     public static final int AVATAR_TYPE_STARS = 26;
     public static final int AVATAR_TYPE_SUGGESTION = 27;
+    public static final int AVATAR_TYPE_FILTER_MAILS = 28; // FORK MOD (gmail)
+
+    private static android.graphics.drawable.Drawable mailsDrawable;
+
+    private static android.graphics.drawable.Drawable mailsDrawable() { // FORK MOD (gmail): envelope icon for the Mails folder type
+        if (mailsDrawable == null) {
+            mailsDrawable = org.telegram.messenger.ApplicationLoader.applicationContext.getResources().getDrawable(org.telegram.messenger.R.drawable.msg2_email).mutate();
+        }
+        Theme.setDrawableColorByKey(mailsDrawable, Theme.key_avatar_text);
+        return mailsDrawable;
+    }
 
     /**
      * Matches {@link org.telegram.ui.Components.AvatarConstructorFragment#defaultColors}
@@ -295,6 +306,10 @@ public class AvatarDrawable extends Drawable {
             hasGradient = true;
             color = getThemedColor(Theme.keys_avatar_background[getColorIndex(1)]);
             color2 = getThemedColor(Theme.keys_avatar_background2[getColorIndex(1)]);
+        } else if (avatarType == AVATAR_TYPE_FILTER_MAILS) { // FORK MOD (gmail)
+            hasGradient = true;
+            color = getThemedColor(Theme.keys_avatar_background[getColorIndex(4)]);
+            color2 = getThemedColor(Theme.keys_avatar_background2[getColorIndex(4)]);
         } else if (avatarType == AVATAR_TYPE_FILTER_BOTS) {
             hasGradient = true;
             color = getThemedColor(Theme.keys_avatar_background[getColorIndex(0)]);
@@ -701,6 +716,8 @@ public class AvatarDrawable extends Drawable {
                 drawable = Theme.avatarDrawables[4];
             } else if (avatarType == AVATAR_TYPE_FILTER_CHANNELS) {
                 drawable = Theme.avatarDrawables[5];
+            } else if (avatarType == AVATAR_TYPE_FILTER_MAILS) { // FORK MOD (gmail)
+                drawable = mailsDrawable();
             } else if (avatarType == AVATAR_TYPE_FILTER_BOTS) {
                 drawable = Theme.avatarDrawables[6];
             } else if (avatarType == AVATAR_TYPE_FILTER_MUTED) {

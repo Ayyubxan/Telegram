@@ -597,6 +597,9 @@ public class UserCell extends FrameLayout implements NotificationCenter.Notifica
                 case "bots":
                     avatarDrawable.setAvatarType(AvatarDrawable.AVATAR_TYPE_FILTER_BOTS);
                     break;
+                case "mails": // FORK MOD (gmail)
+                    avatarDrawable.setAvatarType(AvatarDrawable.AVATAR_TYPE_FILTER_MAILS);
+                    break;
                 case "muted":
                     avatarDrawable.setAvatarType(AvatarDrawable.AVATAR_TYPE_FILTER_MUTED);
                     break;

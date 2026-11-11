@@ -289,7 +289,7 @@ public class UsersSelectActivity extends BaseFragment implements NotificationCen
         public void addSpan(final GroupCreateSpan span, boolean animated) {
             allSpans.add(span);
             long uid = span.getUid();
-            if (uid > Long.MIN_VALUE + 7) {
+            if (uid > Long.MIN_VALUE + 7 && uid != Long.MIN_VALUE + 10) { // FORK MOD (gmail): the Mails type is not a chat
                 selectedCount++;
             }
             selectedContacts.put(uid, span);
@@ -324,7 +324,7 @@ public class UsersSelectActivity extends BaseFragment implements NotificationCen
         public void removeSpan(final GroupCreateSpan span) {
             ignoreScrollEvent = true;
             long uid = span.getUid();
-            if (uid > Long.MIN_VALUE + 7) {
+            if (uid > Long.MIN_VALUE + 7 && uid != Long.MIN_VALUE + 10) { // FORK MOD (gmail): the Mails type is not a chat
                 selectedCount--;
             }
             selectedContacts.remove(uid);
@@ -430,6 +430,8 @@ public class UsersSelectActivity extends BaseFragment implements NotificationCen
                     filterFlags &= ~MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_MUTED;
                 } else if (span.getUid() == Long.MIN_VALUE + 6) {
                     filterFlags &= ~MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_READ;
+                } else if (span.getUid() == Long.MIN_VALUE + 10) { // FORK MOD (gmail)
+                    filterFlags &= ~MessagesController.DIALOG_FILTER_FLAG_MAILS;
                 } else if (span.getUid() == Long.MIN_VALUE + 7) {
                     filterFlags &= ~MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_ARCHIVED;
                 }
@@ -640,6 +642,8 @@ public class UsersSelectActivity extends BaseFragment implements NotificationCen
                                 filterFlags &= ~MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_MUTED;
                             } else if (span.getUid() == Long.MIN_VALUE + 6) {
                                 filterFlags &= ~MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_READ;
+                            } else if (span.getUid() == Long.MIN_VALUE + 10) { // FORK MOD (gmail)
+                                filterFlags &= ~MessagesController.DIALOG_FILTER_FLAG_MAILS;
                             } else if (span.getUid() == Long.MIN_VALUE + 7) {
                                 filterFlags &= ~MessagesController.DIALOG_FILTER_FLAG_EXCLUDE_ARCHIVED;
                             }
@@ -747,9 +751,12 @@ public class UsersSelectActivity extends BaseFragment implements NotificationCen
                         } else if (position == 4) {
                             flag = MessagesController.DIALOG_FILTER_FLAG_CHANNELS;
                             id = Long.MIN_VALUE + 3;
-                        } else {
+                        } else if (position == 5) {
                             flag = MessagesController.DIALOG_FILTER_FLAG_BOTS;
                             id = Long.MIN_VALUE + 4;
+                        } else { // FORK MOD (gmail)
+                            flag = MessagesController.DIALOG_FILTER_FLAG_MAILS;
+                            id = Long.MIN_VALUE + 10;
                         }
                     } else {
                         if (position == 1) {
@@ -830,7 +837,7 @@ public class UsersSelectActivity extends BaseFragment implements NotificationCen
         floatingButton.setOnClickListener(v -> onDonePressed(true));
         floatingButton.setContentDescription(getString(R.string.Next));
 
-        for (int position = 1, N = (isInclude ? 5 : 3); position <= N; position++) {
+        for (int position = 1, N = (isInclude ? 6 : 3); position <= N; position++) {
             int id;
             int flag;
             Object object;
@@ -861,9 +868,12 @@ public class UsersSelectActivity extends BaseFragment implements NotificationCen
                 } else if (position == 4) {
                     object = "channels";
                     flag = MessagesController.DIALOG_FILTER_FLAG_CHANNELS;
-                } else {
+                } else if (position == 5) {
                     object = "bots";
                     flag = MessagesController.DIALOG_FILTER_FLAG_BOTS;
+                } else { // FORK MOD (gmail)
+                    object = "mails";
+                    flag = MessagesController.DIALOG_FILTER_FLAG_MAILS;
                 }
             } else {
                 if (position == 1) {
@@ -980,6 +990,9 @@ public class UsersSelectActivity extends BaseFragment implements NotificationCen
                         case "bots":
                             id = Long.MIN_VALUE + 4;
                             break;
+                        case "mails": // FORK MOD (gmail)
+                            id = Long.MIN_VALUE + 10;
+                            break;
                         case "muted":
                             id = Long.MIN_VALUE + 5;
                             break;
@@ -1095,7 +1108,7 @@ public class UsersSelectActivity extends BaseFragment implements NotificationCen
                 usersStartRow = 5 + (doNotNewChats ? 0 : 1);
             } else if (type == TYPE_FILTER) {
                 if (isInclude) {
-                    usersStartRow = 7;
+                    usersStartRow = 8; // FORK MOD (gmail): + Mails
                 } else {
                     usersStartRow = 5;
                 }
@@ -1179,7 +1192,7 @@ public class UsersSelectActivity extends BaseFragment implements NotificationCen
                     count = 3 + (doNotNewChats ? 0 : 1);
                 } else if (type == TYPE_FILTER) {
                     if (isInclude) {
-                        count = 7;
+                        count = 8;
                     } else {
                         count = 5;
                     }
@@ -1306,10 +1319,14 @@ public class UsersSelectActivity extends BaseFragment implements NotificationCen
                                     name = getString(R.string.FilterChannels);
                                     object = "channels";
                                     flag = MessagesController.DIALOG_FILTER_FLAG_CHANNELS;
-                                } else {
+                                } else if (position == 5) {
                                     name = getString(R.string.FilterBots);
                                     object = "bots";
                                     flag = MessagesController.DIALOG_FILTER_FLAG_BOTS;
+                                } else { // FORK MOD (gmail)
+                                    name = "Mails";
+                                    object = "mails";
+                                    flag = MessagesController.DIALOG_FILTER_FLAG_MAILS;
                                 }
                             } else {
                                 if (position == 1) {
@@ -1428,7 +1445,7 @@ public class UsersSelectActivity extends BaseFragment implements NotificationCen
                     }
                 } else if (type == TYPE_FILTER) {
                     if (isInclude) {
-                        if (position == 0 || position == 6) {
+                        if (position == 0 || position == 7) {
                             return 2;
                         }
                     } else {

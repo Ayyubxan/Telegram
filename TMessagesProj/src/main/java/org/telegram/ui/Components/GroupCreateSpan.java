@@ -163,6 +163,11 @@ public class GroupCreateSpan extends View implements Theme.Colorable {
                     avatarThemeColorType = 2;
                     firstName = LocaleController.getString(R.string.PrivacyMiniapps);
                     break;
+                case "mails": // FORK MOD (gmail)
+                    avatarDrawable.setAvatarType(AvatarDrawable.AVATAR_TYPE_FILTER_MAILS);
+                    uid = Long.MIN_VALUE + 10;
+                    firstName = "Mails";
+                    break;
                 case "archived":
                 default:
                     avatarDrawable.setAvatarType(AvatarDrawable.AVATAR_TYPE_FILTER_ARCHIVED);

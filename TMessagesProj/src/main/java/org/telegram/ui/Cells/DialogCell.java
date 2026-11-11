@@ -1161,6 +1161,9 @@ public class DialogCell extends BaseCell implements StoriesListPlaceProvider.Ava
             if (messagesController.isHiddenByUndo(dialog.id)) {
                 continue;
             }
+            if (org.telegram.messenger.LockedChats.isSuppressed(dialog.id)) { // FORK MOD (locked chats): not named in the archive row
+                continue;
+            }
             if (DialogObject.isEncryptedDialog(dialog.id)) {
                 TLRPC.EncryptedChat encryptedChat = messagesController.getEncryptedChat(DialogObject.getEncryptedChatId(dialog.id));
                 if (encryptedChat != null) {
